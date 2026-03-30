@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — KS Advisory</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0a0f1a;
+            --paper: #f4f1eb;
+            --accent: #c8a55c;
+            --accent-dim: #a6884a;
+            --slate: #3a3f4b;
+            --mist: #ddd8cf;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--ink);
+            color: var(--paper);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 15, 26, 0.8);
+            border-bottom: 1px solid rgba(200, 165, 92, 0.1);
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.02em;
+            color: var(--paper);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+
+        .nav-links a {
+            color: var(--mist);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.active { color: var(--accent); }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: var(--ink) !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 2px;
+            font-weight: 500 !important;
+            transition: background 0.3s !important;
+        }
+
+        .nav-cta:hover { background: var(--accent-dim) !important; }
+
+        /* ── Page Header ── */
+        .page-header {
+            padding: 10rem 4rem 4rem;
+            position: relative;
+        }
+
+        .page-header-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(200, 165, 92, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 165, 92, 0.04) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%);
+        }
+
+        .page-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.2s;
+        }
+
+        .page-header h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.15;
+            max-width: 700px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.4s;
+        }
+
+        .page-header h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .page-intro {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--mist);
+            font-weight: 300;
+            max-width: 580px;
+            margin-top: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.6s;
+        }
+
+        /* ── Divider ── */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--accent);
+            margin: 0 4rem;
+        }
+
+        /* ── Service Detail Blocks ── */
+        .service-detail {
+            padding: 5rem 4rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .service-detail-label {
+            position: sticky;
+            top: 8rem;
+        }
+
+        .service-detail-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 4rem;
+            color: rgba(200, 165, 92, 0.15);
+            line-height: 1;
+        }
+
+        .service-detail-label h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-top: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .service-detail-content p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--mist);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .service-detail-content h3 {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .deliverables {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .deliverables li {
+            font-size: 0.95rem;
+            color: var(--mist);
+            font-weight: 300;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .deliverables li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55rem;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+        }
+
+        /* ── CTA Banner ── */
+        .cta-banner {
+            padding: 6rem 4rem;
+            text-align: center;
+        }
+
+        .cta-banner h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-banner p {
+            font-size: 1.05rem;
+            color: var(--mist);
+            font-weight: 300;
+            max-width: 480px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--ink);
+            padding: 1rem 2.5rem;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover { background: var(--accent-dim); transform: translateY(-1px); }
+
+        /* ── Footer ── */
+        footer {
+            padding: 3rem 4rem;
+            border-top: 1px solid rgba(244, 241, 235, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: rgba(244, 241, 235, 0.3);
+        }
+
+        footer .logo { font-size: 1.1rem; }
+
+        /* ── Animations ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            nav { padding: 1.2rem 2rem; }
+            .nav-links { display: none; }
+            .page-header { padding: 7rem 2rem 3rem; }
+            .service-detail {
+                grid-template-columns: 1fr;
+                padding: 3rem 2rem;
+                gap: 2rem;
+            }
+            .service-detail-label { position: static; }
+            .cta-banner { padding: 4rem 2rem; }
+            footer { padding: 2rem; flex-direction: column; gap: 1rem; }
+            .divider { margin: 0 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">KS<span>.</span></a>
+        <div class="nav-links">
+            <a href="services.html" class="active">Services</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact" class="nav-cta">Get in Touch</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-grid"></div>
+        <div class="page-label">Services</div>
+        <h1>Turning complexity into <em>clarity</em></h1>
+        <p class="page-intro">Every engagement is tailored. These are the areas where I work — typically with CFOs, Group Finance leaders, and transformation programme teams navigating change at scale.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Service 1 -->
+    <section class="service-detail reveal">
+        <div class="service-detail-label">
+            <div class="service-detail-number">01</div>
+            <h2>AI-Enabled Finance Operations</h2>
+        </div>
+        <div class="service-detail-content">
+            <p>Most finance teams know AI matters but struggle to move beyond pilots and proof-of-concepts. I help organisations identify the right use cases, build business cases, and design implementation roadmaps that connect AI capabilities to real operational outcomes.</p>
+            <p>This isn't about chasing technology — it's about understanding which finance processes are ripe for intelligent automation and building the governance to deploy it responsibly.</p>
+            <h3>Typical deliverables</h3>
+            <ul class="deliverables">
+                <li>AI opportunity assessment across finance functions</li>
+                <li>Use case prioritisation and business case development</li>
+                <li>Implementation roadmap with governance framework</li>
+                <li>Vendor evaluation and selection support</li>
+                <li>Change management and adoption planning</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Service 2 -->
+    <section class="service-detail reveal">
+        <div class="service-detail-label">
+            <div class="service-detail-number">02</div>
+            <h2>Finance Transformation Design</h2>
+        </div>
+        <div class="service-detail-content">
+            <p>Finance transformation programmes often stall because they lack a clear operating model to build towards. I design target operating models grounded in how the organisation actually works — not theoretical frameworks that collapse on contact with reality.</p>
+            <p>This includes process taxonomy design, RACI mapping across functions, and governance structures that scale with organisational complexity. Particularly relevant for multinationals managing entity lifecycles across jurisdictions.</p>
+            <h3>Typical deliverables</h3>
+            <ul class="deliverables">
+                <li>Current-state assessment and gap analysis</li>
+                <li>Target operating model design (L1–L4 process taxonomy)</li>
+                <li>Cross-functional governance framework</li>
+                <li>Transformation roadmap and workstream definition</li>
+                <li>Stakeholder alignment and leadership communication</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Service 3 -->
+    <section class="service-detail reveal">
+        <div class="service-detail-label">
+            <div class="service-detail-number">03</div>
+            <h2>Post-Merger Finance Integration</h2>
+        </div>
+        <div class="service-detail-content">
+            <p>M&A transactions create enormous pressure on finance teams. The work between signing and operational integration — harmonising chart of accounts, aligning reporting standards, standing up new entities, consolidating processes — is where deals succeed or fail operationally.</p>
+            <p>I lead or support finance integration workstreams, bringing structure and pace to the work that typically falls between corporate development and BAU finance.</p>
+            <h3>Typical deliverables</h3>
+            <ul class="deliverables">
+                <li>Day 1 readiness planning for finance</li>
+                <li>Chart of accounts harmonisation</li>
+                <li>Reporting and consolidation alignment</li>
+                <li>Entity setup and cross-border structuring support</li>
+                <li>Integration programme governance and tracking</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CTA -->
+    <section class="cta-banner reveal">
+        <h2>Every transformation starts with a conversation</h2>
+        <p>If you're navigating complexity in your finance function, let's talk about what's possible.</p>
+        <a href="index.html#contact" class="btn-primary">Get in Touch</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <a href="index.html" class="logo">KS<span>.</span></a>
+        <span>&copy; 2026 KS Advisory. All rights reserved.</span>
+    </footer>
+
+    <!-- Scroll reveal -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
