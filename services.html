@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ink: #0a0f1a;
+            --ink: #141b2b;
             --paper: #f4f1eb;
             --accent: #c8a55c;
             --accent-dim: #a6884a;
@@ -297,14 +297,14 @@
             flex-direction: column;
             gap: 5px;
             padding: 0.5rem;
-            z-index: 200;
+            z-index: 300;
         }
 
         .menu-toggle span {
             display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--paper);
+            width: 32px;
+            height: 2.5px;
+            background: var(--accent);
             transition: all 0.3s;
         }
 
@@ -318,15 +318,15 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                bottom: 0;
-                background: var(--ink);
+                background: rgba(10, 15, 26, 0.82);
+                backdrop-filter: blur(30px);
                 flex-direction: column;
-                justify-content: center;
                 align-items: center;
-                gap: 2.5rem;
+                padding: 1.5rem 2rem 1.5rem;
+                gap: 1.5rem;
                 z-index: 150;
             }
-            .nav-links.open { display: flex !important; padding-top: 6rem; z-index: 200; }
+            .nav-links.open { display: flex !important; z-index: 200; }
             .nav-links a { font-size: 1.2rem; }
             .page-header { padding: 7rem 2rem 3rem; }
             .service-detail {
@@ -456,6 +456,22 @@
         }, { threshold: 0.15 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Close mobile menu when clicking outside the links
+        document.addEventListener('click', function(e) {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('open');
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('open');
+            });
+        });
     </script>
 
 </body>
