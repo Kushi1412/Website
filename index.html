@@ -4,40 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KS Advisory — AI & Finance Transformation</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --ink: #141b2b;
-            --paper: #f4f1eb;
-            --accent: #c8a55c;
-            --accent-dim: #a6884a;
-            --slate: #3a3f4b;
-            --mist: #ddd8cf;
-            --glass: rgba(244, 241, 235, 0.7);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--ink);
-            color: var(--paper);
-            overflow-x: hidden;
+        :root {
+            --bg: #08090d;
+            --text: #e8e4dc;
+            --accent: #d4a853;
+            --accent-glow: rgba(212, 168, 83, 0.3);
+            --muted: #8a8577;
         }
 
-        /* ── Grain overlay ── */
-        body::before {
-            content: '';
+        body {
+            font-family: 'Syne', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            transition: background 0.8s ease;
+        }
+
+        .cursor-glow {
             position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.06) 0%, transparent 70%);
             pointer-events: none;
             z-index: 1;
+            transform: translate(-50%, -50%);
         }
 
-        /* ── Navigation ── */
         nav {
             position: fixed;
             top: 0;
@@ -46,101 +44,142 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            backdrop-filter: blur(20px);
-            background: rgba(10, 15, 26, 0.8);
-            border-bottom: 1px solid rgba(200, 165, 92, 0.1);
+            z-index: 1000;
+            mix-blend-mode: difference;
         }
 
         .logo {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.5rem;
-            letter-spacing: 0.02em;
-            color: var(--paper);
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
         }
-
-        .logo span { color: var(--accent); }
 
         .nav-links { display: flex; gap: 2.5rem; align-items: center; }
 
         .nav-links a {
-            color: var(--mist);
+            color: #fff;
             text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.08em;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            transition: color 0.3s;
+            position: relative;
         }
 
-        .nav-links a:hover { color: var(--accent); }
-
-        .nav-cta {
-            background: var(--accent) !important;
-            color: var(--ink) !important;
-            padding: 0.6rem 1.5rem;
-            border-radius: 2px;
-            font-weight: 500 !important;
-            transition: background 0.3s !important;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s;
         }
 
-        .nav-cta:hover { background: var(--accent-dim) !important; }
+        .nav-links a:hover::after { width: 100%; }
 
-        /* ── Hero ── */
+        .nav-cta { padding: 0.5rem 1.2rem; border: 1px solid #fff; transition: all 0.3s; }
+        .nav-cta:hover { background: #fff; color: #000; }
+        .nav-cta::after { display: none; }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            padding: 0.5rem;
+            z-index: 1100;
+        }
+
+        .menu-toggle span { display: block; width: 30px; height: 2px; background: #fff; transition: all 0.3s; }
+
         .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 8rem 4rem 4rem;
+            padding: 0 4rem;
             position: relative;
+            overflow: hidden;
         }
 
-        .hero-grid {
+        .hero-bg {
             position: absolute;
             inset: 0;
-            background-image:
-                linear-gradient(rgba(200, 165, 92, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(200, 165, 92, 0.04) 1px, transparent 1px);
-            background-size: 80px 80px;
-            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%);
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 50%, rgba(212, 168, 83, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 80% 30%, rgba(100, 80, 200, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-lines {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .hero-lines::before, .hero-lines::after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(212, 168, 83, 0.15), transparent);
+            animation: lineFloat 8s ease-in-out infinite;
+        }
+
+        .hero-lines::before { left: 25%; }
+        .hero-lines::after { left: 75%; animation-delay: 4s; }
+
+        @keyframes lineFloat {
+            0%, 100% { transform: translateY(-10%); opacity: 0; }
+            50% { transform: translateY(10%); opacity: 1; }
         }
 
         .hero-label {
-            font-size: 0.75rem;
-            letter-spacing: 0.25em;
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 2rem;
-            font-weight: 500;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
             opacity: 0;
-            animation: fadeUp 0.8s ease forwards 0.2s;
+            animation: slideIn 1s ease forwards 0.3s;
         }
 
         .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            line-height: 1.05;
-            font-weight: 400;
-            max-width: 800px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 300;
+            line-height: 1.0;
+            max-width: 900px;
             opacity: 0;
-            animation: fadeUp 0.8s ease forwards 0.4s;
+            animation: slideIn 1s ease forwards 0.5s;
         }
 
-        .hero h1 em {
+        .hero h1 strong {
+            font-weight: 600;
             font-style: italic;
-            color: var(--accent);
+            background: linear-gradient(135deg, var(--accent), #f0d48a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-sub {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            color: var(--mist);
-            max-width: 520px;
-            margin-top: 2rem;
-            font-weight: 300;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 480px;
+            margin-top: 2.5rem;
+            font-weight: 400;
             opacity: 0;
-            animation: fadeUp 0.8s ease forwards 0.6s;
+            animation: slideIn 1s ease forwards 0.7s;
         }
 
         .hero-cta-row {
@@ -148,254 +187,305 @@
             gap: 1.5rem;
             margin-top: 3rem;
             opacity: 0;
-            animation: fadeUp 0.8s ease forwards 0.8s;
+            animation: slideIn 1s ease forwards 0.9s;
         }
 
-        .btn-primary {
+        .btn-glow {
             background: var(--accent);
-            color: var(--ink);
+            color: #08090d;
             padding: 1rem 2.5rem;
             border: none;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-primary:hover { background: var(--accent-dim); transform: translateY(-1px); }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--paper);
-            padding: 1rem 2.5rem;
-            border: 1px solid rgba(244, 241, 235, 0.2);
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-        /* ── Divider line ── */
-        .divider {
-            width: 60px;
-            height: 1px;
-            background: var(--accent);
-            margin: 0 4rem;
-        }
-
-        /* ── Services ── */
-        .services {
-            padding: 6rem 4rem;
-        }
-
-        .section-label {
-            font-size: 0.75rem;
-            letter-spacing: 0.25em;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 0 50px var(--accent-glow); }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text);
+            padding: 1rem 2.5rem;
+            border: 1px solid rgba(232, 228, 220, 0.15);
+            font-family: 'Syne', sans-serif;
+            font-size: 0.8rem;
             font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--muted);
+            opacity: 0;
+            animation: slideIn 1s ease forwards 1.2s;
+        }
+
+        .scroll-line {
+            width: 40px;
+            height: 1px;
+            background: var(--muted);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse { 0% { left: -100%; } 100% { left: 100%; } }
+
+        .section-dark { --section-bg: #08090d; --section-text: #e8e4dc; --section-accent: #d4a853; --section-muted: #8a8577; }
+        .section-warm { --section-bg: #1a150e; --section-text: #f0ebe0; --section-accent: #e8b94a; --section-muted: #a09580; }
+        .section-deep { --section-bg: #0a0e18; --section-text: #d8dce8; --section-accent: #7b9dd4; --section-muted: #6a7088; }
+        .section-rich { --section-bg: #130d18; --section-text: #e4dce8; --section-accent: #c47bd4; --section-muted: #887a90; }
+        .section-light { --section-bg: #f0ebe0; --section-text: #1a1510; --section-accent: #b8922e; --section-muted: #7a7060; }
+
+        .color-section {
+            background: var(--section-bg);
+            color: var(--section-text);
+            transition: background 0.6s ease, color 0.6s ease;
+            position: relative;
+        }
+
+        .services { padding: 8rem 4rem; }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 5rem;
+        }
+
+        .section-tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--section-accent);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
 
         .section-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 400;
-            margin-bottom: 4rem;
-            max-width: 600px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.1;
+            max-width: 550px;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
+        .section-count {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem;
+            font-weight: 300;
+            color: var(--section-accent);
+            opacity: 0.1;
+            line-height: 1;
         }
+
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
 
         .service-card {
-            background: rgba(244, 241, 235, 0.03);
-            border: 1px solid rgba(244, 241, 235, 0.06);
             padding: 3rem 2.5rem;
-            transition: all 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
+            transition: all 0.5s;
+            cursor: default;
         }
 
         .service-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
         }
 
-        .service-card:hover::before { transform: scaleX(1); }
-        .service-card:hover { background: rgba(244, 241, 235, 0.06); }
+        .service-card:hover::before { opacity: 1; }
+        .service-card:hover { border-color: rgba(212, 168, 83, 0.2); transform: translateY(-4px); }
 
-        .service-number {
-            font-family: 'DM Serif Display', serif;
-            font-size: 3rem;
-            color: rgba(200, 165, 92, 0.15);
+        .service-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--section-accent);
+            opacity: 0.2;
             margin-bottom: 1.5rem;
+            line-height: 1;
         }
 
         .service-card h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.4rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: var(--mist);
-            font-weight: 300;
-        }
-
-        /* ── About / Credentials ── */
-        .about {
-            padding: 6rem 4rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-        }
-
-        .about-text .section-title { margin-bottom: 2rem; }
-
-        .about-text p {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--mist);
-            font-weight: 300;
-            margin-bottom: 1.5rem;
-        }
-
-        .credential-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .credential-list li {
-            padding: 1.5rem 2rem;
-            background: rgba(200, 165, 92, 0.05);
-            border-left: 2px solid var(--accent);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .credential-list li strong {
-            display: block;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: var(--paper);
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
         }
 
-        .credential-list li span {
-            color: var(--mist);
+        .service-card p { font-size: 0.9rem; line-height: 1.75; color: var(--section-muted); }
+
+        .about { padding: 8rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+
+        .about-text p { font-size: 1.05rem; line-height: 1.9; color: var(--section-muted); margin-bottom: 1.5rem; }
+
+        .stat-row { display: flex; gap: 3rem; margin-top: 3rem; }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
             font-weight: 300;
+            color: var(--section-accent);
+            line-height: 1;
         }
 
-        /* ── Contact ── */
-        .contact {
-            padding: 6rem 4rem;
-            text-align: center;
+        .stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--section-muted);
+            margin-top: 0.5rem;
         }
 
-        .contact .section-title {
-            margin: 0 auto 1.5rem;
-        }
+        .credential-stack { display: flex; flex-direction: column; gap: 1px; }
 
-        .contact p {
-            font-size: 1.05rem;
-            color: var(--mist);
-            font-weight: 300;
-            max-width: 500px;
-            margin: 0 auto 3rem;
-            line-height: 1.7;
-        }
-
-        .contact-email {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
-        }
-
-        .contact-email:hover { border-color: var(--accent); }
-
-        /* ── Footer ── */
-        footer {
-            padding: 3rem 4rem;
-            border-top: 1px solid rgba(244, 241, 235, 0.06);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: rgba(244, 241, 235, 0.3);
-        }
-
-        footer .logo { font-size: 1.1rem; }
-
-        /* ── Animations ── */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── Scroll reveal ── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ── Responsive ── */
-    
-       /* ── Hamburger button ── */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
-            padding: 0.5rem;
-            z-index: 300;
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 32px;
-            height: 2.5px;
-            background: var(--accent);
+        .credential {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 2px solid var(--section-accent);
             transition: all 0.3s;
         }
 
-        .nav-links.open ~ .menu-toggle,
-        .menu-toggle:has(~ .nav-links.open) {
-            display: none;
+        .credential:hover { background: rgba(255, 255, 255, 0.05); padding-left: 2.5rem; }
+
+        .credential h4 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .credential p { font-size: 0.85rem; color: var(--section-muted); line-height: 1.6; }
+
+        .process { padding: 8rem 4rem; }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 5rem;
+            position: relative;
         }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 3rem;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--section-accent), transparent);
+            opacity: 0.3;
+        }
+
+        .process-step { text-align: center; padding: 0 2rem; position: relative; }
+
+        .process-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--section-accent);
+            border-radius: 50%;
+            margin: 0 auto 2.5rem;
+            box-shadow: 0 0 20px var(--accent-glow);
+            position: relative;
+        }
+
+        .process-dot::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1px solid var(--section-accent);
+            opacity: 0.3;
+            animation: dotPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .process-step h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+        .process-step p { font-size: 0.85rem; line-height: 1.75; color: var(--section-muted); }
+
+        .contact { padding: 8rem 4rem; text-align: center; }
+
+        .contact-email {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--section-accent);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-email::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--section-accent);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .contact-email:hover::after { transform: scaleX(1); }
+
+        footer {
+            padding: 3rem 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 1024px) {
             nav { padding: 1.2rem 2rem; }
@@ -406,160 +496,197 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                background: rgba(10, 15, 26, 0.82);
+                background: rgba(8, 9, 13, 0.92);
                 backdrop-filter: blur(30px);
                 flex-direction: column;
                 align-items: center;
                 padding: 1.5rem 2rem 1.5rem;
                 gap: 1.5rem;
-                z-index: 150;
+                z-index: 1050;
+                mix-blend-mode: normal;
             }
-            .nav-links.open { display: flex !important; z-index: 200; }
-            .nav-links a {
-                font-size: 1.2rem;
-            }
-            .hero { padding: 7rem 2rem 3rem; }
-            .services { padding: 4rem 2rem; }
+            .nav-links.open { display: flex !important; }
+            .nav-links a { font-size: 1rem; mix-blend-mode: normal; color: #fff; }
+            .hero { padding: 0 2rem; }
+            .hero h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .services { padding: 5rem 2rem; }
             .services-grid { grid-template-columns: 1fr; }
-            .about { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
-            .contact { padding: 4rem 2rem; }
+            .about { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+            .stat-row { gap: 2rem; }
+            .process { padding: 5rem 2rem; }
+            .process-timeline { grid-template-columns: 1fr; gap: 3rem; }
+            .process-timeline::before { display: none; }
+            .contact { padding: 5rem 2rem; }
             footer { padding: 2rem; flex-direction: column; gap: 1rem; }
-            .divider { margin: 0 2rem; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .section-count { font-size: 4rem; }
+            .scroll-indicator { display: none; }
             .hero-cta-row { flex-direction: column; }
+            .cursor-glow { display: none; }
         }
-
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <nav>
-        <div class="logo">KS<span>.</span></div>
+        <a href="index.html" class="logo">KS Advisory</a>
         <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-</button>
-<div class="nav-links">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
             <a href="services.html">Services</a>
             <a href="#about">About</a>
+            <a href="#process">Process</a>
             <a href="#contact" class="nav-cta">Get in Touch</a>
         </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero">
-        <div class="hero-grid"></div>
+        <div class="hero-bg"></div>
+        <div class="hero-lines"></div>
         <div class="hero-label">AI & Finance Transformation Advisory</div>
-        <h1>Where finance <em>meets</em> intelligent systems</h1>
-        <p class="hero-sub">Helping multinational organisations redesign their finance operations through AI-enabled transformation, process automation, and scalable governance frameworks.</p>
+        <h1>The future of finance is <strong>intelligent</strong></h1>
+        <p class="hero-sub">Helping multinational organisations redesign their finance operations through AI-enabled transformation, process automation, and scalable governance.</p>
         <div class="hero-cta-row">
-            <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Conversation</button>
-            <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+            <button class="btn-glow" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Conversation</button>
+            <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            Scroll to explore
         </div>
     </section>
 
-    <div class="divider"></div>
-
-    <!-- Services -->
-    <section class="services reveal" id="services">
-        <div class="section-label">What We Do</div>
-        <h2 class="section-title">Finance transformation, grounded in operational reality</h2>
+    <section class="color-section section-warm services reveal" id="services">
+        <div class="section-header">
+            <div>
+                <div class="section-tag">What We Do</div>
+                <h2 class="section-title">Finance transformation, grounded in reality</h2>
+            </div>
+            <div class="section-count">03</div>
+        </div>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-number">01</div>
+                <div class="service-num">01</div>
                 <h3>AI-Enabled Finance Operations</h3>
-                <p>Identifying and implementing AI use cases across finance functions — from intelligent automation of reconciliations and reporting to predictive analytics for cash flow and resource planning.</p>
+                <p>Identifying and implementing AI use cases across finance functions — from intelligent automation of reconciliations to predictive analytics for cash flow planning.</p>
             </div>
             <div class="service-card">
-                <div class="service-number">02</div>
+                <div class="service-num">02</div>
                 <h3>Finance Transformation Design</h3>
-                <p>End-to-end redesign of finance operating models, process taxonomies, and governance structures. Building target operating models that scale with organisational complexity.</p>
+                <p>End-to-end redesign of finance operating models, process taxonomies, and governance structures that scale with organisational complexity.</p>
             </div>
             <div class="service-card">
-                <div class="service-number">03</div>
-                <h3>Post-Merger Finance Integration</h3>
-                <p>Structuring and leading finance workstreams during M&A integration — harmonising chart of accounts, aligning reporting standards, and standing up cross-entity governance from day one.</p>
+                <div class="service-num">03</div>
+                <h3>Post-Merger Integration</h3>
+                <p>Structuring finance workstreams during M&A — harmonising charts of accounts, aligning reporting, and standing up cross-entity governance from day one.</p>
             </div>
         </div>
     </section>
 
-    <div class="divider"></div>
-
-    <!-- About -->
-    <section class="about reveal" id="about">
+    <section class="color-section section-deep about reveal" id="about">
         <div class="about-text">
-            <div class="section-label">About</div>
+            <div class="section-tag">About</div>
             <h2 class="section-title">Built on real transformation programmes</h2>
             <p>KS Advisory brings hands-on experience from leading finance transformation and entity governance at scale inside complex, multinational organisations — not theory from the outside.</p>
-            <p>The work sits at the intersection of finance operations, cross-functional governance, and emerging AI capabilities — where most organisations need the most help but find the least clarity.</p>
+            <p>The work sits at the intersection of finance operations, cross-functional governance, and emerging AI capabilities.</p>
+            <div class="stat-row">
+                <div class="stat">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Functions Spanned</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">L1–L4</div>
+                    <div class="stat-label">Process Taxonomy</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">MNC</div>
+                    <div class="stat-label">Scale Operations</div>
+                </div>
+            </div>
         </div>
-        <ul class="credential-list">
-            <li>
-                <strong>Finance Transformation & Entity Governance</strong>
-                <span>Designing cross-functional governance frameworks spanning 15+ functions across international operations</span>
-            </li>
-            <li>
-                <strong>Post-Merger Finance Integration</strong>
-                <span>Leading finance integration workstreams for large-scale pharmaceutical M&A transactions</span>
-            </li>
-            <li>
-                <strong>AI & Process Automation</strong>
-                <span>Identifying and scoping AI opportunities within finance operating models and lifecycle processes</span>
-            </li>
-        </ul>
+        <div class="credential-stack">
+            <div class="credential">
+                <h4>Finance Transformation & Entity Governance</h4>
+                <p>Designing cross-functional governance frameworks spanning 15+ functions across international operations</p>
+            </div>
+            <div class="credential">
+                <h4>Post-Merger Finance Integration</h4>
+                <p>Leading finance integration workstreams for large-scale pharmaceutical M&A transactions</p>
+            </div>
+            <div class="credential">
+                <h4>AI & Process Automation</h4>
+                <p>Identifying and scoping AI opportunities within finance operating models and lifecycle processes</p>
+            </div>
+        </div>
     </section>
 
-    <div class="divider"></div>
-
-    <!-- How I Work -->
-    <section class="services reveal" id="process">
-        <div class="section-label">How I Work</div>
+    <section class="color-section section-rich process reveal" id="process">
+        <div class="section-tag">How I Work</div>
         <h2 class="section-title">From diagnosis to delivery</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-number">01</div>
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="process-dot"></div>
                 <h3>Discovery & Diagnosis</h3>
                 <p>Understanding your current finance operating model, pain points, and transformation ambitions through structured interviews and process mapping.</p>
             </div>
-            <div class="service-card">
-                <div class="service-number">02</div>
+            <div class="process-step">
+                <div class="process-dot"></div>
                 <h3>Design & Roadmap</h3>
                 <p>Building your target operating model with clear workstreams, milestones, and AI opportunity mapping — grounded in what's actually achievable.</p>
             </div>
-            <div class="service-card">
-                <div class="service-number">03</div>
+            <div class="process-step">
+                <div class="process-dot"></div>
                 <h3>Embed & Execute</h3>
                 <p>Working alongside your teams to implement changes, build governance structures, and ensure the transformation sticks beyond the engagement.</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="contact reveal" id="contact">
-        <div class="section-label">Get in Touch</div>
-        <h2 class="section-title">Let's discuss your transformation</h2>
-        <p>Whether you're scoping a finance transformation, navigating post-merger integration, or exploring AI in your finance function — a conversation is the right starting point.</p>
-        <a href="mailto:hello@KSadvisory.com" class="contact-email">hello@KSadvisory.com</a>
+    <section class="color-section section-light contact reveal" id="contact">
+        <div class="section-tag">Get in Touch</div>
+        <h2 class="section-title" style="margin: 0 auto 1.5rem;">Let's discuss your transformation</h2>
+        <p style="font-size: 1.05rem; color: var(--section-muted); max-width: 480px; margin: 0 auto 3rem; line-height: 1.8;">Whether you're scoping a finance transformation, navigating post-merger integration, or exploring AI in your finance function — a conversation is the right starting point.</p>
+        <a href="mailto:hello@ksadvisory.com" class="contact-email">hello@ksadvisory.com</a>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <div class="logo">KS<span>.</span></div>
+        <a href="index.html" class="logo" style="font-size: 1rem;">KS Advisory</a>
         <span>&copy; 2026 KS Advisory. All rights reserved.</span>
     </footer>
 
-    <!-- Scroll reveal script -->
     <script>
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Close mobile menu when clicking outside the links
+        const glow = document.getElementById('cursorGlow');
+        if (glow && window.innerWidth > 1024) {
+            document.addEventListener('mousemove', (e) => {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top = e.clientY + 'px';
+            });
+        }
+
+        const sections = document.querySelectorAll('.color-section');
+        const bodyEl = document.body;
+        const heroColor = '#08090d';
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bg = getComputedStyle(entry.target).getPropertyValue('--section-bg').trim();
+                    bodyEl.style.background = bg;
+                } else if (entry.target === sections[0] && entry.boundingClientRect.top > 0) {
+                    // First color section has scrolled back below the fold — restore hero background
+                    bodyEl.style.background = heroColor;
+                }
+            });
+        }, { threshold: 0.4 });
+        sections.forEach(s => sectionObserver.observe(s));
+
         document.addEventListener('click', function(e) {
             const navLinks = document.querySelector('.nav-links');
             const menuToggle = document.querySelector('.menu-toggle');
@@ -567,12 +694,8 @@
                 navLinks.classList.remove('open');
             }
         });
-
-        // Close mobile menu when a link is clicked
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('open');
-            });
+            link.addEventListener('click', () => { document.querySelector('.nav-links').classList.remove('open'); });
         });
     </script>
 
