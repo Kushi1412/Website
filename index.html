@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KS Advisory — AI & Finance Transformation</title>
+    <title>Deal & Growth Finance Advisory</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,6 +36,7 @@
             transform: translate(-50%, -50%);
         }
 
+        /* ── NAV ── */
         nav {
             position: fixed;
             top: 0;
@@ -83,6 +84,53 @@
 
         .nav-links a:hover::after { width: 100%; }
 
+        /* Dropdown */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown > a {
+            cursor: default;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(8, 9, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 168, 83, 0.15);
+            padding: 0.8rem 0;
+            min-width: 260px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            mix-blend-mode: normal;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.7rem !important;
+            letter-spacing: 0.1em;
+            color: var(--text) !important;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a::after { display: none; }
+
+        .dropdown-menu a:hover {
+            color: var(--accent) !important;
+            padding-left: 2rem;
+        }
+
         .nav-cta { padding: 0.5rem 1.2rem; border: 1px solid #fff; transition: all 0.3s; }
         .nav-cta:hover { background: #fff; color: #000; }
         .nav-cta::after { display: none; }
@@ -100,6 +148,7 @@
 
         .menu-toggle span { display: block; width: 30px; height: 2px; background: #fff; transition: all 0.3s; }
 
+        /* ── HERO ── */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -154,10 +203,10 @@
 
         .hero h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-size: clamp(3rem, 7vw, 5.5rem);
             font-weight: 300;
-            line-height: 1.0;
-            max-width: 900px;
+            line-height: 1.05;
+            max-width: 850px;
             opacity: 0;
             animation: slideIn 1s ease forwards 0.5s;
         }
@@ -172,14 +221,26 @@
         }
 
         .hero-sub {
+            font-size: 0.85rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            max-width: 480px;
+            margin-top: 2rem;
+            font-weight: 500;
+            opacity: 0;
+            animation: slideIn 1s ease forwards 0.7s;
+        }
+
+        .hero-intro {
             font-size: 1.05rem;
             line-height: 1.8;
             color: var(--muted);
-            max-width: 480px;
-            margin-top: 2.5rem;
+            max-width: 520px;
+            margin-top: 1.5rem;
             font-weight: 400;
             opacity: 0;
-            animation: slideIn 1s ease forwards 0.7s;
+            animation: slideIn 1s ease forwards 0.8s;
         }
 
         .hero-cta-row {
@@ -203,6 +264,8 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 0 30px var(--accent-glow);
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 0 50px var(--accent-glow); }
@@ -219,6 +282,8 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
@@ -259,10 +324,12 @@
 
         @keyframes scrollPulse { 0% { left: -100%; } 100% { left: 100%; } }
 
+        /* ── SECTION THEMES ── */
         .section-dark { --section-bg: #08090d; --section-text: #e8e4dc; --section-accent: #d4a853; --section-muted: #8a8577; }
         .section-warm { --section-bg: #1a150e; --section-text: #f0ebe0; --section-accent: #e8b94a; --section-muted: #a09580; }
         .section-deep { --section-bg: #0a0e18; --section-text: #d8dce8; --section-accent: #7b9dd4; --section-muted: #6a7088; }
         .section-rich { --section-bg: #130d18; --section-text: #e4dce8; --section-accent: #c47bd4; --section-muted: #887a90; }
+        .section-slate { --section-bg: #0e1117; --section-text: #dde0e8; --section-accent: #8eafd4; --section-muted: #6d7590; }
         .section-light { --section-bg: #f0ebe0; --section-text: #1a1510; --section-accent: #b8922e; --section-muted: #7a7060; }
 
         .color-section {
@@ -272,6 +339,7 @@
             position: relative;
         }
 
+        /* ── SERVICES ── */
         .services { padding: 8rem 4rem; }
 
         .section-header {
@@ -307,7 +375,7 @@
             line-height: 1;
         }
 
-        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+        .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; }
 
         .service-card {
             padding: 3rem 2.5rem;
@@ -342,15 +410,16 @@
 
         .service-card h3 {
             font-family: 'Syne', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 1rem;
             letter-spacing: 0.02em;
         }
 
-        .service-card p { font-size: 0.9rem; line-height: 1.75; color: var(--section-muted); }
+        .service-card p { font-size: 0.85rem; line-height: 1.75; color: var(--section-muted); }
 
-        .about { padding: 8rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        /* ── ABOUT ── */
+        .about { padding: 8rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
 
         .about-text p { font-size: 1.05rem; line-height: 1.9; color: var(--section-muted); margin-bottom: 1.5rem; }
 
@@ -386,57 +455,102 @@
         .credential h4 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
         .credential p { font-size: 0.85rem; color: var(--section-muted); line-height: 1.6; }
 
-        .process { padding: 8rem 4rem; }
+        /* ── APPROACH ── */
+        .approach { padding: 8rem 4rem; }
 
-        .process-timeline {
+        .approach-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-            margin-top: 5rem;
-            position: relative;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
         }
 
-        .process-timeline::before {
-            content: '';
-            position: absolute;
-            top: 3rem;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--section-accent), transparent);
-            opacity: 0.3;
+        .approach-philosophy p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--section-muted);
+            margin-bottom: 1.5rem;
         }
 
-        .process-step { text-align: center; padding: 0 2rem; position: relative; }
+        .approach-process { display: flex; flex-direction: column; gap: 2rem; }
 
-        .process-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--section-accent);
-            border-radius: 50%;
-            margin: 0 auto 2.5rem;
-            box-shadow: 0 0 20px var(--accent-glow);
-            position: relative;
+        .process-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
         }
 
-        .process-dot::after {
-            content: '';
-            position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-            border: 1px solid var(--section-accent);
-            opacity: 0.3;
-            animation: dotPulse 3s ease-in-out infinite;
+        .process-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--section-accent);
+            opacity: 0.4;
+            line-height: 1;
+            min-width: 40px;
         }
 
-        @keyframes dotPulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.5); opacity: 0; }
+        .process-item h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
         }
 
-        .process-step h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
-        .process-step p { font-size: 0.85rem; line-height: 1.75; color: var(--section-muted); }
+        .process-item p {
+            font-size: 0.85rem;
+            color: var(--section-muted);
+            line-height: 1.7;
+        }
 
+        /* ── NETWORK ── */
+        .network { padding: 8rem 4rem; }
+
+        .network-intro {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--section-muted);
+            max-width: 600px;
+            margin-bottom: 4rem;
+        }
+
+        .network-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+        }
+
+        .network-card {
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s;
+        }
+
+        .network-card:hover {
+            border-color: rgba(212, 168, 83, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .network-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .network-card h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+
+        .network-card p {
+            font-size: 0.8rem;
+            color: var(--section-muted);
+            line-height: 1.7;
+        }
+
+        /* ── CONTACT ── */
         .contact { padding: 8rem 4rem; text-align: center; }
 
         .contact-email {
@@ -464,6 +578,7 @@
 
         .contact-email:hover::after { transform: scaleX(1); }
 
+        /* ── FOOTER ── */
         footer {
             padding: 3rem 4rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -474,6 +589,7 @@
             color: var(--muted);
         }
 
+        /* ── ANIMATIONS ── */
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
@@ -487,6 +603,7 @@
 
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
+        /* ── RESPONSIVE ── */
         @media (max-width: 1024px) {
             nav { padding: 1.2rem 2rem; }
             .menu-toggle { display: flex; }
@@ -496,7 +613,7 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                background: rgba(8, 9, 13, 0.92);
+                background: rgba(8, 9, 13, 0.95);
                 backdrop-filter: blur(30px);
                 flex-direction: column;
                 align-items: center;
@@ -507,15 +624,28 @@
             }
             .nav-links.open { display: flex !important; }
             .nav-links a { font-size: 1rem; mix-blend-mode: normal; color: #fff; }
+            .dropdown-menu {
+                position: static;
+                transform: none;
+                background: transparent;
+                border: none;
+                backdrop-filter: none;
+                opacity: 1;
+                visibility: visible;
+                padding: 0;
+                min-width: auto;
+            }
+            .dropdown-menu a { padding: 0.4rem 1rem; font-size: 0.85rem !important; color: var(--muted) !important; }
             .hero { padding: 0 2rem; }
-            .hero h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
             .services { padding: 5rem 2rem; }
             .services-grid { grid-template-columns: 1fr; }
             .about { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
             .stat-row { gap: 2rem; }
-            .process { padding: 5rem 2rem; }
-            .process-timeline { grid-template-columns: 1fr; gap: 3rem; }
-            .process-timeline::before { display: none; }
+            .approach { padding: 5rem 2rem; }
+            .approach-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .network { padding: 5rem 2rem; }
+            .network-grid { grid-template-columns: 1fr 1fr; gap: 1px; }
             .contact { padding: 5rem 2rem; }
             footer { padding: 2rem; flex-direction: column; gap: 1rem; }
             .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -524,34 +654,56 @@
             .hero-cta-row { flex-direction: column; }
             .cursor-glow { display: none; }
         }
+
+        @media (max-width: 600px) {
+            .network-grid { grid-template-columns: 1fr; }
+            .stat-row { flex-direction: column; gap: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
     <div class="cursor-glow" id="cursorGlow"></div>
 
+    <!-- ── NAVIGATION ── -->
     <nav>
-        <a href="index.html" class="logo">KS Advisory</a>
+        <a href="index.html" class="logo">Advisory</a>
         <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>
         <div class="nav-links">
-            <a href="services.html">Services</a>
+            <div class="nav-dropdown">
+                <a href="#services">Services ▾</a>
+                <div class="dropdown-menu">
+                    <a href="#services">AI-Enabled Finance Operations</a>
+                    <a href="#services">Finance Transformation Design</a>
+                    <a href="#services">Post-Merger Finance Integration</a>
+                    <a href="#services">Entity Governance & Structuring</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <a href="#insights">Insights ▾</a>
+                <div class="dropdown-menu">
+                    <a href="#insights">Case Studies</a>
+                    <a href="#insights">Articles</a>
+                </div>
+            </div>
             <a href="#about">About</a>
-            <a href="#process">Process</a>
             <a href="#contact" class="nav-cta">Get in Touch</a>
         </div>
     </nav>
 
+    <!-- ── HERO ── -->
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-lines"></div>
-        <div class="hero-label">AI & Finance Transformation Advisory</div>
-        <h1>The future of finance is <strong>intelligent</strong></h1>
-        <p class="hero-sub">Helping multinational organisations redesign their finance operations through AI-enabled transformation, process automation, and scalable governance.</p>
+        <div class="hero-label">Deal & Growth Finance Advisory</div>
+        <h1>Helping companies build a <strong>well-operating</strong> and transparent finance function</h1>
+        <p class="hero-sub">Where finance meets intelligent systems</p>
+        <p class="hero-intro">We help mid-market companies and PE-backed organisations navigate deals, growth and change. Our approach connects finance with the functions around it — legal, tax, HR and technology — because that's where transformation actually happens.</p>
         <div class="hero-cta-row">
-            <button class="btn-glow" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Conversation</button>
-            <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+            <a class="btn-glow" href="#contact">Book a Conversation</a>
+            <a class="btn-ghost" href="#services">Explore Services</a>
         </div>
         <div class="scroll-indicator">
             <div class="scroll-line"></div>
@@ -559,47 +711,54 @@
         </div>
     </section>
 
+    <!-- ── SERVICES ── -->
     <section class="color-section section-warm services reveal" id="services">
         <div class="section-header">
             <div>
                 <div class="section-tag">What We Do</div>
-                <h2 class="section-title">Finance transformation, grounded in reality</h2>
+                <h2 class="section-title">Turning complexity into clarity</h2>
             </div>
-            <div class="section-count">03</div>
+            <div class="section-count">04</div>
         </div>
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-num">01</div>
                 <h3>AI-Enabled Finance Operations</h3>
-                <p>Identifying and implementing AI use cases across finance functions — from intelligent automation of reconciliations to predictive analytics for cash flow planning.</p>
+                <p>Identifying and implementing AI use cases across finance — from intelligent automation of reconciliations and entity reporting to predictive analytics for cash flow and compliance checks across jurisdictions.</p>
             </div>
             <div class="service-card">
                 <div class="service-num">02</div>
                 <h3>Finance Transformation Design</h3>
-                <p>End-to-end redesign of finance operating models, process taxonomies, and governance structures that scale with organisational complexity.</p>
+                <p>Cross-functional redesign of finance operating models, governance structures and process taxonomies — scoped with shared ownership across finance, legal, tax, HR and technology.</p>
             </div>
             <div class="service-card">
                 <div class="service-num">03</div>
-                <h3>Post-Merger Integration</h3>
-                <p>Structuring finance workstreams during M&A — harmonising charts of accounts, aligning reporting, and standing up cross-entity governance from day one.</p>
+                <h3>Post-Merger Finance Integration</h3>
+                <p>Due diligence and integration of acquired companies' financial setup — entity structure, chart of accounts, reporting lines, consolidation and cross-entity governance from day one.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-num">04</div>
+                <h3>Entity Governance & Structuring</h3>
+                <p>End-to-end entity lifecycle management — from setup and registration through monitoring, compliance and reporting to restructuring and wind-down. Built for cross-border operations and exit-readiness.</p>
             </div>
         </div>
     </section>
 
+    <!-- ── ABOUT ── -->
     <section class="color-section section-deep about reveal" id="about">
         <div class="about-text">
             <div class="section-tag">About</div>
             <h2 class="section-title">Built on real transformation programmes</h2>
-            <p>KS Advisory brings hands-on experience from leading finance transformation and entity governance at scale inside complex, multinational organisations — not theory from the outside.</p>
-            <p>The work sits at the intersection of finance operations, cross-functional governance, and emerging AI capabilities.</p>
+            <p>We bring hands-on experience from leading finance transformation, post-merger integration and entity governance at scale inside complex, multinational organisations — not theory from the outside.</p>
+            <p>Our founder has led integration management office (IMO) workstreams across major acquisitions and designed cross-functional governance programmes spanning 15+ functions across international operations.</p>
             <div class="stat-row">
                 <div class="stat">
                     <div class="stat-number">15+</div>
                     <div class="stat-label">Functions Spanned</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">L1–L4</div>
-                    <div class="stat-label">Process Taxonomy</div>
+                    <div class="stat-number">IMO</div>
+                    <div class="stat-label">Integration Lead</div>
                 </div>
                 <div class="stat">
                     <div class="stat-number">MNC</div>
@@ -610,59 +769,117 @@
         <div class="credential-stack">
             <div class="credential">
                 <h4>Finance Transformation & Entity Governance</h4>
-                <p>Designing cross-functional governance frameworks spanning 15+ functions across international operations</p>
+                <p>Designing cross-functional governance frameworks spanning finance, legal, tax, HR, compliance and business development</p>
             </div>
             <div class="credential">
                 <h4>Post-Merger Finance Integration</h4>
-                <p>Leading finance integration workstreams for large-scale pharmaceutical M&A transactions</p>
+                <p>Leading finance integration workstreams and IMO participation across large-scale M&A transactions</p>
             </div>
             <div class="credential">
                 <h4>AI & Process Automation</h4>
-                <p>Identifying and scoping AI opportunities within finance operating models and lifecycle processes</p>
+                <p>Identifying and scoping AI opportunities within finance operating models and entity lifecycle processes</p>
+            </div>
+            <div class="credential">
+                <h4>Entity Structuring & Compliance</h4>
+                <p>Managing entity lifecycle across jurisdictions — setup, monitoring, reporting and deregistration</p>
             </div>
         </div>
     </section>
 
-    <section class="color-section section-rich process reveal" id="process">
-        <div class="section-tag">How I Work</div>
-        <h2 class="section-title">From diagnosis to delivery</h2>
-        <div class="process-timeline">
-            <div class="process-step">
-                <div class="process-dot"></div>
-                <h3>Discovery & Diagnosis</h3>
-                <p>Understanding your current finance operating model, pain points, and transformation ambitions through structured interviews and process mapping.</p>
+    <!-- ── OUR APPROACH ── -->
+    <section class="color-section section-rich approach reveal" id="approach">
+        <div class="section-tag">Our Approach</div>
+        <h2 class="section-title">We start in finance. We don't stop there.</h2>
+        <div class="approach-grid">
+            <div class="approach-philosophy">
+                <p>Finance transformation fails when it's scoped as a pure finance initiative. Every operating model change requires people outside finance to change how they work. Every post-merger integration needs cross-functional alignment that doesn't exist on day one.</p>
+                <p>We work across finance, legal, tax, HR and technology — because that's how reality works. Our IMO experience has taught us that cross-functional ownership is what determines whether a transformation lands or stalls.</p>
+                <p>Whether we're brought in as strategic advisors or embedded hands-on in the team, we build solutions that work across the organisation — and that last beyond our engagement.</p>
             </div>
-            <div class="process-step">
-                <div class="process-dot"></div>
-                <h3>Design & Roadmap</h3>
-                <p>Building your target operating model with clear workstreams, milestones, and AI opportunity mapping — grounded in what's actually achievable.</p>
-            </div>
-            <div class="process-step">
-                <div class="process-dot"></div>
-                <h3>Embed & Execute</h3>
-                <p>Working alongside your teams to implement changes, build governance structures, and ensure the transformation sticks beyond the engagement.</p>
+            <div class="approach-process">
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <div>
+                        <h4>Assess</h4>
+                        <p>Understanding the current setup, pain points and transformation ambitions through structured discovery and process mapping.</p>
+                    </div>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <div>
+                        <h4>Design</h4>
+                        <p>Building the target operating model with clear workstreams, milestones and cross-functional ownership — grounded in what's achievable.</p>
+                    </div>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <div>
+                        <h4>Implement</h4>
+                        <p>Working alongside the team to execute changes, build governance structures and ensure the transformation sticks.</p>
+                    </div>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <div>
+                        <h4>Handover</h4>
+                        <p>Embedding knowledge and transferring ownership so the organisation can sustain and evolve the model independently.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- ── OUR NETWORK ── -->
+    <section class="color-section section-slate network reveal" id="network">
+        <div class="section-tag">Our Network</div>
+        <h2 class="section-title">Specialists across the full lifecycle</h2>
+        <p class="network-intro">We bring together specialists to deliver holistic solutions across the full integration and transformation lifecycle.</p>
+        <div class="network-grid">
+            <div class="network-card">
+                <div class="network-icon">§</div>
+                <h4>Tax & VAT</h4>
+                <p>Cross-border tax structuring, transfer pricing and VAT compliance across jurisdictions.</p>
+            </div>
+            <div class="network-card">
+                <div class="network-icon">⚖</div>
+                <h4>Legal</h4>
+                <p>Corporate law, contracts, regulatory matters and entity-level legal structuring.</p>
+            </div>
+            <div class="network-card">
+                <div class="network-icon">◎</div>
+                <h4>HR & Mobility</h4>
+                <p>People integration, global mobility, labour law and cross-border employment structuring.</p>
+            </div>
+            <div class="network-card">
+                <div class="network-icon">⬡</div>
+                <h4>Technology & AI</h4>
+                <p>Systems integration, intelligent automation, ERP migration and AI implementation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
     <section class="color-section section-light contact reveal" id="contact">
         <div class="section-tag">Get in Touch</div>
-        <h2 class="section-title" style="margin: 0 auto 1.5rem;">Let's discuss your transformation</h2>
-        <p style="font-size: 1.05rem; color: var(--section-muted); max-width: 480px; margin: 0 auto 3rem; line-height: 1.8;">Whether you're scoping a finance transformation, navigating post-merger integration, or exploring AI in your finance function — a conversation is the right starting point.</p>
-        <a href="mailto:hello@ksadvisory.com" class="contact-email">hello@ksadvisory.com</a>
+        <h2 class="section-title" style="margin: 0 auto 1.5rem;">Let's discuss your next move</h2>
+        <p style="font-size: 1.05rem; color: var(--section-muted); max-width: 520px; margin: 0 auto 3rem; line-height: 1.8;">Whether you're navigating a deal, scaling into new markets, or redesigning how finance works across the organisation — a conversation is the right starting point.</p>
+        <a href="mailto:hello@advisory.com" class="contact-email">hello@advisory.com</a>
     </section>
 
+    <!-- ── FOOTER ── -->
     <footer>
-        <a href="index.html" class="logo" style="font-size: 1rem;">KS Advisory</a>
-        <span>&copy; 2026 KS Advisory. All rights reserved.</span>
+        <a href="index.html" class="logo" style="font-size: 1rem;">Advisory</a>
+        <span>&copy; 2026 Deal & Growth Finance Advisory. All rights reserved.</span>
     </footer>
 
     <script>
+        // Reveal on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.12 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+        // Cursor glow
         const glow = document.getElementById('cursorGlow');
         if (glow && window.innerWidth > 1024) {
             document.addEventListener('mousemove', (e) => {
@@ -671,6 +888,7 @@
             });
         }
 
+        // Background color transitions
         const sections = document.querySelectorAll('.color-section');
         const bodyEl = document.body;
         const heroColor = '#08090d';
@@ -680,13 +898,13 @@
                     const bg = getComputedStyle(entry.target).getPropertyValue('--section-bg').trim();
                     bodyEl.style.background = bg;
                 } else if (entry.target === sections[0] && entry.boundingClientRect.top > 0) {
-                    // First color section has scrolled back below the fold — restore hero background
                     bodyEl.style.background = heroColor;
                 }
             });
         }, { threshold: 0.4 });
         sections.forEach(s => sectionObserver.observe(s));
 
+        // Mobile menu close
         document.addEventListener('click', function(e) {
             const navLinks = document.querySelector('.nav-links');
             const menuToggle = document.querySelector('.menu-toggle');
