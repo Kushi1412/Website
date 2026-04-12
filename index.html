@@ -10,11 +10,14 @@
         html { scroll-behavior: smooth; }
 
         :root {
-            --bg: #08090d;
-            --text: #e8e4dc;
-            --accent: #d4a853;
-            --accent-glow: rgba(212, 168, 83, 0.3);
-            --muted: #8a8577;
+            --bg: #F8F6F1;
+            --text: #111111;
+            --navy: #0F2244;
+            --gold: #B8891A;
+            --gold-light: #D4A853;
+            --muted: #6B6560;
+            --border: #E2DDD6;
+            --card: #FFFFFF;
         }
 
         body {
@@ -22,18 +25,6 @@
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            transition: background 0.8s ease;
-        }
-
-        .cursor-glow {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(212, 168, 83, 0.06) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 1;
-            transform: translate(-50%, -50%);
         }
 
         /* ── NAV ── */
@@ -41,20 +32,25 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 4rem;
+            padding: 1.4rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            mix-blend-mode: difference;
+            background: rgba(248, 246, 241, 0.96);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow 0.3s;
         }
+
+        nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.07); }
 
         .logo {
             font-family: 'Syne', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
-            letter-spacing: 0.15em;
-            color: #fff;
+            letter-spacing: 0.14em;
+            color: var(--navy);
             text-decoration: none;
             text-transform: uppercase;
         }
@@ -62,9 +58,9 @@
         .nav-links { display: flex; gap: 2.5rem; align-items: center; }
 
         .nav-links a {
-            color: #fff;
+            color: var(--text);
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 500;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -78,62 +74,60 @@
             left: 0;
             width: 0;
             height: 1px;
-            background: #fff;
+            background: var(--navy);
             transition: width 0.3s;
         }
 
         .nav-links a:hover::after { width: 100%; }
 
-        /* Dropdown */
-        .nav-dropdown {
-            position: relative;
-        }
-
-        .nav-dropdown > a {
-            cursor: default;
-        }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown > a { cursor: default; }
 
         .dropdown-menu {
             position: absolute;
-            top: calc(100% + 12px);
+            top: calc(100% + 14px);
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(8, 9, 13, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 168, 83, 0.15);
+            background: var(--card);
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.08);
             padding: 0.8rem 0;
-            min-width: 260px;
+            min-width: 280px;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
-            mix-blend-mode: normal;
+            transition: all 0.25s ease;
         }
 
-        .nav-dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-        }
+        .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; }
 
         .dropdown-menu a {
             display: block;
-            padding: 0.6rem 1.5rem;
-            font-size: 0.7rem !important;
-            letter-spacing: 0.1em;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
             color: var(--text) !important;
             transition: all 0.2s;
             white-space: nowrap;
         }
 
-        .dropdown-menu a::after { display: none; }
+        .dropdown-menu a::after { display: none !important; }
 
         .dropdown-menu a:hover {
-            color: var(--accent) !important;
+            color: var(--navy) !important;
+            background: var(--bg);
             padding-left: 2rem;
         }
 
-        .nav-cta { padding: 0.5rem 1.2rem; border: 1px solid #fff; transition: all 0.3s; }
-        .nav-cta:hover { background: #fff; color: #000; }
-        .nav-cta::after { display: none; }
+        .nav-cta {
+            padding: 0.55rem 1.4rem;
+            background: var(--navy);
+            color: #fff !important;
+            border: 1px solid var(--navy);
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover { background: transparent; color: var(--navy) !important; }
+        .nav-cta::after { display: none !important; }
 
         .menu-toggle {
             display: none;
@@ -146,147 +140,122 @@
             z-index: 1100;
         }
 
-        .menu-toggle span { display: block; width: 30px; height: 2px; background: #fff; transition: all 0.3s; }
+        .menu-toggle span { display: block; width: 26px; height: 2px; background: var(--navy); transition: all 0.3s; }
 
         /* ── HERO ── */
         .hero {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
             padding: 0 4rem;
+            padding-top: 80px;
+            gap: 3rem;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% 50%, rgba(212, 168, 83, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 80% at 80% 30%, rgba(100, 80, 200, 0.05) 0%, transparent 50%);
-        }
-
-        .hero-lines {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-        }
-
-        .hero-lines::before, .hero-lines::after {
-            content: '';
-            position: absolute;
-            width: 1px;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(212, 168, 83, 0.15), transparent);
-            animation: lineFloat 8s ease-in-out infinite;
-        }
-
-        .hero-lines::before { left: 25%; }
-        .hero-lines::after { left: 75%; animation-delay: 4s; }
-
-        @keyframes lineFloat {
-            0%, 100% { transform: translateY(-10%); opacity: 0; }
-            50% { transform: translateY(10%); opacity: 1; }
-        }
+        .hero-content { position: relative; z-index: 2; }
 
         .hero-label {
-            font-size: 0.7rem;
+            font-size: 0.67rem;
             letter-spacing: 0.4em;
             text-transform: uppercase;
-            color: var(--accent);
+            color: var(--gold);
             font-weight: 600;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             opacity: 0;
-            animation: slideIn 1s ease forwards 0.3s;
+            animation: slideIn 0.9s ease forwards 0.3s;
         }
 
         .hero h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-size: clamp(2.8rem, 4.5vw, 4.6rem);
             font-weight: 300;
-            line-height: 1.05;
-            max-width: 850px;
+            line-height: 1.08;
+            color: var(--navy);
+            max-width: 580px;
             opacity: 0;
-            animation: slideIn 1s ease forwards 0.5s;
+            animation: slideIn 0.9s ease forwards 0.5s;
         }
 
-        .hero h1 strong {
-            font-weight: 600;
+        .hero h1 em {
             font-style: italic;
-            background: linear-gradient(135deg, var(--accent), #f0d48a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 600;
         }
 
         .hero-sub {
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             letter-spacing: 0.25em;
             text-transform: uppercase;
-            color: var(--accent);
-            max-width: 480px;
+            color: var(--gold);
             margin-top: 2rem;
             font-weight: 500;
             opacity: 0;
-            animation: slideIn 1s ease forwards 0.7s;
+            animation: slideIn 0.9s ease forwards 0.65s;
         }
 
         .hero-intro {
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.88;
             color: var(--muted);
-            max-width: 520px;
+            max-width: 500px;
             margin-top: 1.5rem;
-            font-weight: 400;
             opacity: 0;
-            animation: slideIn 1s ease forwards 0.8s;
+            animation: slideIn 0.9s ease forwards 0.75s;
         }
 
         .hero-cta-row {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.2rem;
             margin-top: 3rem;
             opacity: 0;
-            animation: slideIn 1s ease forwards 0.9s;
+            animation: slideIn 0.9s ease forwards 0.9s;
         }
 
-        .btn-glow {
-            background: var(--accent);
-            color: #08090d;
-            padding: 1rem 2.5rem;
-            border: none;
+        .btn-primary {
+            background: var(--navy);
+            color: #fff;
+            padding: 0.9rem 2.4rem;
+            border: 1px solid var(--navy);
             font-family: 'Syne', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
+            font-size: 0.73rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 0 30px var(--accent-glow);
             text-decoration: none;
             display: inline-block;
+            transition: all 0.3s;
         }
 
-        .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 0 50px var(--accent-glow); }
+        .btn-primary:hover { background: transparent; color: var(--navy); }
 
-        .btn-ghost {
+        .btn-outline {
             background: transparent;
-            color: var(--text);
-            padding: 1rem 2.5rem;
-            border: 1px solid rgba(232, 228, 220, 0.15);
+            color: var(--navy);
+            padding: 0.9rem 2.4rem;
+            border: 1px solid var(--border);
             font-family: 'Syne', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.73rem;
             font-weight: 500;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
+            transition: all 0.3s;
         }
 
-        .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+        .btn-outline:hover { border-color: var(--navy); }
+
+        .hero-visual {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1.4s ease forwards 0.8s;
+        }
+
+        .hero-visual svg { width: 100%; max-width: 560px; height: auto; }
 
         .scroll-indicator {
             position: absolute;
@@ -295,18 +264,18 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            font-size: 0.65rem;
+            font-size: 0.63rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             color: var(--muted);
             opacity: 0;
-            animation: slideIn 1s ease forwards 1.2s;
+            animation: slideIn 0.9s ease forwards 1.2s;
         }
 
         .scroll-line {
             width: 40px;
             height: 1px;
-            background: var(--muted);
+            background: var(--border);
             position: relative;
             overflow: hidden;
         }
@@ -318,199 +287,306 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--accent);
-            animation: scrollPulse 2s ease-in-out infinite;
+            background: var(--gold);
+            animation: scrollPulse 2.2s ease-in-out infinite;
         }
 
         @keyframes scrollPulse { 0% { left: -100%; } 100% { left: 100%; } }
 
-        /* ── SECTION THEMES ── */
-        .section-dark { --section-bg: #08090d; --section-text: #e8e4dc; --section-accent: #d4a853; --section-muted: #8a8577; }
-        .section-warm { --section-bg: #1a150e; --section-text: #f0ebe0; --section-accent: #e8b94a; --section-muted: #a09580; }
-        .section-deep { --section-bg: #0a0e18; --section-text: #d8dce8; --section-accent: #7b9dd4; --section-muted: #6a7088; }
-        .section-rich { --section-bg: #130d18; --section-text: #e4dce8; --section-accent: #c47bd4; --section-muted: #887a90; }
-        .section-slate { --section-bg: #0e1117; --section-text: #dde0e8; --section-accent: #8eafd4; --section-muted: #6d7590; }
-        .section-light { --section-bg: #f0ebe0; --section-text: #1a1510; --section-accent: #b8922e; --section-muted: #7a7060; }
+        /* ── AUTHORITY STRIP ── */
+        .authority-strip {
+            background: var(--navy);
+            padding: 2.2rem 4rem;
+            display: flex;
+            justify-content: center;
+        }
 
-        .color-section {
-            background: var(--section-bg);
-            color: var(--section-text);
-            transition: background 0.6s ease, color 0.6s ease;
-            position: relative;
+        .authority-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 0 3.5rem;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .authority-item:last-child { border-right: none; }
+
+        .authority-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: var(--gold-light);
+            line-height: 1;
+        }
+
+        .authority-text {
+            font-size: 0.67rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
         }
 
         /* ── SERVICES ── */
-        .services { padding: 8rem 4rem; }
+        .services { padding: 8rem 4rem; background: var(--bg); }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 5rem;
+            margin-bottom: 4.5rem;
         }
 
         .section-tag {
-            font-size: 0.65rem;
-            letter-spacing: 0.4em;
+            font-size: 0.63rem;
+            letter-spacing: 0.42em;
             text-transform: uppercase;
-            color: var(--section-accent);
+            color: var(--gold);
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.2rem, 3.8vw, 3.4rem);
             font-weight: 300;
             line-height: 1.1;
-            max-width: 550px;
+            color: var(--navy);
+            max-width: 500px;
         }
 
         .section-count {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 8rem;
+            font-size: 7rem;
             font-weight: 300;
-            color: var(--section-accent);
-            opacity: 0.1;
+            color: var(--navy);
+            opacity: 0.06;
             line-height: 1;
         }
 
-        .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
 
         .service-card {
-            padding: 3rem 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--card);
+            padding: 3.5rem 3rem;
             position: relative;
             overflow: hidden;
-            transition: all 0.5s;
-            cursor: default;
+            transition: background 0.35s;
         }
 
-        .service-card::before {
+        .service-card::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(212, 168, 83, 0.05) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.5s;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.4s ease;
         }
 
-        .service-card:hover::before { opacity: 1; }
-        .service-card:hover { border-color: rgba(212, 168, 83, 0.2); transform: translateY(-4px); }
+        .service-card:hover { background: #FDFCF9; }
+        .service-card:hover::after { width: 100%; }
 
         .service-num {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            font-weight: 300;
-            color: var(--section-accent);
-            opacity: 0.2;
-            margin-bottom: 1.5rem;
-            line-height: 1;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.22em;
         }
 
         .service-card h3 {
             font-family: 'Syne', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             font-weight: 600;
-            margin-bottom: 1rem;
-            letter-spacing: 0.02em;
+            margin-bottom: 1.2rem;
+            color: var(--navy);
+            letter-spacing: 0.01em;
         }
 
-        .service-card p { font-size: 0.85rem; line-height: 1.75; color: var(--section-muted); }
+        .service-card p { font-size: 0.87rem; line-height: 1.82; color: var(--muted); }
+
+        .service-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--navy);
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s, gap 0.3s;
+        }
+
+        .service-card:hover .service-arrow { opacity: 1; }
+        .service-arrow:hover { gap: 0.8rem; }
 
         /* ── ABOUT ── */
-        .about { padding: 8rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+        .about {
+            padding: 8rem 4rem;
+            background: var(--navy);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
 
-        .about-text p { font-size: 1.05rem; line-height: 1.9; color: var(--section-muted); margin-bottom: 1.5rem; }
+        .about .section-tag { color: var(--gold-light); }
+        .about .section-title { color: #fff; }
 
-        .stat-row { display: flex; gap: 3rem; margin-top: 3rem; }
+        .about-text p {
+            font-size: 0.98rem;
+            line-height: 1.92;
+            color: rgba(255,255,255,0.52);
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255,255,255,0.09);
+        }
 
         .stat-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 300;
-            color: var(--section-accent);
+            color: var(--gold-light);
             line-height: 1;
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.67rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: var(--section-muted);
-            margin-top: 0.5rem;
+            color: rgba(255,255,255,0.38);
+            margin-top: 0.4rem;
         }
 
-        .credential-stack { display: flex; flex-direction: column; gap: 1px; }
+        .credential-stack { display: flex; flex-direction: column; }
 
         .credential {
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-left: 2px solid var(--section-accent);
+            padding: 2rem 2rem 2rem 2.5rem;
+            border-left: 2px solid rgba(212,168,83,0.25);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             transition: all 0.3s;
         }
 
-        .credential:hover { background: rgba(255, 255, 255, 0.05); padding-left: 2.5rem; }
+        .credential:last-child { border-bottom: none; }
 
-        .credential h4 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
-        .credential p { font-size: 0.85rem; color: var(--section-muted); line-height: 1.6; }
+        .credential:hover {
+            border-left-color: var(--gold-light);
+            padding-left: 3rem;
+        }
+
+        .credential h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.93rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .credential p { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.68; }
 
         /* ── APPROACH ── */
-        .approach { padding: 8rem 4rem; }
+        .approach { padding: 8rem 4rem; background: var(--bg); }
 
         .approach-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             margin-top: 4rem;
         }
 
         .approach-philosophy p {
-            font-size: 1.05rem;
-            line-height: 1.9;
-            color: var(--section-muted);
+            font-size: 0.98rem;
+            line-height: 1.92;
+            color: var(--muted);
             margin-bottom: 1.5rem;
         }
 
-        .approach-process { display: flex; flex-direction: column; gap: 2rem; }
-
-        .process-item {
+        .approach-timeline {
             display: flex;
-            gap: 1.5rem;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .approach-timeline::before {
+            content: '';
+            position: absolute;
+            left: 1.1rem;
+            top: 1.1rem;
+            bottom: 1.1rem;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.8rem;
             align-items: flex-start;
+            padding-bottom: 2.5rem;
         }
 
-        .process-number {
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .timeline-dot {
+            width: 2.2rem;
+            height: 2.2rem;
+            min-width: 2.2rem;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: var(--section-accent);
-            opacity: 0.4;
-            line-height: 1;
-            min-width: 40px;
-        }
-
-        .process-item h4 {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
+            color: var(--gold);
             font-weight: 600;
-            margin-bottom: 0.4rem;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
         }
 
-        .process-item p {
-            font-size: 0.85rem;
-            color: var(--section-muted);
-            line-height: 1.7;
+        .timeline-item:hover .timeline-dot {
+            background: var(--navy);
+            border-color: var(--navy);
+            color: #fff;
         }
+
+        .timeline-content h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.4rem;
+            padding-top: 0.3rem;
+        }
+
+        .timeline-content p { font-size: 0.84rem; color: var(--muted); line-height: 1.72; }
 
         /* ── NETWORK ── */
-        .network { padding: 8rem 4rem; }
+        .network { padding: 8rem 4rem; background: var(--card); }
 
         .network-intro {
-            font-size: 1.05rem;
+            font-size: 0.98rem;
             line-height: 1.9;
-            color: var(--section-muted);
-            max-width: 600px;
+            color: var(--muted);
+            max-width: 580px;
             margin-bottom: 4rem;
         }
 
@@ -518,47 +594,66 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1px;
+            background: var(--border);
         }
 
         .network-card {
-            padding: 2.5rem 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s;
+            background: var(--card);
+            padding: 2.8rem 2.2rem;
+            transition: background 0.3s;
         }
 
-        .network-card:hover {
-            border-color: rgba(212, 168, 83, 0.2);
-            background: rgba(255, 255, 255, 0.02);
-        }
+        .network-card:hover { background: var(--bg); }
 
-        .network-icon {
-            font-size: 1.8rem;
-            margin-bottom: 1.2rem;
-            opacity: 0.7;
+        .network-icon-wrap {
+            width: 44px;
+            height: 44px;
+            margin-bottom: 1.5rem;
         }
 
         .network-card h4 {
             font-family: 'Syne', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.93rem;
             font-weight: 600;
             margin-bottom: 0.6rem;
+            color: var(--navy);
         }
 
-        .network-card p {
-            font-size: 0.8rem;
-            color: var(--section-muted);
-            line-height: 1.7;
-        }
+        .network-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.76; }
 
         /* ── CONTACT ── */
-        .contact { padding: 8rem 4rem; text-align: center; }
+        .contact {
+            padding: 8rem 4rem;
+            background: var(--navy);
+            text-align: center;
+        }
+
+        .contact .section-tag { color: var(--gold-light); }
+
+        .contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+            font-weight: 300;
+            color: #fff;
+            margin: 1rem auto 1.5rem;
+            max-width: 580px;
+            line-height: 1.1;
+        }
+
+        .contact-sub {
+            font-size: 0.98rem;
+            color: rgba(255,255,255,0.48);
+            max-width: 480px;
+            margin: 0 auto 3rem;
+            line-height: 1.85;
+        }
 
         .contact-email {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-size: clamp(1.6rem, 3.2vw, 2.5rem);
             font-weight: 300;
             font-style: italic;
-            color: var(--section-accent);
+            color: var(--gold-light);
             text-decoration: none;
             position: relative;
             display: inline-block;
@@ -571,7 +666,7 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background: var(--section-accent);
+            background: var(--gold-light);
             transform: scaleX(0);
             transition: transform 0.4s;
         }
@@ -580,24 +675,32 @@
 
         /* ── FOOTER ── */
         footer {
-            padding: 3rem 4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2.5rem 4rem;
+            background: #0a1a36;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.75rem;
-            color: var(--muted);
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.28);
+            letter-spacing: 0.05em;
         }
+
+        footer .logo { color: rgba(255,255,255,0.55); font-size: 1rem; }
 
         /* ── ANIMATIONS ── */
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(28px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(40px);
             transition: opacity 0.9s ease, transform 0.9s ease;
         }
 
@@ -610,34 +713,35 @@
             .nav-links {
                 display: none;
                 position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                background: rgba(8, 9, 13, 0.95);
+                top: 0; left: 0; right: 0;
+                background: rgba(248, 246, 241, 0.98);
                 backdrop-filter: blur(30px);
                 flex-direction: column;
                 align-items: center;
-                padding: 1.5rem 2rem 1.5rem;
+                padding: 5rem 2rem 2rem;
                 gap: 1.5rem;
                 z-index: 1050;
-                mix-blend-mode: normal;
             }
             .nav-links.open { display: flex !important; }
-            .nav-links a { font-size: 1rem; mix-blend-mode: normal; color: #fff; }
+            .nav-links a { font-size: 1rem; color: var(--navy); }
             .dropdown-menu {
                 position: static;
                 transform: none;
                 background: transparent;
                 border: none;
-                backdrop-filter: none;
+                box-shadow: none;
                 opacity: 1;
                 visibility: visible;
                 padding: 0;
                 min-width: auto;
             }
-            .dropdown-menu a { padding: 0.4rem 1rem; font-size: 0.85rem !important; color: var(--muted) !important; }
-            .hero { padding: 0 2rem; }
-            .hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+            .dropdown-menu a { color: var(--muted) !important; padding: 0.4rem 1rem; font-size: 0.85rem; }
+            .hero { grid-template-columns: 1fr; padding: 6rem 2rem 5rem; min-height: auto; }
+            .hero-visual { display: none; }
+            .scroll-indicator { display: none; }
+            .hero-cta-row { flex-direction: column; }
+            .authority-strip { padding: 2rem; flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
+            .authority-item { padding: 0 1.5rem; border-right: none; }
             .services { padding: 5rem 2rem; }
             .services-grid { grid-template-columns: 1fr; }
             .about { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
@@ -645,28 +749,24 @@
             .approach { padding: 5rem 2rem; }
             .approach-grid { grid-template-columns: 1fr; gap: 3rem; }
             .network { padding: 5rem 2rem; }
-            .network-grid { grid-template-columns: 1fr 1fr; gap: 1px; }
+            .network-grid { grid-template-columns: 1fr 1fr; }
             .contact { padding: 5rem 2rem; }
-            footer { padding: 2rem; flex-direction: column; gap: 1rem; }
+            footer { padding: 2rem; flex-direction: column; gap: 1rem; text-align: center; }
             .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
             .section-count { font-size: 4rem; }
-            .scroll-indicator { display: none; }
-            .hero-cta-row { flex-direction: column; }
-            .cursor-glow { display: none; }
         }
 
         @media (max-width: 600px) {
             .network-grid { grid-template-columns: 1fr; }
             .stat-row { flex-direction: column; gap: 1.5rem; }
+            .authority-strip { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="cursor-glow" id="cursorGlow"></div>
-
     <!-- ── NAVIGATION ── -->
-    <nav>
+    <nav id="mainNav">
         <a href="index.html" class="logo">Advisory</a>
         <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
             <span></span><span></span><span></span>
@@ -678,7 +778,7 @@
                     <a href="#services">AI-Enabled Finance Operations</a>
                     <a href="#services">Finance Transformation Design</a>
                     <a href="#services">Post-Merger Finance Integration</a>
-                    <a href="#services">Entity Governance & Structuring</a>
+                    <a href="#services">Entity Governance &amp; Structuring</a>
                 </div>
             </div>
             <div class="nav-dropdown">
@@ -694,25 +794,220 @@
     </nav>
 
     <!-- ── HERO ── -->
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-lines"></div>
-        <div class="hero-label">Deal & Growth Finance Advisory</div>
-        <h1>Helping companies build a <strong>well-operating</strong> and transparent finance function</h1>
-        <p class="hero-sub">Where finance meets intelligent systems</p>
-        <p class="hero-intro">We help mid-market companies and PE-backed organisations navigate deals, growth and change. Our approach connects finance with the functions around it — legal, tax, HR and technology — because that's where transformation actually happens.</p>
-        <div class="hero-cta-row">
-            <a class="btn-glow" href="#contact">Book a Conversation</a>
-            <a class="btn-ghost" href="#services">Explore Services</a>
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-label">Deal &amp; Growth Finance Advisory</div>
+            <h1>Helping companies build a <em>well-operating</em> and transparent finance function</h1>
+            <p class="hero-sub">Where finance meets intelligent systems</p>
+            <p class="hero-intro">We help mid-market companies and PE-backed organisations navigate deals, growth and change. Our approach connects finance with the functions around it — legal, tax, HR and technology — because that's where transformation actually happens.</p>
+            <div class="hero-cta-row">
+                <a class="btn-primary" href="#contact">Book a Conversation</a>
+                <a class="btn-outline" href="#services">Explore Services</a>
+            </div>
         </div>
+
+        <!-- Animated SVG node network -->
+        <div class="hero-visual">
+            <svg viewBox="0 0 560 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#0F2244" stop-opacity="0.04"/>
+                        <stop offset="100%" stop-color="#0F2244" stop-opacity="0"/>
+                    </radialGradient>
+                </defs>
+
+                <!-- Subtle background wash -->
+                <ellipse cx="280" cy="240" rx="240" ry="220" fill="url(#bgGlow)"/>
+
+                <!-- Connection lines -->
+                <g stroke="#0F2244" stroke-width="0.8">
+                    <line x1="280" y1="240" x2="140" y2="120">
+                        <animate attributeName="stroke-opacity" values="0.15;0.5;0.15" dur="4s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="280" y1="240" x2="420" y2="120">
+                        <animate attributeName="stroke-opacity" values="0.5;0.15;0.5" dur="4s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="280" y1="240" x2="90" y2="310">
+                        <animate attributeName="stroke-opacity" values="0.2;0.55;0.2" dur="5.5s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="280" y1="240" x2="470" y2="310">
+                        <animate attributeName="stroke-opacity" values="0.55;0.2;0.55" dur="5.5s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="280" y1="240" x2="280" y2="65">
+                        <animate attributeName="stroke-opacity" values="0.25;0.6;0.25" dur="6s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="280" y1="240" x2="190" y2="400">
+                        <animate attributeName="stroke-opacity" values="0.6;0.25;0.6" dur="6s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="280" y1="240" x2="370" y2="400">
+                        <animate attributeName="stroke-opacity" values="0.15;0.45;0.15" dur="7s" repeatCount="indefinite"/>
+                    </line>
+                    <!-- Secondary -->
+                    <line x1="140" y1="120" x2="280" y2="65">
+                        <animate attributeName="stroke-opacity" values="0.1;0.35;0.1" dur="5s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="420" y1="120" x2="280" y2="65">
+                        <animate attributeName="stroke-opacity" values="0.35;0.1;0.35" dur="5s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="90" y1="310" x2="190" y2="400">
+                        <animate attributeName="stroke-opacity" values="0.1;0.3;0.1" dur="4.8s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="470" y1="310" x2="370" y2="400">
+                        <animate attributeName="stroke-opacity" values="0.3;0.1;0.3" dur="4.8s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="140" y1="120" x2="90" y2="310">
+                        <animate attributeName="stroke-opacity" values="0.08;0.25;0.08" dur="8s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="420" y1="120" x2="470" y2="310">
+                        <animate attributeName="stroke-opacity" values="0.25;0.08;0.25" dur="8s" repeatCount="indefinite"/>
+                    </line>
+                    <!-- Outer satellites -->
+                    <line x1="50" y1="195" x2="140" y2="120">
+                        <animate attributeName="stroke-opacity" values="0.06;0.22;0.06" dur="7s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="510" y1="195" x2="420" y2="120">
+                        <animate attributeName="stroke-opacity" values="0.22;0.06;0.22" dur="7s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="50" y1="195" x2="90" y2="310">
+                        <animate attributeName="stroke-opacity" values="0.1;0.28;0.1" dur="6.5s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="510" y1="195" x2="470" y2="310">
+                        <animate attributeName="stroke-opacity" values="0.28;0.1;0.28" dur="6.5s" repeatCount="indefinite"/>
+                    </line>
+                </g>
+
+                <!-- Gold travelling particles -->
+                <circle r="2.8" fill="#B8891A" opacity="0.85">
+                    <animateMotion dur="3.2s" repeatCount="indefinite">
+                        <mpath href="#p1"/>
+                    </animateMotion>
+                </circle>
+                <circle r="2.2" fill="#B8891A" opacity="0.7">
+                    <animateMotion dur="4.8s" repeatCount="indefinite" begin="1.2s">
+                        <mpath href="#p2"/>
+                    </animateMotion>
+                </circle>
+                <circle r="2" fill="#0F2244" opacity="0.6">
+                    <animateMotion dur="5.2s" repeatCount="indefinite" begin="2.1s">
+                        <mpath href="#p3"/>
+                    </animateMotion>
+                </circle>
+                <circle r="1.8" fill="#0F2244" opacity="0.55">
+                    <animateMotion dur="3.8s" repeatCount="indefinite" begin="0.7s">
+                        <mpath href="#p4"/>
+                    </animateMotion>
+                </circle>
+                <circle r="2" fill="#B8891A" opacity="0.65">
+                    <animateMotion dur="6s" repeatCount="indefinite" begin="3s">
+                        <mpath href="#p5"/>
+                    </animateMotion>
+                </circle>
+
+                <!-- Hidden motion paths -->
+                <path id="p1" d="M280,240 L140,120" style="display:none"/>
+                <path id="p2" d="M280,240 L420,120" style="display:none"/>
+                <path id="p3" d="M280,240 L90,310" style="display:none"/>
+                <path id="p4" d="M280,240 L470,310" style="display:none"/>
+                <path id="p5" d="M280,240 L280,65" style="display:none"/>
+
+                <!-- Centre node — main hub -->
+                <circle cx="280" cy="240" r="32" fill="white" stroke="#0F2244" stroke-width="1.2"/>
+                <circle cx="280" cy="240" r="22" fill="#0F2244"/>
+                <!-- Pulse ring -->
+                <circle cx="280" cy="240" r="32" fill="none" stroke="#0F2244" stroke-width="0.6" opacity="0">
+                    <animate attributeName="r" values="32;56;32" dur="3.2s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.5;0;0.5" dur="3.2s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- Secondary nodes -->
+                <circle cx="140" cy="120" r="14" fill="white" stroke="#0F2244" stroke-width="1"/>
+                <circle cx="140" cy="120" r="8" fill="#0F2244">
+                    <animate attributeName="r" values="8;10;8" dur="4.5s" repeatCount="indefinite"/>
+                </circle>
+
+                <circle cx="420" cy="120" r="14" fill="white" stroke="#0F2244" stroke-width="1"/>
+                <circle cx="420" cy="120" r="8" fill="#B8891A">
+                    <animate attributeName="r" values="8;10;8" dur="4.5s" begin="1s" repeatCount="indefinite"/>
+                </circle>
+
+                <circle cx="90" cy="310" r="13" fill="white" stroke="#0F2244" stroke-width="1"/>
+                <circle cx="90" cy="310" r="7" fill="#0F2244">
+                    <animate attributeName="r" values="7;9;7" dur="5.5s" begin="0.5s" repeatCount="indefinite"/>
+                </circle>
+
+                <circle cx="470" cy="310" r="13" fill="white" stroke="#0F2244" stroke-width="1"/>
+                <circle cx="470" cy="310" r="7" fill="#B8891A">
+                    <animate attributeName="r" values="7;9;7" dur="5.5s" begin="1.8s" repeatCount="indefinite"/>
+                </circle>
+
+                <circle cx="280" cy="65" r="11" fill="white" stroke="#0F2244" stroke-width="0.9"/>
+                <circle cx="280" cy="65" r="6" fill="#0F2244">
+                    <animate attributeName="r" values="6;8;6" dur="6s" repeatCount="indefinite"/>
+                </circle>
+
+                <circle cx="190" cy="400" r="11" fill="white" stroke="#0F2244" stroke-width="0.9"/>
+                <circle cx="190" cy="400" r="6" fill="#B8891A">
+                    <animate attributeName="r" values="6;8;6" dur="6s" begin="2s" repeatCount="indefinite"/>
+                </circle>
+
+                <circle cx="370" cy="400" r="11" fill="white" stroke="#0F2244" stroke-width="0.9"/>
+                <circle cx="370" cy="400" r="6" fill="#0F2244">
+                    <animate attributeName="r" values="6;8;6" dur="6s" begin="3.5s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- Outer satellites -->
+                <circle cx="50" cy="195" r="8" fill="white" stroke="#0F2244" stroke-width="0.7">
+                    <animate attributeName="opacity" values="0.45;1;0.45" dur="5.5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="50" cy="195" r="4" fill="#0F2244"/>
+
+                <circle cx="510" cy="195" r="8" fill="white" stroke="#0F2244" stroke-width="0.7">
+                    <animate attributeName="opacity" values="1;0.45;1" dur="5.5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="510" cy="195" r="4" fill="#B8891A"/>
+
+                <!-- Node labels -->
+                <text x="140" y="100" text-anchor="middle" font-family="'Syne',sans-serif" font-size="7.5" fill="#6B6560" letter-spacing="1.5" font-weight="500">AI</text>
+                <text x="420" y="100" text-anchor="middle" font-family="'Syne',sans-serif" font-size="7.5" fill="#6B6560" letter-spacing="1.5" font-weight="500">M&amp;A</text>
+                <text x="78" y="340" text-anchor="middle" font-family="'Syne',sans-serif" font-size="7.5" fill="#6B6560" letter-spacing="1.5" font-weight="500">TAX</text>
+                <text x="480" y="340" text-anchor="middle" font-family="'Syne',sans-serif" font-size="7.5" fill="#6B6560" letter-spacing="1.5" font-weight="500">LEGAL</text>
+                <text x="280" y="50" text-anchor="middle" font-family="'Syne',sans-serif" font-size="7.5" fill="#6B6560" letter-spacing="1.5" font-weight="500">FINANCE</text>
+                <text x="190" y="424" text-anchor="middle" font-family="'Syne',sans-serif" font-size="7.5" fill="#6B6560" letter-spacing="1.5" font-weight="500">HR</text>
+                <text x="370" y="424" text-anchor="middle" font-family="'Syne',sans-serif" font-size="7.5" fill="#6B6560" letter-spacing="1.5" font-weight="500">ENTITY</text>
+
+                <!-- Centre label -->
+                <text x="280" y="244" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="9" fill="white" letter-spacing="2" font-weight="300">ADVISORY</text>
+            </svg>
+        </div>
+
         <div class="scroll-indicator">
             <div class="scroll-line"></div>
             Scroll to explore
         </div>
     </section>
 
+    <!-- ── AUTHORITY STRIP ── -->
+    <div class="authority-strip reveal">
+        <div class="authority-item">
+            <div class="authority-num">15+</div>
+            <div class="authority-text">Years of<br>Experience</div>
+        </div>
+        <div class="authority-item">
+            <div class="authority-num">04</div>
+            <div class="authority-text">Service<br>Pillars</div>
+        </div>
+        <div class="authority-item">
+            <div class="authority-num">MNC</div>
+            <div class="authority-text">Scale<br>Operations</div>
+        </div>
+        <div class="authority-item">
+            <div class="authority-num">IMO</div>
+            <div class="authority-text">Integration<br>Lead</div>
+        </div>
+    </div>
+
     <!-- ── SERVICES ── -->
-    <section class="color-section section-warm services reveal" id="services">
+    <section class="services reveal" id="services">
         <div class="section-header">
             <div>
                 <div class="section-tag">What We Do</div>
@@ -722,30 +1017,34 @@
         </div>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-num">01</div>
+                <div class="service-num">01 —</div>
                 <h3>AI-Enabled Finance Operations</h3>
                 <p>Identifying and implementing AI use cases across finance — from intelligent automation of reconciliations and entity reporting to predictive analytics for cash flow and compliance checks across jurisdictions.</p>
+                <a href="#" class="service-arrow">Learn more →</a>
             </div>
             <div class="service-card">
-                <div class="service-num">02</div>
+                <div class="service-num">02 —</div>
                 <h3>Finance Transformation Design</h3>
                 <p>Cross-functional redesign of finance operating models, governance structures and process taxonomies — scoped with shared ownership across finance, legal, tax, HR and technology.</p>
+                <a href="#" class="service-arrow">Learn more →</a>
             </div>
             <div class="service-card">
-                <div class="service-num">03</div>
+                <div class="service-num">03 —</div>
                 <h3>Post-Merger Finance Integration</h3>
                 <p>Due diligence and integration of acquired companies' financial setup — entity structure, chart of accounts, reporting lines, consolidation and cross-entity governance from day one.</p>
+                <a href="#" class="service-arrow">Learn more →</a>
             </div>
             <div class="service-card">
-                <div class="service-num">04</div>
-                <h3>Entity Governance & Structuring</h3>
+                <div class="service-num">04 —</div>
+                <h3>Entity Governance &amp; Structuring</h3>
                 <p>End-to-end entity lifecycle management — from setup and registration through monitoring, compliance and reporting to restructuring and wind-down. Built for cross-border operations and exit-readiness.</p>
+                <a href="#" class="service-arrow">Learn more →</a>
             </div>
         </div>
     </section>
 
     <!-- ── ABOUT ── -->
-    <section class="color-section section-deep about reveal" id="about">
+    <section class="about reveal" id="about">
         <div class="about-text">
             <div class="section-tag">About</div>
             <h2 class="section-title">Built on real transformation programmes</h2>
@@ -768,26 +1067,26 @@
         </div>
         <div class="credential-stack">
             <div class="credential">
-                <h4>Finance Transformation & Entity Governance</h4>
+                <h4>Finance Transformation &amp; Entity Governance</h4>
                 <p>Designing cross-functional governance frameworks spanning finance, legal, tax, HR, compliance and business development</p>
             </div>
             <div class="credential">
                 <h4>Post-Merger Finance Integration</h4>
-                <p>Leading finance integration workstreams and IMO participation across large-scale M&A transactions</p>
+                <p>Leading finance integration workstreams and IMO participation across large-scale M&amp;A transactions</p>
             </div>
             <div class="credential">
-                <h4>AI & Process Automation</h4>
+                <h4>AI &amp; Process Automation</h4>
                 <p>Identifying and scoping AI opportunities within finance operating models and entity lifecycle processes</p>
             </div>
             <div class="credential">
-                <h4>Entity Structuring & Compliance</h4>
+                <h4>Entity Structuring &amp; Compliance</h4>
                 <p>Managing entity lifecycle across jurisdictions — setup, monitoring, reporting and deregistration</p>
             </div>
         </div>
     </section>
 
     <!-- ── OUR APPROACH ── -->
-    <section class="color-section section-rich approach reveal" id="approach">
+    <section class="approach reveal" id="approach">
         <div class="section-tag">Our Approach</div>
         <h2 class="section-title">We start in finance. We don't stop there.</h2>
         <div class="approach-grid">
@@ -796,31 +1095,31 @@
                 <p>We work across finance, legal, tax, HR and technology — because that's how reality works. Our IMO experience has taught us that cross-functional ownership is what determines whether a transformation lands or stalls.</p>
                 <p>Whether we're brought in as strategic advisors or embedded hands-on in the team, we build solutions that work across the organisation — and that last beyond our engagement.</p>
             </div>
-            <div class="approach-process">
-                <div class="process-item">
-                    <div class="process-number">01</div>
-                    <div>
+            <div class="approach-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">01</div>
+                    <div class="timeline-content">
                         <h4>Assess</h4>
                         <p>Understanding the current setup, pain points and transformation ambitions through structured discovery and process mapping.</p>
                     </div>
                 </div>
-                <div class="process-item">
-                    <div class="process-number">02</div>
-                    <div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">02</div>
+                    <div class="timeline-content">
                         <h4>Design</h4>
                         <p>Building the target operating model with clear workstreams, milestones and cross-functional ownership — grounded in what's achievable.</p>
                     </div>
                 </div>
-                <div class="process-item">
-                    <div class="process-number">03</div>
-                    <div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">03</div>
+                    <div class="timeline-content">
                         <h4>Implement</h4>
                         <p>Working alongside the team to execute changes, build governance structures and ensure the transformation sticks.</p>
                     </div>
                 </div>
-                <div class="process-item">
-                    <div class="process-number">04</div>
-                    <div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">04</div>
+                    <div class="timeline-content">
                         <h4>Handover</h4>
                         <p>Embedding knowledge and transferring ownership so the organisation can sustain and evolve the model independently.</p>
                     </div>
@@ -830,81 +1129,89 @@
     </section>
 
     <!-- ── OUR NETWORK ── -->
-    <section class="color-section section-slate network reveal" id="network">
+    <section class="network reveal" id="network">
         <div class="section-tag">Our Network</div>
         <h2 class="section-title">Specialists across the full lifecycle</h2>
         <p class="network-intro">We bring together specialists to deliver holistic solutions across the full integration and transformation lifecycle.</p>
         <div class="network-grid">
             <div class="network-card">
-                <div class="network-icon">§</div>
-                <h4>Tax & VAT</h4>
+                <div class="network-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="7" y="9" width="30" height="26" rx="2" stroke="#0F2244" stroke-width="1.2"/>
+                        <path d="M14 22h16M22 14v16" stroke="#B8891A" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="22" cy="22" r="5" stroke="#0F2244" stroke-width="0.9"/>
+                    </svg>
+                </div>
+                <h4>Tax &amp; VAT</h4>
                 <p>Cross-border tax structuring, transfer pricing and VAT compliance across jurisdictions.</p>
             </div>
             <div class="network-card">
-                <div class="network-icon">⚖</div>
+                <div class="network-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 7L6 15v3h32v-3L22 7z" stroke="#0F2244" stroke-width="1.2" stroke-linejoin="round"/>
+                        <path d="M11 18v14M17 18v14M27 18v14M33 18v14" stroke="#0F2244" stroke-width="1.2" stroke-linecap="round"/>
+                        <path d="M6 32h32" stroke="#0F2244" stroke-width="1.2" stroke-linecap="round"/>
+                        <circle cx="22" cy="13" r="2.2" fill="#B8891A"/>
+                    </svg>
+                </div>
                 <h4>Legal</h4>
                 <p>Corporate law, contracts, regulatory matters and entity-level legal structuring.</p>
             </div>
             <div class="network-card">
-                <div class="network-icon">◎</div>
-                <h4>HR & Mobility</h4>
+                <div class="network-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="22" cy="15" r="6" stroke="#0F2244" stroke-width="1.2"/>
+                        <path d="M9 37c0-7.18 5.82-13 13-13s13 5.82 13 13" stroke="#0F2244" stroke-width="1.2" stroke-linecap="round"/>
+                        <path d="M31 20c2.5 1.8 4.5 4.8 4.5 9" stroke="#B8891A" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h4>HR &amp; Mobility</h4>
                 <p>People integration, global mobility, labour law and cross-border employment structuring.</p>
             </div>
             <div class="network-card">
-                <div class="network-icon">⬡</div>
-                <h4>Technology & AI</h4>
+                <div class="network-icon-wrap">
+                    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="7" y="13" width="30" height="20" rx="2" stroke="#0F2244" stroke-width="1.2"/>
+                        <path d="M15 33v4M29 33v4M11 37h22" stroke="#0F2244" stroke-width="1.2" stroke-linecap="round"/>
+                        <circle cx="22" cy="23" r="4.5" stroke="#B8891A" stroke-width="1.2"/>
+                        <path d="M22 9v4" stroke="#0F2244" stroke-width="1.2" stroke-linecap="round"/>
+                        <path d="M17.5 10.5l1.8 3M26.5 10.5l-1.8 3" stroke="#0F2244" stroke-width="1" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h4>Technology &amp; AI</h4>
                 <p>Systems integration, intelligent automation, ERP migration and AI implementation.</p>
             </div>
         </div>
     </section>
 
     <!-- ── CONTACT ── -->
-    <section class="color-section section-light contact reveal" id="contact">
+    <section class="contact reveal" id="contact">
         <div class="section-tag">Get in Touch</div>
-        <h2 class="section-title" style="margin: 0 auto 1.5rem;">Let's discuss your next move</h2>
-        <p style="font-size: 1.05rem; color: var(--section-muted); max-width: 520px; margin: 0 auto 3rem; line-height: 1.8;">Whether you're navigating a deal, scaling into new markets, or redesigning how finance works across the organisation — a conversation is the right starting point.</p>
+        <h2 class="contact-title">Let's discuss your next move</h2>
+        <p class="contact-sub">Whether you're navigating a deal, scaling into new markets, or redesigning how finance works across the organisation — a conversation is the right starting point.</p>
         <a href="mailto:hello@advisory.com" class="contact-email">hello@advisory.com</a>
     </section>
 
     <!-- ── FOOTER ── -->
     <footer>
-        <a href="index.html" class="logo" style="font-size: 1rem;">Advisory</a>
-        <span>&copy; 2026 Deal & Growth Finance Advisory. All rights reserved.</span>
+        <a href="index.html" class="logo">Advisory</a>
+        <span>&copy; 2026 Deal &amp; Growth Finance Advisory. All rights reserved.</span>
     </footer>
 
     <script>
         // Reveal on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-        }, { threshold: 0.12 });
+        }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Cursor glow
-        const glow = document.getElementById('cursorGlow');
-        if (glow && window.innerWidth > 1024) {
-            document.addEventListener('mousemove', (e) => {
-                glow.style.left = e.clientX + 'px';
-                glow.style.top = e.clientY + 'px';
-            });
-        }
+        // Nav scroll shadow
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
 
-        // Background color transitions
-        const sections = document.querySelectorAll('.color-section');
-        const bodyEl = document.body;
-        const heroColor = '#08090d';
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bg = getComputedStyle(entry.target).getPropertyValue('--section-bg').trim();
-                    bodyEl.style.background = bg;
-                } else if (entry.target === sections[0] && entry.boundingClientRect.top > 0) {
-                    bodyEl.style.background = heroColor;
-                }
-            });
-        }, { threshold: 0.4 });
-        sections.forEach(s => sectionObserver.observe(s));
-
-        // Mobile menu close
+        // Mobile menu close on outside click
         document.addEventListener('click', function(e) {
             const navLinks = document.querySelector('.nav-links');
             const menuToggle = document.querySelector('.menu-toggle');
