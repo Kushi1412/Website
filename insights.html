@@ -24,13 +24,11 @@
                 <div class="section-tag">Insights</div>
                 <h2 class="section-title">Thinking that earns its place</h2>
             </div>
-            <div class="feed-nav feed-nav--insights">
-                <button class="feed-arrow" type="button" data-dir="prev" aria-label="Previous" disabled>&larr;</button>
-                <button class="feed-arrow" type="button" data-dir="next" aria-label="Next">&rarr;</button>
-            </div>
         </div>
         <p class="lead feed-intro" id="cases">Articles and anonymised case studies from the work — frameworks, concrete examples and hard-won lessons. Case studies are anonymised to protect client confidentiality.</p>
-        <div class="insights-feed feed--grid" role="region" aria-label="Insights and case studies" tabindex="0">
+        <div class="feed-shell feed-shell--insights">
+            <button class="feed-arrow feed-arrow--prev" type="button" data-dir="prev" aria-label="Previous" disabled>&larr;</button>
+            <div class="insights-feed feed--grid" role="region" aria-label="Insights and case studies" tabindex="0">
 
             <a href="article-integration-deadline.html" class="feed-card">
                 <span class="feed-tag">Article</span>
@@ -93,7 +91,8 @@
                 </div>
                 <button class="card-arrow feed-expand" type="button" aria-expanded="false">Read more &rarr;</button>
             </article>
-
+            </div>
+            <button class="feed-arrow feed-arrow--next" type="button" data-dir="next" aria-label="Next">&rarr;</button>
         </div>
     </section>
 

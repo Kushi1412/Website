@@ -1230,14 +1230,18 @@ table.portal-table tr:hover td { background: #FFFEF9; }
 /* ── Insights + Case Studies feed ───────────────────────────── */
 .feed-band { background: var(--paper-2); }
 .feed-intro { max-width: 640px; margin-bottom: 2.5rem; }
-.feed-nav { display: flex; gap: 0.6rem; }
+.feed-shell { position: relative; }
 .feed-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
     width: 44px; height: 44px; border-radius: 50%;
-    border: 1px solid var(--green); background: transparent;
+    border: 1px solid var(--green); background: var(--paper);
     color: var(--green); font-size: 1.05rem; line-height: 1;
     font-family: var(--mono); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
     transition: background 0.2s, color 0.2s, opacity 0.2s;
 }
+.feed-arrow--prev { left: -20px; }
+.feed-arrow--next { right: -20px; }
 .feed-arrow:hover:not(:disabled) { background: var(--green); color: var(--paper); }
 .feed-arrow:disabled { opacity: 0.3; cursor: default; }
 .feed-arrow:focus-visible { outline: 2px solid var(--seal); outline-offset: 2px; }
@@ -1282,14 +1286,14 @@ a.feed-card:hover { border-left-color: var(--seal); transform: translateY(-3px);
     a.feed-card:hover { transform: none; }
 }
 @media (max-width: 768px) {
-    .feed-nav { display: none; }
+    .feed-arrow { display: none; }
     .feed-card { flex-basis: 82%; max-width: 82%; }
 }
 @media (min-width: 900px) {
     .insights-feed.feed--grid {
         display: grid; grid-template-columns: repeat(3, 1fr);
-        overflow: visible; gap: 1.5rem;
+        overflow: visible; gap: 1.5rem; align-items: start;
     }
     .insights-feed.feed--grid .feed-card { flex: initial; max-width: none; }
-    .feed-nav--insights { display: none; }
+    .feed-shell--insights .feed-arrow { display: none; }
 }

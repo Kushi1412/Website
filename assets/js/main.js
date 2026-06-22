@@ -132,6 +132,7 @@
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var feedPrev = document.querySelector('.feed-arrow[data-dir="prev"]');
         var feedNext = document.querySelector('.feed-arrow[data-dir="next"]');
+        var feedCards = feed.querySelectorAll('.feed-card');
 
         function feedStep() {
             var card = feed.querySelector('.feed-card');
@@ -148,14 +149,31 @@
             if (feedPrev) { feedPrev.disabled = feed.scrollLeft <= 0; }
             if (feedNext) { feedNext.disabled = feed.scrollLeft >= maxScroll; }
         }
+        // Give every collapsed card the same height; an expanded card grows freely.
+        function equalizeCards() {
+            var i, max = 0;
+            for (i = 0; i < feedCards.length; i++) { feedCards[i].style.height = 'auto'; }
+            for (i = 0; i < feedCards.length; i++) {
+                if (!feedCards[i].classList.contains('feed-card--open')) {
+                    max = Math.max(max, feedCards[i].offsetHeight);
+                }
+            }
+            for (i = 0; i < feedCards.length; i++) {
+                if (!feedCards[i].classList.contains('feed-card--open')) {
+                    feedCards[i].style.height = max + 'px';
+                }
+            }
+        }
         if (feedPrev) { feedPrev.addEventListener('click', function () { scrollFeed(-1); }); }
         if (feedNext) { feedNext.addEventListener('click', function () { scrollFeed(1); }); }
         feed.addEventListener('scroll', updateArrows, { passive: true });
-        window.addEventListener('resize', updateArrows);
+        window.addEventListener('resize', function () { equalizeCards(); updateArrows(); });
+        window.addEventListener('load', equalizeCards);
         feed.addEventListener('keydown', function (e) {
             if (e.key === 'ArrowRight') { scrollFeed(1); e.preventDefault(); }
             else if (e.key === 'ArrowLeft') { scrollFeed(-1); e.preventDefault(); }
         });
+        equalizeCards();
         updateArrows();
 
         // Expand / collapse the inline case-study cards
@@ -166,7 +184,9 @@
                 var open = btn.getAttribute('aria-expanded') === 'true';
                 btn.setAttribute('aria-expanded', open ? 'false' : 'true');
                 if (more) { more.hidden = open; }
+                if (card) { card.classList.toggle('feed-card--open', !open); }
                 btn.textContent = open ? 'Read more →' : 'Show less →';
+                equalizeCards();
                 updateArrows();
             });
         });
