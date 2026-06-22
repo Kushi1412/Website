@@ -686,19 +686,6 @@ nav.site-nav.scrolled { box-shadow: 0 2px 24px rgba(25,23,19,0.08); }
     overflow: hidden;
 }
 
-.cta-band::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent 39px,
-        rgba(22, 56, 44, 0.05) 39px,
-        rgba(22, 56, 44, 0.05) 40px
-    );
-    pointer-events: none;
-}
 
 .cta-band > * { position: relative; }
 
