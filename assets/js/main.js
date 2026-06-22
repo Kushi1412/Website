@@ -62,7 +62,7 @@
         '<div class="footer-grid">' +
         '<div class="footer-brand">' +
         '<a href="index.html" class="logo">Finateo<span class="logo-dot">.</span></a>' +
-        '<p>Deal &amp; growth finance advisory for mid-market companies and PE-backed organisations. We design the finance function — and we can run it, through our shared services center in Tetovo, North Macedonia.</p>' +
+        '<p>Deal &amp; growth finance advisory for mid-market companies and the investors behind them. We design the finance function — and we can run it, through our shared services center in Tetovo and a broader professional network across several countries.</p>' +
         '</div>' +
         '<div class="footer-col"><h5>Services</h5>' +
         '<a href="finance-transformation.html">Finance Transformation Design</a>' +
