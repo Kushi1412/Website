@@ -125,4 +125,50 @@
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+
+    // Insights + case-studies feed (no-op on pages without it)
+    var feed = document.querySelector('.insights-feed');
+    if (feed) {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var feedPrev = document.querySelector('.feed-arrow[data-dir="prev"]');
+        var feedNext = document.querySelector('.feed-arrow[data-dir="next"]');
+
+        function feedStep() {
+            var card = feed.querySelector('.feed-card');
+            if (!card) { return feed.clientWidth; }
+            var s = getComputedStyle(feed);
+            var gap = parseFloat(s.columnGap || s.gap) || 0;
+            return card.getBoundingClientRect().width + gap;
+        }
+        function scrollFeed(dir) {
+            feed.scrollBy({ left: dir * feedStep(), behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+        function updateArrows() {
+            var maxScroll = feed.scrollWidth - feed.clientWidth - 2;
+            if (feedPrev) { feedPrev.disabled = feed.scrollLeft <= 0; }
+            if (feedNext) { feedNext.disabled = feed.scrollLeft >= maxScroll; }
+        }
+        if (feedPrev) { feedPrev.addEventListener('click', function () { scrollFeed(-1); }); }
+        if (feedNext) { feedNext.addEventListener('click', function () { scrollFeed(1); }); }
+        feed.addEventListener('scroll', updateArrows, { passive: true });
+        window.addEventListener('resize', updateArrows);
+        feed.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight') { scrollFeed(1); e.preventDefault(); }
+            else if (e.key === 'ArrowLeft') { scrollFeed(-1); e.preventDefault(); }
+        });
+        updateArrows();
+
+        // Expand / collapse the inline case-study cards
+        feed.querySelectorAll('.feed-expand').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var card = btn.closest('.feed-card');
+                var more = card ? card.querySelector('.feed-more') : null;
+                var open = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+                if (more) { more.hidden = open; }
+                btn.textContent = open ? 'Read more →' : 'Show less →';
+                updateArrows();
+            });
+        });
+    }
 })();

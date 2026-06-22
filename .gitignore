@@ -6,6 +6,9 @@ Log/
 # Internal-only material — keep out of the public repo
 internal/
 
+# Local scratch / preview-only files — never publish
+*.local.html
+
 # OS / editor noise
 node_modules/
 .DS_Store

@@ -129,6 +129,19 @@
             color: var(--seal-bright);
             font-size: 1.3rem;
         }
+        /* hero illustration motion — paused when the user prefers reduced motion */
+        @media (prefers-reduced-motion: no-preference) {
+            .hero-pulse { animation: heroTravel 7s linear infinite; }
+            @keyframes heroTravel {
+                0%   { cx: 36px; opacity: 0; }
+                8%   { opacity: 1; }
+                86%  { opacity: 1; }
+                100% { cx: 495px; opacity: 0; }
+            }
+            .hero-ring { transform-box: fill-box; transform-origin: center; animation: heroSpin 16s linear infinite; }
+            @keyframes heroSpin { to { transform: rotate(360deg); } }
+        }
+
         @media (max-width: 1024px) {
             .hero { grid-template-columns: 1fr; padding: 7rem 2rem 5rem; min-height: auto; }
             .hero-visual { display: none; }
@@ -153,79 +166,36 @@
             </div>
         </div>
 
-        <!-- Animated journey: five stages of change, carried by the Finateo spine -->
+        <!-- Hero illustration: complexity resolving into a clean ledger, ending in ongoing operations (Advise · Build · Run) -->
         <div class="hero-visual">
             <svg viewBox="0 0 560 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <!-- stage path -->
-                <line x1="70" y1="150" x2="490" y2="150" stroke="#16382C" stroke-opacity="0.18" stroke-width="1"/>
-                <line x1="70" y1="150" x2="490" y2="150" stroke="#B34A1F" stroke-width="1.4" stroke-dasharray="420" stroke-dashoffset="420">
-                    <animate attributeName="stroke-dashoffset" values="420;0;0" keyTimes="0;0.86;1" dur="7s" repeatCount="indefinite"/>
-                </line>
-                <!-- traveling pulse -->
-                <circle r="3.2" fill="#B34A1F">
-                    <animateMotion dur="7s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.86;1" calcMode="linear" path="M70,150 L490,150"/>
-                </circle>
-
-                <!-- connectors down to the spine -->
-                <g stroke="#16382C" stroke-width="0.8" stroke-opacity="0.25">
-                    <line x1="70" y1="166" x2="70" y2="263"/>
-                    <line x1="175" y1="166" x2="175" y2="263"/>
-                    <line x1="280" y1="166" x2="280" y2="263"/>
-                    <line x1="385" y1="166" x2="385" y2="263"/>
-                    <line x1="490" y1="166" x2="490" y2="263"/>
+                <!-- complexity: tangled strokes combing into order -->
+                <g stroke="#16382C" stroke-opacity="0.28" stroke-width="1" stroke-linecap="round" fill="none">
+                    <path d="M36,108 C112,150 150,285 232,150"/>
+                    <path d="M36,250 C112,225 158,100 232,190"/>
+                    <path d="M34,182 C112,312 165,95 232,230"/>
+                    <path d="M60,300 C125,150 175,300 232,270"/>
                 </g>
-
-                <!-- stage nodes -->
-                <circle cx="70" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
-                <circle cx="70" cy="150" r="8" fill="#16382C">
-                    <animate attributeName="r" values="8;11;8;8" keyTimes="0;0.04;0.09;1" dur="7s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="175" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
-                <circle cx="175" cy="150" r="8" fill="#16382C">
-                    <animate attributeName="r" values="8;8;11;8;8" keyTimes="0;0.215;0.255;0.30;1" dur="7s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="280" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
-                <circle cx="280" cy="150" r="8" fill="#16382C">
-                    <animate attributeName="r" values="8;8;11;8;8" keyTimes="0;0.43;0.47;0.52;1" dur="7s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="385" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
-                <circle cx="385" cy="150" r="8" fill="#16382C">
-                    <animate attributeName="r" values="8;8;11;8;8" keyTimes="0;0.645;0.685;0.73;1" dur="7s" repeatCount="indefinite"/>
-                </circle>
-                <!-- run node: amber, with ongoing-operations loop -->
-                <circle cx="490" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
-                <circle cx="490" cy="150" r="8" fill="#B34A1F">
-                    <animate attributeName="r" values="8;8;11;8;8" keyTimes="0;0.84;0.88;0.93;1" dur="7s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="490" cy="150" r="23" fill="none" stroke="#B34A1F" stroke-width="1" stroke-dasharray="5 6" stroke-opacity="0.55">
-                    <animateTransform attributeName="transform" type="rotate" from="0 490 150" to="360 490 150" dur="10s" repeatCount="indefinite"/>
-                </circle>
-
-                <!-- stage labels -->
-                <text x="70" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#16382C" letter-spacing="1.5" font-weight="600">INITIATE</text>
-                <text x="175" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#16382C" letter-spacing="1.5" font-weight="600">DESIGN</text>
-                <text x="280" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#16382C" letter-spacing="1.5" font-weight="600">EXECUTE</text>
-                <text x="385" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#16382C" letter-spacing="1.5" font-weight="600">HANDOVER</text>
-                <text x="490" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#B34A1F" letter-spacing="1.5" font-weight="600">RUN</text>
-
-                <!-- stage captions -->
-                <text x="70" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#5C5E54" letter-spacing="0.8">case for change</text>
-                <text x="175" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#5C5E54" letter-spacing="0.8">target model</text>
-                <text x="280" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#5C5E54" letter-spacing="0.8">implementation</text>
-                <text x="385" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#5C5E54" letter-spacing="0.8">to your team</text>
-                <text x="490" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#B34A1F" letter-spacing="0.8">or run by us</text>
-
-                <!-- Finateo spine -->
-                <rect x="40" y="263" width="480" height="44" fill="#16382C" rx="2"/>
-                <text x="280" y="289" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#F4F1E8" letter-spacing="3" font-weight="600">FINATEO — WITH YOU END TO END</text>
-                <!-- pulse traveling inside the spine -->
-                <circle r="2.4" cy="0" fill="#D2702F">
-                    <animateMotion dur="7s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.86;1" calcMode="linear" path="M52,299 L508,299"/>
-                </circle>
-                <line x1="52" y1="299" x2="508" y2="299" stroke="#D2702F" stroke-opacity="0.35" stroke-width="0.8"/>
-
-                <!-- footing caption -->
-                <text x="280" y="345" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#5C5E54" letter-spacing="2">ADVISE · BUILD · RUN</text>
+                <!-- clarity: clean ledger lines -->
+                <g stroke="#16382C" stroke-opacity="0.22" stroke-width="1">
+                    <line x1="232" y1="150" x2="470" y2="150"/>
+                    <line x1="232" y1="190" x2="470" y2="190"/>
+                    <line x1="232" y1="230" x2="495" y2="230"/>
+                    <line x1="232" y1="270" x2="470" y2="270"/>
+                </g>
+                <!-- sealing-wax margin rule -->
+                <line x1="232" y1="124" x2="232" y2="296" stroke="#B34A1F" stroke-width="1.6"/>
+                <!-- ongoing operations: amber ring at the resolved end -->
+                <circle cx="495" cy="230" r="6" fill="#B34A1F"/>
+                <circle class="hero-ring" cx="495" cy="230" r="22" fill="none" stroke="#D2702F" stroke-width="1.3" stroke-dasharray="4 7" stroke-opacity="0.78"/>
+                <!-- pulse travelling from complexity into the ongoing-operations ring -->
+                <circle class="hero-pulse" cx="36" cy="230" r="3.4" fill="#B34A1F" style="opacity:0"/>
+                <!-- phase ticks -->
+                <g font-family="'IBM Plex Mono',monospace" font-size="8" letter-spacing="2" fill="#5C5E54">
+                    <text x="120" y="356" text-anchor="middle">ADVISE</text>
+                    <text x="300" y="356" text-anchor="middle">BUILD</text>
+                    <text x="495" y="356" text-anchor="middle" fill="#B34A1F">RUN</text>
+                </g>
             </svg>
         </div>
 
@@ -403,35 +373,56 @@
         </div>
     </section>
 
-    <!-- ── INSIGHTS TEASER ── -->
-    <section class="section reveal" id="insights">
+    <!-- ── INSIGHTS + CASE STUDIES FEED ── -->
+    <section class="section feed-band reveal" id="insights">
         <div class="section-header">
             <div>
                 <div class="section-tag">Insights</div>
                 <h2 class="section-title">Thinking that earns its place</h2>
             </div>
-            <a href="insights.html" class="btn-outline">All insights</a>
+            <div class="feed-nav">
+                <button class="feed-arrow" type="button" data-dir="prev" aria-label="Previous insights" disabled>&larr;</button>
+                <button class="feed-arrow" type="button" data-dir="next" aria-label="More insights">&rarr;</button>
+            </div>
         </div>
-        <div class="grid-3">
-            <a href="article-entity-lifecycle.html" class="card">
-                <div class="card-num">Entity Governance</div>
-                <h3>An entity is never just an entity.</h3>
-                <p>Every legal entity is a subscription you keep paying whether you use it or not. A lifecycle lens for cleaning up structures that grew instead of being designed.</p>
-                <span class="card-arrow">Read article &rarr;</span>
-            </a>
-            <a href="article-integration-deadline.html" class="card">
+        <p class="lead feed-intro">Articles and anonymised case studies from the work — frameworks, concrete examples and the occasional hard-won lesson.</p>
+        <div class="insights-feed" role="region" aria-label="Insights and case studies" tabindex="0">
+            <a href="article-integration-deadline.html" class="feed-card">
+                <span class="feed-tag">Article</span>
                 <div class="card-num">Post-Merger Integration</div>
                 <h3>Integration has a deadline. Transformation has a grey zone.</h3>
                 <p>Mixing the two is the most common — and most expensive — mistake in post-merger finance work. Here's how to keep them apart.</p>
                 <span class="card-arrow">Read article &rarr;</span>
             </a>
-            <a href="article-ask-the-organisation.html" class="card">
+            <a href="article-ask-the-organisation.html" class="feed-card">
+                <span class="feed-tag">Article</span>
                 <div class="card-num">Finance Transformation</div>
                 <h3>Your finance transformation looks great. Until you ask the rest of the organisation.</h3>
                 <p>Why transformations scoped as pure finance initiatives stall — and the ownership model that prevents it.</p>
                 <span class="card-arrow">Read article &rarr;</span>
             </a>
+            <a href="article-entity-lifecycle.html" class="feed-card">
+                <span class="feed-tag">Article</span>
+                <div class="card-num">Entity Governance</div>
+                <h3>An entity is never just an entity.</h3>
+                <p>Every legal entity is a subscription you keep paying whether you use it or not. A lifecycle lens for cleaning up overgrown structures.</p>
+                <span class="card-arrow">Read article &rarr;</span>
+            </a>
+            <article class="feed-card feed-card--case">
+                <span class="feed-tag feed-tag--case">Case Study</span>
+                <div class="card-num">Listed Multinational · Cross-Border M&amp;A</div>
+                <h3>Integrating a factory acquisition into an existing market</h3>
+                <p>One entity, one acquisition — the prize was the facility's licenses and platform for the group's own production after a transformation programme.</p>
+                <div class="feed-more" hidden>
+                    <div class="case-label">What we did</div>
+                    <p>Led the finance integration in close coordination with the IMO — Day-1 readiness, reporting alignment and entity governance — with the integration backlog kept separate from the transformation.</p>
+                    <div class="case-label">Outcome</div>
+                    <p>The acquired entity reported to group standards on deadline; the transformation ran afterwards as a scoped, costed programme.</p>
+                </div>
+                <button class="card-arrow feed-expand" type="button" aria-expanded="false">Read more &rarr;</button>
+            </article>
         </div>
+        <a href="insights.html" class="btn-outline" style="margin-top: 2rem;">View all insights &rarr;</a>
     </section>
 
     <!-- ── CTA ── -->
