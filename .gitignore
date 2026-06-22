@@ -1,0 +1,15 @@
+# Local tooling — not part of the published site
+.claude/
+.mcp.json
+Log/
+
+# Internal-only material — keep out of the public repo
+internal/
+
+# OS / editor noise
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Project brief — local only, never publish
+CLAUDE.md

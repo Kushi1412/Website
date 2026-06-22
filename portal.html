@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Portal — Finateo</title>
+    <meta name="description" content="The Finateo client portal: your engagements, commitments and the activity log of your counterpart team in Tetovo — in one transparent view.">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="portal">
+
+    <div class="portal-wrap">
+
+        <!-- ════════ LOGIN VIEW ════════ -->
+        <section id="loginView">
+            <div style="text-align: center;">
+                <div class="section-tag anim-1">Client Portal</div>
+                <h1 class="section-title anim-2" style="margin: 0 auto;">Transparency, <em>by design</em></h1>
+                <p class="lead anim-3" style="margin: 1.5rem auto 0; text-align: center;">Every Finateo engagement comes with a portal view: your current commitments, milestone status, and a live log of every action taken by your counterpart team in Tetovo.</p>
+            </div>
+
+            <div class="portal-login-card anim-4">
+                <h2>Sign in</h2>
+                <p class="login-sub">Access is provisioned by your engagement lead at kick-off.</p>
+                <div class="portal-notice">
+                    <strong>Preview environment.</strong> This is a demonstration with illustrative data only — no client information is stored on this website. Production portal access uses dedicated, secured infrastructure with MFA.<br><br>
+                    Try it: <strong>demo@finateo.com</strong> / <strong>finateo2026</strong>
+                </div>
+                <div class="login-error" id="loginError">Unknown email or password. For the preview, use the demo credentials shown above.</div>
+                <form id="loginForm">
+                    <div class="form-field" style="margin-bottom: 1.2rem;">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required autocomplete="username">
+                    </div>
+                    <div class="form-field" style="margin-bottom: 1.8rem;">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; text-align: center;">Sign In</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ════════ DASHBOARD VIEW ════════ -->
+        <section id="dashboardView" style="display: none;">
+
+            <div class="portal-notice" style="margin-bottom: 2.5rem;">
+                <strong>Preview environment</strong> — the data below is illustrative, showing what your engagement view looks like in production.
+            </div>
+
+            <div class="portal-header">
+                <div>
+                    <div class="section-tag" style="margin-bottom: 0.6rem;">Aldera Group · Client View</div>
+                    <h1>Welcome back, Demo User</h1>
+                </div>
+                <div>
+                    <button id="logoutBtn" class="btn-outline" style="border: 1px solid var(--border);">Sign Out</button>
+                </div>
+            </div>
+
+            <!-- KPIs -->
+            <div class="portal-kpis">
+                <div class="portal-kpi">
+                    <div class="kpi-value">2</div>
+                    <div class="kpi-label">Active Engagements</div>
+                </div>
+                <div class="portal-kpi">
+                    <div class="kpi-value">7</div>
+                    <div class="kpi-label">Open Commitments</div>
+                </div>
+                <div class="portal-kpi">
+                    <div class="kpi-value">98.6%</div>
+                    <div class="kpi-label">Delivered On Time — Last 90 Days</div>
+                </div>
+                <div class="portal-kpi">
+                    <div class="kpi-value">Jun 30</div>
+                    <div class="kpi-label">Next Milestone</div>
+                </div>
+            </div>
+
+            <!-- ENGAGEMENTS -->
+            <div class="portal-section-title">Active Engagements</div>
+            <div class="portal-table-wrap">
+                <table class="portal-table">
+                    <thead>
+                        <tr><th>Engagement</th><th>Type</th><th>Lead</th><th>Period</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Finance Operations — Managed Services</strong><br><span style="font-size: 0.72rem; color: var(--muted);">Accounting, AP &amp; AR for 3 entities</span></td>
+                            <td>Run (SSC Tetovo)</td>
+                            <td>Kurt / Finateo</td>
+                            <td>Jan 2026 — ongoing</td>
+                            <td><span class="status on-track">On Track</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Project Controlling Setup — Phase 2</strong><br><span style="font-size: 0.72rem; color: var(--muted);">Forecast model &amp; steering reporting</span></td>
+                            <td>Advise + Build</td>
+                            <td>Kurt / Finateo</td>
+                            <td>Apr — Jul 2026</td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- COMMITMENTS -->
+            <div class="portal-section-title">Current Commitments</div>
+            <div class="portal-table-wrap">
+                <table class="portal-table">
+                    <thead>
+                        <tr><th>Commitment</th><th>Owner</th><th>Due</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>May month-end close — all 3 entities, group pack delivered</td>
+                            <td><div class="counterpart"><span class="avatar">ES</span><span>Elena S.<span class="loc">Tetovo · Accounting</span></span></div></td>
+                            <td>Jun 5, 2026</td>
+                            <td><span class="status done">Delivered</span></td>
+                        </tr>
+                        <tr>
+                            <td>AP payment run — week 24 batch, approval workflow complete</td>
+                            <td><div class="counterpart"><span class="avatar">DM</span><span>Darko M.<span class="loc">Tetovo · Accounts Payable</span></span></div></td>
+                            <td>Jun 12, 2026</td>
+                            <td><span class="status on-track">On Track</span></td>
+                        </tr>
+                        <tr>
+                            <td>AR ageing review &amp; collections follow-up — top 15 overdue accounts</td>
+                            <td><div class="counterpart"><span class="avatar">MJ</span><span>Marija J.<span class="loc">Tetovo · Accounts Receivable</span></span></div></td>
+                            <td>Jun 13, 2026</td>
+                            <td><span class="status on-track">On Track</span></td>
+                        </tr>
+                        <tr>
+                            <td>Q2 project forecast — consolidated, with variance commentary</td>
+                            <td><div class="counterpart"><span class="avatar">AT</span><span>Ana T.<span class="loc">Tetovo · Project Controlling</span></span></div></td>
+                            <td>Jun 20, 2026</td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                        </tr>
+                        <tr>
+                            <td>Intercompany reconciliation automation — pilot on entity DE-01</td>
+                            <td><div class="counterpart"><span class="avatar">KU</span><span>Kurt<span class="loc">Copenhagen · Advisory</span></span></div></td>
+                            <td>Jun 30, 2026</td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                        </tr>
+                        <tr>
+                            <td>Vendor master data cleanup — duplicate &amp; inactive vendor purge</td>
+                            <td><div class="counterpart"><span class="avatar">DM</span><span>Darko M.<span class="loc">Tetovo · Accounts Payable</span></span></div></td>
+                            <td>Jul 4, 2026</td>
+                            <td><span class="status attention">Needs Input</span></td>
+                        </tr>
+                        <tr>
+                            <td>Statutory filing calendar H2 — confirmation across jurisdictions</td>
+                            <td><div class="counterpart"><span class="avatar">ES</span><span>Elena S.<span class="loc">Tetovo · Accounting</span></span></div></td>
+                            <td>Jul 15, 2026</td>
+                            <td><span class="status on-track">On Track</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ACTIVITY LOG -->
+            <div class="portal-section-title">Activity Log — Your Counterpart Team</div>
+            <div class="portal-table-wrap">
+                <table class="portal-table">
+                    <thead>
+                        <tr><th>Date</th><th>Action</th><th>By</th><th>Reference</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jun 10, 09:42</td>
+                            <td>Processed 38 supplier invoices; 2 routed to exception queue for your approval</td>
+                            <td><div class="counterpart"><span class="avatar">DM</span><span>Darko M.<span class="loc">Tetovo</span></span></div></td>
+                            <td>AP · Week 24</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 10, 08:15</td>
+                            <td>Bank reconciliation completed for all 3 entities — zero unmatched items</td>
+                            <td><div class="counterpart"><span class="avatar">ES</span><span>Elena S.<span class="loc">Tetovo</span></span></div></td>
+                            <td>ACC · Daily</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 9, 16:30</td>
+                            <td>Collections calls on 6 overdue accounts; payment plans agreed on 4</td>
+                            <td><div class="counterpart"><span class="avatar">MJ</span><span>Marija J.<span class="loc">Tetovo</span></span></div></td>
+                            <td>AR · Ageing</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 9, 14:05</td>
+                            <td>Q2 forecast draft uploaded — variance commentary on projects P-114, P-117</td>
+                            <td><div class="counterpart"><span class="avatar">AT</span><span>Ana T.<span class="loc">Tetovo</span></span></div></td>
+                            <td>PC · Q2 Forecast</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 6, 11:20</td>
+                            <td>Monthly service review held — minutes and KPI deck shared in Documents</td>
+                            <td><div class="counterpart"><span class="avatar">KU</span><span>Kurt<span class="loc">Copenhagen</span></span></div></td>
+                            <td>GOV · Monthly</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 5, 17:48</td>
+                            <td>May group reporting pack delivered to group consolidation — on deadline</td>
+                            <td><div class="counterpart"><span class="avatar">ES</span><span>Elena S.<span class="loc">Tetovo</span></span></div></td>
+                            <td>ACC · Close</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 4, 10:02</td>
+                            <td>Reconciliation automation pilot: matching rules configured for entity DE-01</td>
+                            <td><div class="counterpart"><span class="avatar">KU</span><span>Kurt<span class="loc">Copenhagen</span></span></div></td>
+                            <td>ADV · Automation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- DOCUMENTS -->
+            <div class="portal-section-title">Recent Documents</div>
+            <div class="portal-table-wrap">
+                <table class="portal-table">
+                    <thead>
+                        <tr><th>Document</th><th>Type</th><th>Shared</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Service Review — May 2026 (KPIs, SLA report, improvement backlog)</td><td>Governance</td><td>Jun 6, 2026</td></tr>
+                        <tr><td>Group Reporting Pack — May 2026, entities DE-01 / DK-02 / NL-03</td><td>Reporting</td><td>Jun 5, 2026</td></tr>
+                        <tr><td>Q2 Project Forecast — draft for review</td><td>Controlling</td><td>Jun 9, 2026</td></tr>
+                        <tr><td>AP Exception Queue — items pending client approval</td><td>Operations</td><td>Jun 10, 2026</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="font-size: 0.72rem; color: var(--muted); margin-top: 2.5rem; line-height: 1.8;">
+                In production, this portal runs on dedicated infrastructure with single sign-on, multi-factor authentication, role-based access and full audit logging. Questions about portal security? <a href="contact.html" style="color: var(--navy); font-weight: 600;">Ask us directly</a>.
+            </p>
+        </section>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // ── Portal preview logic (demo only — no real data, no real auth) ──
+        (function () {
+            var DEMO_EMAIL = 'demo@finateo.com';
+            var DEMO_PASS = 'finateo2026';
+
+            var loginView = document.getElementById('loginView');
+            var dashboardView = document.getElementById('dashboardView');
+            var loginError = document.getElementById('loginError');
+
+            function showDashboard() {
+                loginView.style.display = 'none';
+                dashboardView.style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+
+            function showLogin() {
+                dashboardView.style.display = 'none';
+                loginView.style.display = 'block';
+            }
+
+            // Restore session within this browser tab
+            if (sessionStorage.getItem('finateo_demo_session') === 'active') {
+                showDashboard();
+            }
+
+            document.getElementById('loginForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var email = document.getElementById('loginEmail').value.trim().toLowerCase();
+                var pass = document.getElementById('loginPassword').value;
+                if (email === DEMO_EMAIL && pass === DEMO_PASS) {
+                    sessionStorage.setItem('finateo_demo_session', 'active');
+                    loginError.style.display = 'none';
+                    showDashboard();
+                } else {
+                    loginError.style.display = 'block';
+                }
+            });
+
+            document.getElementById('logoutBtn').addEventListener('click', function () {
+                sessionStorage.removeItem('finateo_demo_session');
+                document.getElementById('loginForm').reset();
+                showLogin();
+                window.scrollTo(0, 0);
+            });
+        })();
+    </script>
+</body>
+</html>

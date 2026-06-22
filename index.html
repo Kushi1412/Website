@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finateo — Deal &amp; Growth Finance Advisory</title>
+    <meta name="description" content="Finateo helps mid-market companies and PE-backed organisations build a well-operating and transparent finance function — advisory, transformation, integration and finance operations delivered from our shared services center.">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* ── Page-specific: HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            align-items: center;
+            padding: 0 4rem;
+            padding-top: 80px;
+            gap: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-label {
+            font-family: var(--mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .hero-label::before {
+            content: '';
+            display: inline-block;
+            width: 26px;
+            height: 1px;
+            background: var(--gold);
+        }
+        .hero h1 {
+            font-family: var(--serif);
+            font-optical-sizing: auto;
+            font-size: clamp(3.2rem, 5.4vw, 5.7rem);
+            font-weight: 400;
+            line-height: 1.02;
+            letter-spacing: -0.03em;
+            color: var(--navy);
+            max-width: 680px;
+        }
+        .hero h1 em { font-style: italic; font-weight: 500; color: var(--gold); }
+        .hero-sub {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-top: 2rem;
+            font-weight: 500;
+        }
+        .hero-intro {
+            font-size: 1rem;
+            line-height: 1.88;
+            color: var(--muted);
+            max-width: 520px;
+            margin-top: 1.5rem;
+        }
+        .hero-cta-row { display: flex; gap: 1.2rem; margin-top: 3rem; flex-wrap: wrap; }
+        .hero-visual { display: flex; justify-content: flex-end; align-items: center; opacity: 0; animation: fadeIn 1.4s ease forwards 0.8s; }
+        .hero-visual svg { width: 100%; max-width: 560px; height: auto; }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem; left: 4rem;
+            display: flex; align-items: center; gap: 1rem;
+            font-family: var(--mono);
+            font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--muted);
+            opacity: 0; animation: slideIn 0.9s ease forwards 1.2s;
+        }
+        .scroll-line { width: 40px; height: 1px; background: var(--border); position: relative; overflow: hidden; }
+        .scroll-line::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--gold); animation: scrollPulse 2.2s ease-in-out infinite;
+        }
+        @keyframes scrollPulse { 0% { left: -100%; } 100% { left: 100%; } }
+
+        /* ── Page-specific: MODEL (Advise / Build / Run) ── */
+        .model-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            align-items: stretch;
+            gap: 1.4rem;
+            margin-top: 4rem;
+        }
+        .model-step {
+            background: rgba(244,241,232,0.06);
+            border: none;
+            border-radius: 10px;
+            padding: 2.2rem 1.9rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .model-step:hover {
+            background: rgba(244,241,232,0.11);
+            transform: translateY(-4px);
+        }
+        .model-step .step-word {
+            font-family: var(--serif);
+            font-optical-sizing: auto;
+            font-size: 2.3rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--seal-bright);
+            margin-bottom: 1rem;
+        }
+        .model-step h4 { color: #F8F5EC; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.8rem; }
+        .model-step p { font-size: 0.83rem; line-height: 1.78; color: rgba(244,241,232,0.72); }
+        .services-grid { align-items: stretch; }
+        .card.card-delivery { background: var(--navy); border-color: var(--navy-deep); }
+        .card.card-delivery .card-num,
+        .card.card-delivery .card-arrow { color: var(--seal-bright); }
+        .card.card-delivery h3 { color: #F8F5EC; }
+        .card.card-delivery p { color: rgba(244,241,232,0.78); }
+        .card.card-delivery .card-badge { background: var(--seal); color: #F8F5EC; }
+        .model-connector {
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 1.2rem;
+            color: var(--seal-bright);
+            font-size: 1.3rem;
+        }
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; padding: 7rem 2rem 5rem; min-height: auto; }
+            .hero-visual { display: none; }
+            .scroll-indicator { display: none; }
+            .model-flow { grid-template-columns: 1fr; }
+            .model-connector { transform: rotate(90deg); padding: 0.6rem 0; }
+        }
+    </style>
+</head>
+<body data-page="home">
+
+    <!-- ── HERO ── -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-label anim-1">Deal &amp; Growth Finance Advisory</div>
+            <h1 class="anim-2">Helping companies build a <em>well-operating</em> and transparent finance function</h1>
+            <p class="hero-sub anim-3">Where finance meets intelligent systems</p>
+            <p class="hero-intro anim-3">We help mid-market companies and PE-backed organisations navigate deals, growth and change. Our approach connects finance with the functions around it — legal, tax, HR and technology — because that's where transformation actually happens. And when the design is done, we don't walk away: our shared services center runs the finance operations we build.</p>
+            <div class="hero-cta-row anim-4">
+                <a class="btn-primary" href="services.html">Explore Our Services</a>
+                <a class="btn-outline" href="contact.html">Book a Conversation</a>
+            </div>
+        </div>
+
+        <!-- Animated journey: five stages of change, carried by the Finateo spine -->
+        <div class="hero-visual">
+            <svg viewBox="0 0 560 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- stage path -->
+                <line x1="70" y1="150" x2="490" y2="150" stroke="#16382C" stroke-opacity="0.18" stroke-width="1"/>
+                <line x1="70" y1="150" x2="490" y2="150" stroke="#B34A1F" stroke-width="1.4" stroke-dasharray="420" stroke-dashoffset="420">
+                    <animate attributeName="stroke-dashoffset" values="420;0;0" keyTimes="0;0.86;1" dur="7s" repeatCount="indefinite"/>
+                </line>
+                <!-- traveling pulse -->
+                <circle r="3.2" fill="#B34A1F">
+                    <animateMotion dur="7s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.86;1" calcMode="linear" path="M70,150 L490,150"/>
+                </circle>
+
+                <!-- connectors down to the spine -->
+                <g stroke="#16382C" stroke-width="0.8" stroke-opacity="0.25">
+                    <line x1="70" y1="166" x2="70" y2="263"/>
+                    <line x1="175" y1="166" x2="175" y2="263"/>
+                    <line x1="280" y1="166" x2="280" y2="263"/>
+                    <line x1="385" y1="166" x2="385" y2="263"/>
+                    <line x1="490" y1="166" x2="490" y2="263"/>
+                </g>
+
+                <!-- stage nodes -->
+                <circle cx="70" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
+                <circle cx="70" cy="150" r="8" fill="#16382C">
+                    <animate attributeName="r" values="8;11;8;8" keyTimes="0;0.04;0.09;1" dur="7s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="175" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
+                <circle cx="175" cy="150" r="8" fill="#16382C">
+                    <animate attributeName="r" values="8;8;11;8;8" keyTimes="0;0.215;0.255;0.30;1" dur="7s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="280" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
+                <circle cx="280" cy="150" r="8" fill="#16382C">
+                    <animate attributeName="r" values="8;8;11;8;8" keyTimes="0;0.43;0.47;0.52;1" dur="7s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="385" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
+                <circle cx="385" cy="150" r="8" fill="#16382C">
+                    <animate attributeName="r" values="8;8;11;8;8" keyTimes="0;0.645;0.685;0.73;1" dur="7s" repeatCount="indefinite"/>
+                </circle>
+                <!-- run node: amber, with ongoing-operations loop -->
+                <circle cx="490" cy="150" r="15" fill="white" stroke="#16382C" stroke-width="1"/>
+                <circle cx="490" cy="150" r="8" fill="#B34A1F">
+                    <animate attributeName="r" values="8;8;11;8;8" keyTimes="0;0.84;0.88;0.93;1" dur="7s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="490" cy="150" r="23" fill="none" stroke="#B34A1F" stroke-width="1" stroke-dasharray="5 6" stroke-opacity="0.55">
+                    <animateTransform attributeName="transform" type="rotate" from="0 490 150" to="360 490 150" dur="10s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- stage labels -->
+                <text x="70" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#16382C" letter-spacing="1.5" font-weight="600">INITIATE</text>
+                <text x="175" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#16382C" letter-spacing="1.5" font-weight="600">DESIGN</text>
+                <text x="280" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#16382C" letter-spacing="1.5" font-weight="600">EXECUTE</text>
+                <text x="385" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#16382C" letter-spacing="1.5" font-weight="600">HANDOVER</text>
+                <text x="490" y="112" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#B34A1F" letter-spacing="1.5" font-weight="600">RUN</text>
+
+                <!-- stage captions -->
+                <text x="70" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#5C5E54" letter-spacing="0.8">case for change</text>
+                <text x="175" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#5C5E54" letter-spacing="0.8">target model</text>
+                <text x="280" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#5C5E54" letter-spacing="0.8">implementation</text>
+                <text x="385" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#5C5E54" letter-spacing="0.8">to your team</text>
+                <text x="490" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#B34A1F" letter-spacing="0.8">or run by us</text>
+
+                <!-- Finateo spine -->
+                <rect x="40" y="263" width="480" height="44" fill="#16382C" rx="2"/>
+                <text x="280" y="289" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#F4F1E8" letter-spacing="3" font-weight="600">FINATEO — WITH YOU END TO END</text>
+                <!-- pulse traveling inside the spine -->
+                <circle r="2.4" cy="0" fill="#D2702F">
+                    <animateMotion dur="7s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.86;1" calcMode="linear" path="M52,299 L508,299"/>
+                </circle>
+                <line x1="52" y1="299" x2="508" y2="299" stroke="#D2702F" stroke-opacity="0.35" stroke-width="0.8"/>
+
+                <!-- footing caption -->
+                <text x="280" y="345" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#5C5E54" letter-spacing="2">ADVISE · BUILD · RUN</text>
+            </svg>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            Scroll to explore
+        </div>
+    </section>
+
+    <!-- ── AUTHORITY STRIP ── -->
+    <div class="authority-strip reveal">
+        <div class="authority-item">
+            <div class="authority-num">10+</div>
+            <div class="authority-text">Years in<br>International Finance</div>
+        </div>
+        <div class="authority-item">
+            <div class="authority-num">05</div>
+            <div class="authority-text">Service<br>Pillars</div>
+        </div>
+        <div class="authority-item">
+            <div class="authority-num">M&amp;A</div>
+            <div class="authority-text">Finance Integration<br>Lead Experience</div>
+        </div>
+        <div class="authority-item">
+            <div class="authority-num">SSC</div>
+            <div class="authority-text">Delivery Center<br>Tetovo</div>
+        </div>
+    </div>
+
+    <!-- ── SERVICES ── -->
+    <section class="section reveal" id="services">
+        <div class="section-header">
+            <div>
+                <div class="section-tag">What We Do</div>
+                <h2 class="section-title">Turning complexity into clarity</h2>
+            </div>
+            <div class="section-count">04</div>
+        </div>
+        <div class="grid-3 services-grid">
+            <a href="finance-transformation.html" class="card">
+                <div class="card-num">01 —</div>
+                <h3>Finance Transformation Design</h3>
+                <p>Cross-functional operating model design with shared ownership and governance. Not finance-led with stakeholder input — truly cross-functional, because that's how transformation actually lands.</p>
+                <span class="card-arrow">Learn more &rarr;</span>
+            </a>
+            <a href="post-merger-integration.html" class="card">
+                <div class="card-num">02 —</div>
+                <h3>Post-Merger Finance Integration</h3>
+                <p>Due diligence and integration of the acquired company's financial setup — entity structure, governance, processes and compliance. Integration has a deadline; we keep it separate from transformation.</p>
+                <span class="card-arrow">Learn more &rarr;</span>
+            </a>
+            <a href="entity-governance.html" class="card">
+                <div class="card-num">03 —</div>
+                <h3>Entity Governance &amp; Structuring</h3>
+                <p>Entity setup, PE lifecycle, restructuring, wind-down and exit-readiness across jurisdictions — the legal-financial backbone your growth and deal agenda depends on.</p>
+                <span class="card-arrow">Learn more &rarr;</span>
+            </a>
+            <a href="shared-services.html" class="card card-delivery" style="grid-column: 1 / -1;">
+                <span class="card-badge">Delivery</span>
+                <div class="card-num">04 —</div>
+                <h3>Shared Services Center — Tetovo, North Macedonia</h3>
+                <p>Beyond advice: our nearshore delivery center runs finance operations for our clients — project controlling, accounting, accounts payable, accounts receivable and adjacent finance functions. Designed by the advisory, executed by a dedicated team, governed transparently through the client portal.</p>
+                <span class="card-arrow">Explore the center &rarr;</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── OPERATING MODEL: ADVISE / BUILD / RUN ── -->
+    <section class="section invert reveal" id="model">
+        <div class="section-tag">How We Work</div>
+        <h2 class="section-title">Advise. Build. <em>Run.</em></h2>
+        <p class="lead" style="margin-top: 1.5rem;">Most advisors hand over a slide deck and leave. We designed Finateo around a simple conviction: the firm that designs your finance function should be accountable for how it runs.</p>
+        <div class="model-flow">
+            <div class="model-step">
+                <div class="step-word">Advise</div>
+                <h4>Strategy &amp; Design</h4>
+                <p>Finance transformation, post-merger integration, AI adoption and entity governance — scoped cross-functionally with legal, tax, HR and technology, advised at board level or hands-on in the engine room.</p>
+            </div>
+            <div class="model-connector">&rarr;</div>
+            <div class="model-step">
+                <div class="step-word">Build</div>
+                <h4>Implementation</h4>
+                <p>Target operating models turned into working processes: systems configured, controls established, AI automation deployed responsibly, teams trained and governance anchored.</p>
+            </div>
+            <div class="model-connector">&rarr;</div>
+            <div class="model-step">
+                <div class="step-word">Run</div>
+                <h4>Ongoing Operations</h4>
+                <p>Our shared services center in Tetovo takes over the day-to-day: project controlling, accounting, AP, AR and reporting — with full transparency through your client portal.</p>
+            </div>
+        </div>
+        <div style="margin-top: 3rem;">
+            <a href="shared-services.html" class="btn-primary">How the delivery model works</a>
+        </div>
+    </section>
+
+    <!-- ── APPROACH ── -->
+    <section class="section reveal" id="approach">
+        <div class="section-tag">Our Approach</div>
+        <h2 class="section-title">We start in finance. We don't stop there.</h2>
+        <div class="two-col" style="margin-top: 4rem;">
+            <div class="prose">
+                <p>Finance transformation fails when it's scoped as a pure finance initiative. Every operating model change requires people outside finance to change how they work. Every post-merger integration needs cross-functional alignment that doesn't exist on day one.</p>
+                <p>We work across <strong>finance, legal, tax, HR and technology</strong> — because that's how reality works. Leading finance integration hand-in-hand with the IMO on major acquisitions taught us that cross-functional ownership is what determines whether a transformation lands or stalls.</p>
+                <p>Whether we're brought in as strategic advisors or embedded hands-on in the team, we build solutions that work across the organisation — and that last beyond our engagement.</p>
+                <a href="about.html" class="btn-outline" style="margin-top: 1rem;">More about Finateo</a>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">01</div>
+                    <div class="timeline-content">
+                        <h4>Assess</h4>
+                        <p>Understanding the current setup, pain points and transformation ambitions through structured discovery and process mapping.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">02</div>
+                    <div class="timeline-content">
+                        <h4>Design</h4>
+                        <p>Building the target operating model with clear workstreams, milestones and cross-functional ownership — grounded in what's achievable.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">03</div>
+                    <div class="timeline-content">
+                        <h4>Implement</h4>
+                        <p>Working alongside the team to execute changes, build governance structures and ensure the transformation sticks.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">04</div>
+                    <div class="timeline-content">
+                        <h4>Run or Handover</h4>
+                        <p>Either we transfer ownership so your organisation sustains the model independently — or our shared services center keeps running the operations for you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── NORTH MACEDONIA TEASER ── -->
+    <section class="section white reveal" id="nearshore">
+        <div class="section-header">
+            <div>
+                <div class="section-tag">Nearshore Advantage</div>
+                <h2 class="section-title">Why North Macedonia</h2>
+            </div>
+        </div>
+        <div class="two-col">
+            <div class="prose">
+                <p>EU-aligned regulation, a deep pool of finance and accounting talent, CET time zone, and operating costs 40–60% below Western Europe. North Macedonia is one of Europe's most underrated nearshore destinations — and we know it from the inside, with citizenship, family roots and a local professional network.</p>
+                <p>It's where our shared services center operates, and where we advise companies evaluating the country as an outsourcing, nearshoring or project destination.</p>
+                <a href="north-macedonia.html" class="btn-primary" style="margin-top: 1rem;">Explore the destination</a>
+            </div>
+            <div>
+                <div class="grid-2" style="background: var(--border);">
+                    <div class="card" style="padding: 2.2rem 2rem;">
+                        <div class="authority-num" style="color: var(--gold);">CET</div>
+                        <p style="margin-top: 0.6rem;">Same time zone as your European headquarters</p>
+                    </div>
+                    <div class="card" style="padding: 2.2rem 2rem;">
+                        <div class="authority-num" style="color: var(--gold);">40–60%</div>
+                        <p style="margin-top: 0.6rem;">Typical cost advantage vs. Western European operations</p>
+                    </div>
+                    <div class="card" style="padding: 2.2rem 2rem;">
+                        <div class="authority-num" style="color: var(--gold);">EU</div>
+                        <p style="margin-top: 0.6rem;">Candidate country with EU-aligned accounting and tax frameworks</p>
+                    </div>
+                    <div class="card" style="padding: 2.2rem 2rem;">
+                        <div class="authority-num" style="color: var(--gold);">EN</div>
+                        <p style="margin-top: 0.6rem;">English-proficient finance talent with international experience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── INSIGHTS TEASER ── -->
+    <section class="section reveal" id="insights">
+        <div class="section-header">
+            <div>
+                <div class="section-tag">Insights</div>
+                <h2 class="section-title">Thinking that earns its place</h2>
+            </div>
+            <a href="insights.html" class="btn-outline">All insights</a>
+        </div>
+        <div class="grid-3">
+            <a href="article-entity-lifecycle.html" class="card">
+                <div class="card-num">Entity Governance</div>
+                <h3>An entity is never just an entity.</h3>
+                <p>Every legal entity is a subscription you keep paying whether you use it or not. A lifecycle lens for cleaning up structures that grew instead of being designed.</p>
+                <span class="card-arrow">Read article &rarr;</span>
+            </a>
+            <a href="article-integration-deadline.html" class="card">
+                <div class="card-num">Post-Merger Integration</div>
+                <h3>Integration has a deadline. Transformation has a grey zone.</h3>
+                <p>Mixing the two is the most common — and most expensive — mistake in post-merger finance work. Here's how to keep them apart.</p>
+                <span class="card-arrow">Read article &rarr;</span>
+            </a>
+            <a href="article-ask-the-organisation.html" class="card">
+                <div class="card-num">Finance Transformation</div>
+                <h3>Your finance transformation looks great. Until you ask the rest of the organisation.</h3>
+                <p>Why transformations scoped as pure finance initiatives stall — and the ownership model that prevents it.</p>
+                <span class="card-arrow">Read article &rarr;</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="cta-band reveal" id="contact">
+        <div class="section-tag">Get in Touch</div>
+        <h2>Let's discuss your <em>next move</em></h2>
+        <p>Whether you're navigating a deal, scaling into new markets, or redesigning how finance works across the organisation — a conversation is the right starting point.</p>
+        <div class="cta-band-buttons on-dark">
+            <a href="contact.html" class="btn-primary">Book a Conversation</a>
+            <a href="mailto:hello@finateo.com" class="btn-outline">hello@finateo.com</a>
+        </div>
+    </section>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

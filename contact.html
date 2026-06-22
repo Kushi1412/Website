@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Finateo</title>
+    <meta name="description" content="Get in touch with Finateo — deal and growth finance advisory for mid-market companies and PE-backed organisations.">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="contact">
+
+    <section class="page-hero">
+        <div class="page-hero-grid"></div>
+        <div class="breadcrumb anim-1"><a href="index.html">Home</a> &nbsp;/&nbsp; <span>Contact</span></div>
+        <h1 class="anim-2">Let's discuss your <em>next move</em></h1>
+        <p class="lead anim-3">Whether you're navigating a deal, scaling into new markets, evaluating nearshoring, or redesigning how finance works across the organisation — a conversation is the right starting point. No pitch deck, no junior team: you talk to the person who'd do the work.</p>
+    </section>
+
+    <section class="section white reveal" style="padding-top: 4rem;">
+        <div class="two-col">
+            <!-- ── DIRECT CHANNELS ── -->
+            <div>
+                <div class="section-tag">Direct</div>
+                <h2 class="section-title" style="font-size: 2rem;">Reach us directly</h2>
+                <div style="margin-top: 2.5rem;">
+                    <h3 class="list-heading" style="margin-top: 0;">Email</h3>
+                    <p><a href="mailto:hello@finateo.com" style="font-family: 'Newsreader', serif; font-size: 1.6rem; font-style: italic; color: var(--gold); text-decoration: none;">hello@finateo.com</a></p>
+
+                    <h3 class="list-heading">LinkedIn</h3>
+                    <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.8;">We publish weekly and answer messages daily.<br>
+                    <a href="https://www.linkedin.com" target="_blank" rel="noopener" style="color: var(--navy); font-weight: 600;">Connect with Finateo &rarr;</a></p>
+
+                    <h3 class="list-heading">Locations</h3>
+                    <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.8;">Copenhagen, Denmark — advisory<br>Tetovo, North Macedonia — shared services center</p>
+
+                    <h3 class="list-heading">Existing clients</h3>
+                    <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.8;">Your engagement status and activity log live in the <a href="portal.html" style="color: var(--navy); font-weight: 600;">client portal</a>; your named counterpart remains your fastest channel.</p>
+                </div>
+            </div>
+
+            <!-- ── FORM ── -->
+            <div>
+                <div class="section-tag">Or Write Here</div>
+                <h2 class="section-title" style="font-size: 2rem;">Tell us where the complexity sits</h2>
+                <form id="contactForm" class="form-grid" style="margin-top: 2.5rem;">
+                    <div class="form-field">
+                        <label for="cname">Name</label>
+                        <input type="text" id="cname" name="name" required autocomplete="name">
+                    </div>
+                    <div class="form-field">
+                        <label for="ccompany">Company</label>
+                        <input type="text" id="ccompany" name="company" autocomplete="organization">
+                    </div>
+                    <div class="form-field full">
+                        <label for="cemail">Work Email</label>
+                        <input type="email" id="cemail" name="email" required autocomplete="email">
+                    </div>
+                    <div class="form-field full">
+                        <label for="ctopic">Topic</label>
+                        <select id="ctopic" name="topic">
+                            <option>Finance Transformation</option>
+                            <option>Post-Merger Integration</option>
+                            <option>AI-Enabled Finance Operations</option>
+                            <option>Entity Governance &amp; Structuring</option>
+                            <option>Shared Services / Nearshoring</option>
+                            <option>North Macedonia as a Destination</option>
+                            <option>Something else</option>
+                        </select>
+                    </div>
+                    <div class="form-field full">
+                        <label for="cmessage">Message</label>
+                        <textarea id="cmessage" name="message" required placeholder="A few lines on your situation is plenty — we'll ask the right questions from there."></textarea>
+                    </div>
+                    <div class="full">
+                        <button type="submit" class="btn-primary" style="border: 1px solid var(--navy);">Send Message</button>
+                        <p style="font-size: 0.7rem; color: var(--muted); margin-top: 1rem; line-height: 1.7;">Submitting opens a pre-filled email in your mail client — your message goes directly to us, and nothing is stored on this website.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── WHAT HAPPENS NEXT ── -->
+    <section class="section reveal">
+        <div class="section-tag">What Happens Next</div>
+        <h2 class="section-title">Three steps, no surprises</h2>
+        <div class="grid-3" style="margin-top: 3.5rem;">
+            <div class="card">
+                <div class="card-num">01 —</div>
+                <h3>Reply within one business day</h3>
+                <p>A real answer from the person who'd do the work — including "we're not the right fit", if that's the honest assessment.</p>
+            </div>
+            <div class="card">
+                <div class="card-num">02 —</div>
+                <h3>A focused first call</h3>
+                <p>Thirty to forty-five minutes on your situation. You'll leave with at least one useful observation, whether or not we work together.</p>
+            </div>
+            <div class="card">
+                <div class="card-num">03 —</div>
+                <h3>A written proposal — or a referral</h3>
+                <p>If there's a fit: scope, approach and fee in writing. If not: where possible, an introduction to someone better placed.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Contact form → pre-filled mailto (no backend on GitHub Pages; nothing is stored)
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var name = document.getElementById('cname').value.trim();
+            var company = document.getElementById('ccompany').value.trim();
+            var email = document.getElementById('cemail').value.trim();
+            var topic = document.getElementById('ctopic').value;
+            var message = document.getElementById('cmessage').value.trim();
+            var subject = encodeURIComponent('[Finateo] ' + topic + ' — ' + (company || name));
+            var body = encodeURIComponent(
+                'Name: ' + name + '\n' +
+                'Company: ' + (company || '-') + '\n' +
+                'Email: ' + email + '\n' +
+                'Topic: ' + topic + '\n\n' +
+                message
+            );
+            window.location.href = 'mailto:hello@finateo.com?subject=' + subject + '&body=' + body;
+        });
+    </script>
+</body>
+</html>
