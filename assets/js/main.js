@@ -126,69 +126,76 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
 
-    // Insights + case-studies feed (no-op on pages without it)
-    var feed = document.querySelector('.insights-feed');
-    if (feed) {
+    // Insights / case-study feeds (no-op on pages without them; supports several per page)
+    var feeds = document.querySelectorAll('.insights-feed');
+    if (feeds.length) {
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var feedPrev = document.querySelector('.feed-arrow[data-dir="prev"]');
-        var feedNext = document.querySelector('.feed-arrow[data-dir="next"]');
-        var feedCards = feed.querySelectorAll('.feed-card');
+        var allCards = document.querySelectorAll('.feed-card');
+        var updaters = [];
 
-        function feedStep() {
-            var card = feed.querySelector('.feed-card');
-            if (!card) { return feed.clientWidth; }
-            var s = getComputedStyle(feed);
-            var gap = parseFloat(s.columnGap || s.gap) || 0;
-            return card.getBoundingClientRect().width + gap;
-        }
-        function scrollFeed(dir) {
-            feed.scrollBy({ left: dir * feedStep(), behavior: reduceMotion ? 'auto' : 'smooth' });
-        }
-        function updateArrows() {
-            var maxScroll = feed.scrollWidth - feed.clientWidth - 2;
-            if (feedPrev) { feedPrev.disabled = feed.scrollLeft <= 0; }
-            if (feedNext) { feedNext.disabled = feed.scrollLeft >= maxScroll; }
-        }
-        // Give every collapsed card the same height; an expanded card grows freely.
-        function equalizeCards() {
+        // Give every collapsed card one shared height across all feeds; an expanded card grows freely.
+        function equalizeAll() {
             var i, max = 0;
-            for (i = 0; i < feedCards.length; i++) { feedCards[i].style.height = 'auto'; }
-            for (i = 0; i < feedCards.length; i++) {
-                if (!feedCards[i].classList.contains('feed-card--open')) {
-                    max = Math.max(max, feedCards[i].offsetHeight);
-                }
+            for (i = 0; i < allCards.length; i++) { allCards[i].style.height = 'auto'; }
+            for (i = 0; i < allCards.length; i++) {
+                if (!allCards[i].classList.contains('feed-card--open')) { max = Math.max(max, allCards[i].offsetHeight); }
             }
-            for (i = 0; i < feedCards.length; i++) {
-                if (!feedCards[i].classList.contains('feed-card--open')) {
-                    feedCards[i].style.height = max + 'px';
-                }
+            for (i = 0; i < allCards.length; i++) {
+                if (!allCards[i].classList.contains('feed-card--open')) { allCards[i].style.height = max + 'px'; }
             }
         }
-        if (feedPrev) { feedPrev.addEventListener('click', function () { scrollFeed(-1); }); }
-        if (feedNext) { feedNext.addEventListener('click', function () { scrollFeed(1); }); }
-        feed.addEventListener('scroll', updateArrows, { passive: true });
-        window.addEventListener('resize', function () { equalizeCards(); updateArrows(); });
-        window.addEventListener('load', equalizeCards);
-        feed.addEventListener('keydown', function (e) {
-            if (e.key === 'ArrowRight') { scrollFeed(1); e.preventDefault(); }
-            else if (e.key === 'ArrowLeft') { scrollFeed(-1); e.preventDefault(); }
-        });
-        equalizeCards();
-        updateArrows();
 
-        // Expand / collapse the inline case-study cards
-        feed.querySelectorAll('.feed-expand').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var card = btn.closest('.feed-card');
-                var more = card ? card.querySelector('.feed-more') : null;
-                var open = btn.getAttribute('aria-expanded') === 'true';
-                btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-                if (more) { more.hidden = open; }
-                if (card) { card.classList.toggle('feed-card--open', !open); }
-                btn.textContent = open ? 'Read more →' : 'Show less →';
-                equalizeCards();
-                updateArrows();
+        function initFeed(feed) {
+            var shell = feed.closest('.feed-shell');
+            var prev = shell ? shell.querySelector('.feed-arrow[data-dir="prev"]') : null;
+            var next = shell ? shell.querySelector('.feed-arrow[data-dir="next"]') : null;
+
+            function step() {
+                var card = feed.querySelector('.feed-card');
+                if (!card) { return feed.clientWidth; }
+                var s = getComputedStyle(feed);
+                var gap = parseFloat(s.columnGap || s.gap) || 0;
+                return card.getBoundingClientRect().width + gap;
+            }
+            function scrollFeed(dir) {
+                feed.scrollBy({ left: dir * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
+            }
+            function updateArrows() {
+                var maxScroll = feed.scrollWidth - feed.clientWidth - 2;
+                if (prev) { prev.disabled = feed.scrollLeft <= 0; }
+                if (next) { next.disabled = feed.scrollLeft >= maxScroll; }
+            }
+            if (prev) { prev.addEventListener('click', function () { scrollFeed(-1); }); }
+            if (next) { next.addEventListener('click', function () { scrollFeed(1); }); }
+            feed.addEventListener('scroll', updateArrows, { passive: true });
+            feed.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowRight') { scrollFeed(1); e.preventDefault(); }
+                else if (e.key === 'ArrowLeft') { scrollFeed(-1); e.preventDefault(); }
             });
-        });
+            feed.querySelectorAll('.feed-expand').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var card = btn.closest('.feed-card');
+                    var more = card ? card.querySelector('.feed-more') : null;
+                    var open = btn.getAttribute('aria-expanded') === 'true';
+                    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+                    if (more) { more.hidden = open; }
+                    if (card) { card.classList.toggle('feed-card--open', !open); }
+                    btn.textContent = open ? 'Read more →' : 'Show less →';
+                    equalizeAll();
+                    updateArrows();
+                });
+            });
+            updaters.push(updateArrows);
+        }
+
+        feeds.forEach(initFeed);
+
+        function refreshAll() {
+            equalizeAll();
+            updaters.forEach(function (u) { u(); });
+        }
+        window.addEventListener('resize', refreshAll);
+        window.addEventListener('load', refreshAll);
+        refreshAll();
     }
 })();

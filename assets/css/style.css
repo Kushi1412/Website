@@ -1274,6 +1274,7 @@ a.feed-card:hover { border-left-color: var(--seal); transform: translateY(-3px);
 .feed-card h3 { font-size: 1.15rem; line-height: 1.25; margin-bottom: 0.8rem; }
 .feed-card p { font-size: 0.9rem; line-height: 1.7; color: var(--muted-tone); }
 .feed-card .card-arrow { margin-top: auto; padding-top: 1.2rem; }
+.feed-card--case .card-arrow { color: #B34A1F; } /* case cue = fixed sealing-wax */
 .feed-more .case-label { margin-top: 1.1rem; }
 .feed-expand {
     background: none; border: none; padding: 0; cursor: pointer;
