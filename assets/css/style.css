@@ -115,13 +115,13 @@ nav.site-nav.scrolled { box-shadow: 0 2px 24px rgba(25,23,19,0.08); }
 .nav-links { display: flex; gap: 2.1rem; align-items: center; }
 
 .nav-links > a, .nav-dropdown > a {
-    font-family: var(--mono);
+    font-family: var(--sans);
     color: var(--ink);
     text-decoration: none;
-    font-size: 0.7rem;
+    font-size: 0.82rem;
     font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    text-transform: none;
     position: relative;
 }
 
@@ -168,11 +168,12 @@ nav.site-nav.scrolled { box-shadow: 0 2px 24px rgba(25,23,19,0.08); }
 
 .dropdown-menu a {
     display: block;
-    font-family: var(--mono);
+    font-family: var(--sans);
     padding: 0.65rem 1.5rem;
-    font-size: 0.66rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-size: 0.84rem;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    text-transform: none;
     text-decoration: none;
     color: var(--ink);
     transition: all 0.2s;
@@ -288,11 +289,11 @@ nav.site-nav.scrolled { box-shadow: 0 2px 24px rgba(25,23,19,0.08); }
 
 /* ── BUTTONS — stamped ── */
 .btn-primary, .btn-outline, .btn-gold {
-    font-family: var(--mono);
-    font-size: 0.69rem;
+    font-family: var(--sans);
+    font-size: 0.82rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-transform: none;
     text-decoration: none;
     display: inline-block;
     padding: 0.9rem 2.2rem;

@@ -25,7 +25,6 @@
         '<a href="services.html">All Services</a>' +
         '<div class="dropdown-divider"></div>' +
         '<span class="dropdown-group-label">Advisory &amp; Delivery</span>' +
-        '<a href="ai-finance-operations.html">AI-Enabled Finance Operations</a>' +
         '<a href="finance-transformation.html">Finance Transformation Design</a>' +
         '<a href="post-merger-integration.html">Post-Merger Finance Integration</a>' +
         '<a href="entity-governance.html">Entity Governance &amp; Structuring</a>' +
@@ -66,7 +65,6 @@
         '<p>Deal &amp; growth finance advisory for mid-market companies and PE-backed organisations. We design the finance function — and we can run it, through our shared services center in Tetovo, North Macedonia.</p>' +
         '</div>' +
         '<div class="footer-col"><h5>Services</h5>' +
-        '<a href="ai-finance-operations.html">AI-Enabled Finance Operations</a>' +
         '<a href="finance-transformation.html">Finance Transformation Design</a>' +
         '<a href="post-merger-integration.html">Post-Merger Integration</a>' +
         '<a href="entity-governance.html">Entity Governance</a>' +
