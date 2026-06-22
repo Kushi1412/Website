@@ -1,0 +1,21 @@
+# Normalize line endings: auto-detect text, store as LF in the repo
+* text=auto
+
+# Web source files: always LF in the repo
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+*.svg  text eol=lf
+
+# Binary assets: never touch
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
+*.pdf  binary
