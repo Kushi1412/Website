@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://finateo.com/insights.html">
+    <link rel="canonical" href="https://finateo.com/insights">
     <title>Insights — Finateo</title>
     <meta name="description" content="Articles and anonymised case studies from Finateo on finance transformation, post-merger integration and entity governance.">
     <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,61 +13,40 @@
 
     <section class="page-hero">
         <div class="page-hero-grid"></div>
-        <div class="breadcrumb anim-1"><a href="index.html">Home</a> &nbsp;/&nbsp; <span>Insights</span></div>
+        <div class="breadcrumb anim-1"><a href="/">Home</a> &nbsp;/&nbsp; <span>Insights</span></div>
         <h1 class="anim-2">Thinking that earns its <em>place</em></h1>
-        <p class="lead anim-3">No content-marketing filler. Every article adds something you can use — a framework, a concrete example, or a specific recommendation — drawn from real transformation and integration work.</p>
+        <p class="lead anim-3">One collection, not a content mill: articles that hand you a framework, a concrete example or a specific recommendation, and anonymised case studies from real engagements — thinly-identifiable details blurred to protect confidentiality.</p>
     </section>
 
-    <!-- ── ARTICLES ── -->
-    <section class="section reveal" id="articles" style="padding-top: 3rem;">
-        <div class="section-header">
-            <div>
-                <div class="section-tag">Articles</div>
-                <h2 class="section-title">From the practice</h2>
-            </div>
-        </div>
-        <p class="lead feed-intro">Each piece adds something you can use — a framework, a concrete example or a specific recommendation.</p>
-        <div class="feed-shell feed-shell--insights">
-            <button class="feed-arrow feed-arrow--prev" type="button" data-dir="prev" aria-label="Previous articles" disabled>&larr;</button>
-            <div class="insights-feed feed--grid" role="region" aria-label="Articles" tabindex="0">
-                <a href="article-integration-deadline.html" class="feed-card">
+    <!-- ── UNIFIED INSIGHTS + CASE STUDIES FEED ── -->
+    <section class="section feed-band reveal" id="insights" style="padding-top: 3rem;">
+        <span id="articles" class="feed-anchor" aria-hidden="true"></span>
+        <span id="cases" class="feed-anchor" aria-hidden="true"></span>
+        <p class="lead feed-intro">Articles and anonymised case studies, side by side — the frameworks, concrete examples and hard-won lessons from real transformation, integration and governance work. Use the arrows, or scroll, to move through the collection.</p>
+        <div class="feed-shell">
+            <button class="feed-arrow feed-arrow--prev" type="button" data-dir="prev" aria-label="Previous" disabled>&larr;</button>
+            <div class="insights-feed" role="region" aria-label="Insights and case studies" tabindex="0">
+                <a href="/article-integration-deadline" class="feed-card">
                     <span class="feed-tag">Article</span>
                     <div class="card-num">Post-Merger Integration</div>
                     <h3>Integration has a deadline. Transformation has a grey zone.</h3>
                     <p>The most expensive mistake in post-merger finance work is mixing the two. A two-list method to keep your deal on its critical path.</p>
                     <span class="card-arrow">Read article &rarr;</span>
                 </a>
-                <a href="article-ask-the-organisation.html" class="feed-card">
+                <a href="/article-ask-the-organisation" class="feed-card">
                     <span class="feed-tag">Article</span>
                     <div class="card-num">Finance Transformation</div>
                     <h3>Your finance transformation looks great. Until you ask the rest of the organisation.</h3>
                     <p>Why transformations scoped as pure finance initiatives stall — and the ownership-mapping exercise that predicts it before you spend the budget.</p>
                     <span class="card-arrow">Read article &rarr;</span>
                 </a>
-                <a href="article-entity-lifecycle.html" class="feed-card">
+                <a href="/article-entity-lifecycle" class="feed-card">
                     <span class="feed-tag">Article</span>
                     <div class="card-num">Entity Governance</div>
                     <h3>An entity is never just an entity.</h3>
                     <p>Every legal entity is a subscription you keep paying whether you use it or not. A lifecycle lens for cleaning up structures that grew instead of being designed.</p>
                     <span class="card-arrow">Read article &rarr;</span>
                 </a>
-            </div>
-            <button class="feed-arrow feed-arrow--next" type="button" data-dir="next" aria-label="More articles">&rarr;</button>
-        </div>
-    </section>
-
-    <!-- ── CASE STUDIES ── -->
-    <section class="section white reveal" id="cases">
-        <div class="section-header">
-            <div>
-                <div class="section-tag">Case Studies</div>
-                <h2 class="section-title">Lessons from past engagements</h2>
-            </div>
-        </div>
-        <p class="lead feed-intro">Anonymised examples from past engagements — details blurred to protect confidentiality.</p>
-        <div class="feed-shell feed-shell--insights">
-            <button class="feed-arrow feed-arrow--prev" type="button" data-dir="prev" aria-label="Previous case studies" disabled>&larr;</button>
-            <div class="insights-feed feed--grid" role="region" aria-label="Case studies" tabindex="0">
                 <article class="feed-card feed-card--case">
                     <span class="feed-tag feed-tag--case">Case Study</span>
                     <div class="card-num">Listed Multinational · Cross-Border M&amp;A</div>
@@ -107,8 +86,34 @@
                     </div>
                     <button class="card-arrow feed-expand" type="button" aria-expanded="false">Read more &rarr;</button>
                 </article>
+                <article class="feed-card feed-card--case">
+                    <span class="feed-tag feed-tag--case">Case Study</span>
+                    <div class="card-num">Danish Manufacturing SME · Reporting Platform</div>
+                    <h3>A plug-and-play reporting platform, built to management's own criteria</h3>
+                    <p>A Danish manufacturer came to us with no financial platform to track year-to-date performance or a credible full-year forecast — and a clear ask: an automated, plug-and-play reporting platform for daily operations, pulling exactly the figures management cared about.</p>
+                    <div class="feed-more" hidden>
+                        <div class="case-label">What we did</div>
+                        <p>We reviewed the company's existing material and systems, designed the operating platform around management's own criteria for what it had to pull, and — through close dialogue with the leadership team — concluded on a single financial platform for daily, monthly, quarterly and yearly reporting. It consolidates data automatically from the existing sources into one source of truth: year-to-date actuals against forecast, KPI dashboards, variance and deviation tracking, cash-flow and forecast modelling, and drill-down by product, seller and period — including month-versus-same-month-last-year comparatives and a clear view of individual sellers' performance.</p>
+                        <div class="case-label">Outcome</div>
+                        <p>Management gained a daily, self-updating view of where the business stood and where the year was heading, month-end reporting got faster, and decisions that used to wait on manual spreadsheets now rest on one trusted platform tailored to how the company actually runs.</p>
+                    </div>
+                    <button class="card-arrow feed-expand" type="button" aria-expanded="false">Read more &rarr;</button>
+                </article>
+                <article class="feed-card feed-card--case">
+                    <span class="feed-tag feed-tag--case">Case Study</span>
+                    <div class="card-num">Danish Public-Sector Tax Authority · Forecasting &amp; Reporting</div>
+                    <h3>Forecasting the right control strategy under a fraud-case backlog</h3>
+                    <p>A Danish public-sector tax authority needed to project resource needs in its dividend-tax department during a major dividend-tax fraud case — with a hard constraint: interest accrued on any case left open longer than six months.</p>
+                    <div class="feed-more" hidden>
+                        <div class="case-label">What we did</div>
+                        <p>We built a forecasting model framed as an optimisation problem with three unknowns — the case backlog (<em>sagsbunker</em>), the number of cases by size (small, medium, large) and case-handling time — made harder by the six-month interest rule, which created pressure to prioritise larger cases and clear them before the deadline. The model determined the optimal control strategy and became the basis for how the controls strategy was set in that area. Separately, we developed a fully automated Power BI management-reporting platform built on SAP data extracts, with monthly performance logging and written explanations of deviations, used for management reporting across the ministry.</p>
+                        <div class="case-label">Outcome</div>
+                        <p>The authority had an evidence-based control strategy it could defend and adjust as the backlog moved, and a standing, automated reporting platform that gave management a monthly, explained view of performance without manual assembly.</p>
+                    </div>
+                    <button class="card-arrow feed-expand" type="button" aria-expanded="false">Read more &rarr;</button>
+                </article>
             </div>
-            <button class="feed-arrow feed-arrow--next" type="button" data-dir="next" aria-label="More case studies">&rarr;</button>
+            <button class="feed-arrow feed-arrow--next" type="button" data-dir="next" aria-label="Next">&rarr;</button>
         </div>
     </section>
 
@@ -131,7 +136,7 @@
         <h2>Prefer the conversation to the <em>article</em>?</h2>
         <p>Most of these pieces started as client questions. Bring us yours.</p>
         <div class="cta-band-buttons on-dark">
-            <a href="contact.html" class="btn-primary">Get in Touch</a>
+            <a href="/contact" class="btn-primary">Get in Touch</a>
         </div>
     </section>
 

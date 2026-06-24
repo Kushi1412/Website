@@ -1298,3 +1298,12 @@ a.feed-card:hover { border-left-color: var(--seal); transform: translateY(-3px);
     .insights-feed.feed--grid .feed-card { flex: initial; max-width: none; }
     .feed-shell--insights .feed-arrow { display: none; }
 }
+
+/* ── Network grid: 5 cards across on desktop, single column on mobile ── */
+@media (min-width: 1025px) {
+    #network .grid-4 { grid-template-columns: repeat(5, 1fr); }
+    #network .grid-4 .card { padding: 2.4rem 1.7rem; }
+}
+
+/* Anchor targets so legacy #articles / #cases links land on the unified feed */
+.feed-anchor { display: block; height: 0; scroll-margin-top: 90px; }

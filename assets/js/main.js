@@ -14,40 +14,40 @@
 
     /* ── NAVIGATION ── */
     var navHTML =
-        '<a href="index.html" class="logo">Finateo<span class="logo-dot">.</span></a>' +
+        '<a href="/" class="logo">Finateo<span class="logo-dot">.</span></a>' +
         '<button class="menu-toggle" aria-label="Menu" aria-expanded="false">' +
         '<span></span><span></span><span></span></button>' +
         '<div class="nav-links">' +
 
         '<div class="nav-dropdown">' +
-        '<a href="services.html"' + (page.indexOf('service') === 0 || page === 'lectures' ? ' class="active"' : '') + '>Services &#9662;</a>' +
+        '<a href="/services"' + (page.indexOf('service') === 0 || page === 'lectures' ? ' class="active"' : '') + '>Services &#9662;</a>' +
         '<div class="dropdown-menu">' +
-        '<a href="services.html">All Services</a>' +
+        '<a href="/services">All Services</a>' +
         '<div class="dropdown-divider"></div>' +
         '<span class="dropdown-group-label">Advisory &amp; Delivery</span>' +
-        '<a href="finance-transformation.html">Finance Transformation Design</a>' +
-        '<a href="post-merger-integration.html">Post-Merger Finance Integration</a>' +
-        '<a href="entity-governance.html">Entity Governance &amp; Structuring</a>' +
-        '<a href="shared-services.html">Shared Services Center</a>' +
+        '<a href="/finance-transformation">Finance Transformation Design</a>' +
+        '<a href="/post-merger-integration">Post-Merger Finance Integration</a>' +
+        '<a href="/entity-governance">Entity Governance &amp; Structuring</a>' +
+        '<a href="/shared-services">Shared Services Center</a>' +
         '<div class="dropdown-divider"></div>' +
         '<span class="dropdown-group-label">Lectures &amp; Training</span>' +
-        '<a href="lectures.html">Executive Lectures &amp; Briefings</a>' +
+        '<a href="/lectures">Executive Lectures &amp; Briefings</a>' +
         '</div></div>' +
 
-        '<a href="north-macedonia.html"' + active('north-macedonia') + '>North Macedonia</a>' +
+        '<a href="/north-macedonia"' + active('north-macedonia') + '>North Macedonia</a>' +
 
         '<div class="nav-dropdown">' +
-        '<a href="insights.html"' + (page.indexOf('insight') === 0 ? ' class="active"' : '') + '>Insights &#9662;</a>' +
+        '<a href="/insights"' + (page.indexOf('insight') === 0 ? ' class="active"' : '') + '>Insights &#9662;</a>' +
         '<div class="dropdown-menu">' +
-        '<a href="insights.html">All Insights</a>' +
+        '<a href="/insights">All Insights</a>' +
         '<div class="dropdown-divider"></div>' +
-        '<a href="insights.html#articles">Articles</a>' +
-        '<a href="insights.html#cases">Case Studies</a>' +
+        '<a href="/insights#articles">Articles</a>' +
+        '<a href="/insights#cases">Case Studies</a>' +
         '</div></div>' +
 
-        '<a href="about.html"' + active('about') + '>About</a>' +
-        '<a href="portal.html" class="nav-portal' + (page === 'portal' ? ' active' : '') + '">Client Portal</a>' +
-        '<a href="contact.html" class="nav-cta">Get in Touch</a>' +
+        '<a href="/about"' + active('about') + '>About</a>' +
+        '<a href="/portal" class="nav-portal' + (page === 'portal' ? ' active' : '') + '">Client Portal</a>' +
+        '<a href="/contact" class="nav-cta">Get in Touch</a>' +
         '</div>';
 
     var nav = document.createElement('nav');
@@ -61,24 +61,24 @@
     var footerHTML =
         '<div class="footer-grid">' +
         '<div class="footer-brand">' +
-        '<a href="index.html" class="logo">Finateo<span class="logo-dot">.</span></a>' +
-        '<p>Deal &amp; growth finance advisory for mid-market companies and the investors behind them. We design the finance function — and we can run it, through our shared services center in Tetovo and a broader professional network across several countries.</p>' +
+        '<a href="/" class="logo">Finateo<span class="logo-dot">.</span></a>' +
+        '<p>Deal &amp; growth finance advisory for companies navigating deals, growth and change. We design the finance function — and we can run it, through our shared services center in Tetovo and a broader professional network across several countries.</p>' +
         '</div>' +
         '<div class="footer-col"><h5>Services</h5>' +
-        '<a href="finance-transformation.html">Finance Transformation Design</a>' +
-        '<a href="post-merger-integration.html">Post-Merger Integration</a>' +
-        '<a href="entity-governance.html">Entity Governance</a>' +
-        '<a href="shared-services.html">Shared Services Center</a>' +
-        '<a href="lectures.html">Lectures &amp; Training</a>' +
+        '<a href="/finance-transformation">Finance Transformation Design</a>' +
+        '<a href="/post-merger-integration">Post-Merger Integration</a>' +
+        '<a href="/entity-governance">Entity Governance</a>' +
+        '<a href="/shared-services">Shared Services Center</a>' +
+        '<a href="/lectures">Lectures &amp; Training</a>' +
         '</div>' +
         '<div class="footer-col"><h5>Company</h5>' +
-        '<a href="about.html">About Finateo</a>' +
-        '<a href="north-macedonia.html">Why North Macedonia</a>' +
-        '<a href="insights.html">Insights</a>' +
-        '<a href="contact.html">Contact</a>' +
+        '<a href="/about">About Finateo</a>' +
+        '<a href="/north-macedonia">Why North Macedonia</a>' +
+        '<a href="/insights">Insights</a>' +
+        '<a href="/contact">Contact</a>' +
         '</div>' +
         '<div class="footer-col"><h5>Clients</h5>' +
-        '<a href="portal.html">Client Portal</a>' +
+        '<a href="/portal">Client Portal</a>' +
         '<a href="mailto:hello@finateo.com">hello@finateo.com</a>' +
         '<a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>' +
         '</div>' +
