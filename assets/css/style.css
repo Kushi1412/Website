@@ -1305,5 +1305,10 @@ a.feed-card:hover { border-left-color: var(--seal); transform: translateY(-3px);
     #network .grid-4 .card { padding: 2.4rem 1.7rem; }
 }
 
-/* Anchor targets so legacy #articles / #cases links land on the unified feed */
+/* Anchor targets so #articles / #cases links land on the right scroller */
 .feed-anchor { display: block; height: 0; scroll-margin-top: 90px; }
+
+/* Two-scroller insights layout: Articles + Case Studies as separate scrollers */
+.feed-group + .feed-group { margin-top: 3.2rem; }
+.feed-group .section-tag { margin-bottom: 1.1rem; }
+.feed-disclaimer { margin-top: 1rem; max-width: 760px; font-size: 0.7rem; line-height: 1.7; color: var(--muted-tone); }

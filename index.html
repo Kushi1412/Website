@@ -336,9 +336,12 @@
             </div>
         </div>
         <p class="lead feed-intro">Articles and anonymised case studies from the work — frameworks, concrete examples and the occasional hard-won lesson.</p>
-        <div class="feed-shell">
-            <button class="feed-arrow feed-arrow--prev" type="button" data-dir="prev" aria-label="Previous" disabled>&larr;</button>
-            <div class="insights-feed" role="region" aria-label="Insights and case studies" tabindex="0">
+        <!-- Articles scroller -->
+        <div class="feed-group">
+            <div class="section-tag">Articles</div>
+            <div class="feed-shell">
+                <button class="feed-arrow feed-arrow--prev" type="button" data-dir="prev" aria-label="Previous article" disabled>&larr;</button>
+                <div class="insights-feed" role="region" aria-label="Articles" tabindex="0">
                 <a href="/article-integration-deadline" class="feed-card">
                     <span class="feed-tag">Article</span>
                     <div class="card-num">Post-Merger Integration</div>
@@ -360,6 +363,18 @@
                     <p>Every legal entity is a subscription you keep paying whether you use it or not. A lifecycle lens for cleaning up overgrown structures.</p>
                     <span class="card-arrow">Read article &rarr;</span>
                 </a>
+                </div>
+                <button class="feed-arrow feed-arrow--next" type="button" data-dir="next" aria-label="Next article">&rarr;</button>
+            </div>
+            <p class="feed-disclaimer">The articles here are general perspectives shared for information only — not professional, financial, legal or tax advice. Finateo makes no warranty as to their accuracy or completeness and accepts no liability for any reliance placed on them.</p>
+        </div>
+
+        <!-- Case Studies scroller -->
+        <div class="feed-group">
+            <div class="section-tag">Case Studies</div>
+            <div class="feed-shell">
+                <button class="feed-arrow feed-arrow--prev" type="button" data-dir="prev" aria-label="Previous case study" disabled>&larr;</button>
+                <div class="insights-feed" role="region" aria-label="Case studies" tabindex="0">
                 <article class="feed-card feed-card--case">
                     <span class="feed-tag feed-tag--case">Case Study</span>
                     <div class="card-num">Danish Manufacturing SME · Reporting Platform</div>
@@ -386,8 +401,10 @@
                     </div>
                     <button class="card-arrow feed-expand" type="button" aria-expanded="false">Read more &rarr;</button>
                 </article>
+                </div>
+                <button class="feed-arrow feed-arrow--next" type="button" data-dir="next" aria-label="Next case study">&rarr;</button>
             </div>
-            <button class="feed-arrow feed-arrow--next" type="button" data-dir="next" aria-label="Next">&rarr;</button>
+            <p class="feed-disclaimer">These case studies are anonymised illustrations of past work; identifying details are altered or omitted and some elements simplified or generalised. They are provided for information only, with no representation or warranty by Finateo as to their accuracy or completeness.</p>
         </div>
         <a href="/insights" class="btn-outline" style="margin-top: 2rem;">View all insights &rarr;</a>
     </section>
