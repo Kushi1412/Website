@@ -20,13 +20,13 @@
         '<div class="nav-links">' +
 
         '<div class="nav-dropdown">' +
-        '<a href="/services"' + (page.indexOf('service') === 0 || page === 'lectures' ? ' class="active"' : '') + '>Services &#9662;</a>' +
+        '<a href="/services"' + (page.indexOf('service') === 0 || page === 'lectures' ? ' class="active"' : '') + '>Services <span class="nav-caret">&#9662;</span></a>' +
         '<div class="dropdown-menu">' +
         '<a href="/services">All Services</a>' +
         '<div class="dropdown-divider"></div>' +
         '<span class="dropdown-group-label">Advisory &amp; Delivery</span>' +
         '<a href="/finance-transformation">Finance Transformation Design</a>' +
-        '<a href="/post-merger-integration">Post-Merger Finance Integration</a>' +
+        '<a href="/post-merger-integration">M&amp;A Finance</a>' +
         '<a href="/entity-governance">Entity Governance &amp; Structuring</a>' +
         '<a href="/shared-services">Shared Services Center</a>' +
         '<div class="dropdown-divider"></div>' +
@@ -37,7 +37,7 @@
         '<a href="/north-macedonia"' + active('north-macedonia') + '>North Macedonia</a>' +
 
         '<div class="nav-dropdown">' +
-        '<a href="/insights"' + (page.indexOf('insight') === 0 ? ' class="active"' : '') + '>Insights &#9662;</a>' +
+        '<a href="/insights"' + (page.indexOf('insight') === 0 ? ' class="active"' : '') + '>Insights <span class="nav-caret">&#9662;</span></a>' +
         '<div class="dropdown-menu">' +
         '<a href="/insights">All Insights</a>' +
         '<div class="dropdown-divider"></div>' +
@@ -66,7 +66,7 @@
         '</div>' +
         '<div class="footer-col"><h5>Services</h5>' +
         '<a href="/finance-transformation">Finance Transformation Design</a>' +
-        '<a href="/post-merger-integration">Post-Merger Integration</a>' +
+        '<a href="/post-merger-integration">M&amp;A Finance</a>' +
         '<a href="/entity-governance">Entity Governance</a>' +
         '<a href="/shared-services">Shared Services Center</a>' +
         '<a href="/lectures">Lectures &amp; Training</a>' +
@@ -100,22 +100,54 @@
         nav.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // Mobile menu toggle
+    // Mobile menu toggle + tap-to-expand accordions
     var toggle = nav.querySelector('.menu-toggle');
     var links = nav.querySelector('.nav-links');
+
+    function isMobileNav() { return window.matchMedia('(max-width: 1024px)').matches; }
+
+    function closeMenu() {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.querySelectorAll('.nav-dropdown.expanded').forEach(function (drop) {
+            drop.classList.remove('expanded');
+            var pa = drop.querySelector('a');
+            if (pa) { pa.setAttribute('aria-expanded', 'false'); }
+        });
+    }
+
     toggle.addEventListener('click', function () {
         var open = links.classList.toggle('open');
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (!open) { closeMenu(); }
     });
 
-    // Close mobile menu on outside click or link click
+    // On mobile, tapping a dropdown parent expands its sub-items inline instead of navigating
+    nav.querySelectorAll('.nav-dropdown').forEach(function (drop) {
+        var parentLink = drop.querySelector('a');
+        if (!parentLink) { return; }
+        parentLink.setAttribute('aria-haspopup', 'true');
+        parentLink.setAttribute('aria-expanded', 'false');
+        parentLink.addEventListener('click', function (e) {
+            if (isMobileNav()) {
+                e.preventDefault();
+                var expanded = drop.classList.toggle('expanded');
+                parentLink.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            }
+        });
+    });
+
+    // Close the menu on an outside click
     document.addEventListener('click', function (e) {
         if (links.classList.contains('open') && !links.contains(e.target) && !toggle.contains(e.target)) {
-            links.classList.remove('open');
+            closeMenu();
         }
     });
+
+    // Tapping a real navigation link closes the menu (accordion parents are excluded above)
     links.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () { links.classList.remove('open'); });
+        if (link.parentElement && link.parentElement.classList.contains('nav-dropdown')) { return; }
+        link.addEventListener('click', function () { closeMenu(); });
     });
 
     // Reveal-on-scroll
