@@ -1218,7 +1218,7 @@ table.portal-table tr:hover td { background: #FFFEF9; }
     .nav-links {
         display: none;
         position: fixed;
-        top: var(--nav-h, 60px);
+        top: calc(var(--nav-h, 60px) - 1px);
         left: 0; right: 0;
         max-height: calc(100vh - var(--nav-h, 60px));
         background: var(--paper);
@@ -1250,15 +1250,15 @@ table.portal-table tr:hover td { background: #FFFEF9; }
     .nav-links > a,
     .nav-dropdown > a {
         font-family: var(--sans);
-        font-size: 1.16rem;
+        font-size: 1rem;
         font-weight: 600;
         color: var(--green);
         width: 100%;
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        min-height: 54px;
-        padding: 0.6rem 1.75rem;
+        min-height: 50px;
+        padding: 0.55rem 1.75rem;
         letter-spacing: -0.005em;
     }
     .nav-links > a::after, .nav-dropdown > a::after { display: none; }
