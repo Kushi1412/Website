@@ -1172,93 +1172,9 @@ table.portal-table tr:hover td { background: #FFFEF9; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-    /* drop backdrop-filter on mobile: it would make the bar the containing block
-       for the fixed full-screen menu panel, clipping it to the bar's height */
-    nav.site-nav { padding: 1.1rem 2rem; backdrop-filter: none; -webkit-backdrop-filter: none; }
-    .menu-toggle { display: flex; }
-    /* ── Mobile menu: full-screen panel with tap-to-expand accordions ── */
-    .nav-links {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: var(--paper);
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        padding: 4.9rem 0 2rem;
-        gap: 0;
-        z-index: 1050;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        border-bottom: none;
-    }
-    .nav-links.open { display: flex !important; }
-    /* keep the brand + hamburger visible above the open panel */
-    nav.site-nav .logo { position: relative; z-index: 1100; }
-
-    /* every top-level row: consistent size, full-width, comfortable tap target */
-    .nav-links > a,
-    .nav-dropdown > a {
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--green);
-        width: 100%;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        min-height: 44px;
-        padding: 0.9rem 2rem;
-        border-bottom: 1px solid var(--rule);
-        letter-spacing: 0.01em;
-    }
-    .nav-links > a::after, .nav-dropdown > a::after { display: none; }
-
-    .nav-dropdown { position: static; width: 100%; text-align: left; }
-    .nav-dropdown > a { justify-content: space-between; cursor: pointer; }
-    .nav-dropdown.expanded > a { color: var(--seal); }
-    .nav-dropdown.expanded > a .nav-caret { transform: rotate(180deg); }
-
-    /* accordion sub-menu: collapsed by default, revealed when the parent is expanded */
-    .dropdown-menu {
-        position: static;
-        transform: none;
-        background: var(--paper-2);
-        border: none;
-        box-shadow: none;
-        opacity: 1;
-        visibility: visible;
-        padding: 0;
-        min-width: auto;
-        display: none;
-    }
-    .nav-dropdown.expanded .dropdown-menu { display: block; }
-    .dropdown-menu::before { display: none; }
-    .dropdown-menu a {
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--ink);
-        display: flex;
-        align-items: center;
-        min-height: 44px;
-        padding: 0.8rem 2rem 0.8rem 3.2rem;
-        border-bottom: 1px solid var(--rule);
-        white-space: normal;
-    }
-    .dropdown-menu a:hover { color: var(--seal); background: transparent; padding-left: 3.2rem; }
-    .dropdown-menu .dropdown-divider { display: none; }
-    .dropdown-menu .dropdown-group-label {
-        display: block;
-        padding: 0.7rem 2rem 0.25rem 3.2rem;
-        font-size: 0.58rem;
-    }
-
-    /* primary CTA as a full-width filled row at the foot of the menu */
-    .nav-links > a.nav-cta {
-        background: var(--green);
-        color: #fff !important;
-        border: none;
-        margin-top: 0.4rem;
-    }
+    /* 901–1024px: keep the desktop hover-bar, but tighten it so it fits on small laptops */
+    nav.site-nav { padding: 1.1rem 2rem; }
+    .nav-links { gap: 1.7rem; }
 
     .page-hero { padding: 8rem 2rem 3.5rem; }
     .section, .section.tight { padding: 4.5rem 2rem; }
@@ -1275,6 +1191,121 @@ table.portal-table tr:hover td { background: #FFFEF9; }
     .form-grid { grid-template-columns: 1fr; }
     .portal-wrap { padding: 7rem 2rem 4rem; }
     .portal-kpis { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Mobile navigation (≤900px): full-screen panel with tap-to-expand accordions ──
+   Hierarchy is carried by size / weight / colour / indent — NOT heavy borders.
+   Top-level items read primary; an expanded dropdown is a quiet, nested block. */
+@media (max-width: 900px) {
+    /* backdrop-filter off here: it would make the bar the containing block for the
+       fixed panel and clip it to the bar's height */
+    nav.site-nav { padding: 1.05rem 1.5rem; backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .menu-toggle { display: flex; }
+
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--paper);
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: 4.75rem 0 2.5rem;
+        gap: 0;
+        z-index: 1050;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        border-bottom: none;
+    }
+    .nav-links.open { display: flex !important; }
+    nav.site-nav .logo { position: relative; z-index: 1100; }
+
+    /* TOP-LEVEL rows — primary: green, larger, heavier, generous */
+    .nav-links > a,
+    .nav-dropdown > a {
+        font-family: var(--sans);
+        font-size: 1.16rem;
+        font-weight: 600;
+        color: var(--green);
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        min-height: 54px;
+        padding: 0.6rem 1.75rem;
+        letter-spacing: -0.005em;
+    }
+    .nav-links > a::after, .nav-dropdown > a::after { display: none; }
+
+    /* separators ONLY between top-level groups */
+    .nav-links > a,
+    .nav-links > .nav-dropdown { border-top: 1px solid var(--rule); }
+    .nav-links > :first-child { border-top: none; }
+
+    .nav-dropdown { position: static; width: 100%; text-align: left; }
+    .nav-dropdown > a { justify-content: space-between; cursor: pointer; }
+    .nav-dropdown.expanded > a { color: var(--seal); }
+    .nav-dropdown > a .nav-caret { font-size: 0.8rem; opacity: 0.65; }
+    .nav-dropdown.expanded > a .nav-caret { transform: rotate(180deg); opacity: 1; }
+
+    /* Expanded sub-menu — quiet nested block: faint tint + left rule, indented */
+    .dropdown-menu {
+        position: static; transform: none;
+        background: var(--paper-2);
+        border: none;
+        border-left: 2px solid var(--band-border);
+        box-shadow: none;
+        opacity: 1; visibility: visible;
+        min-width: auto;
+        display: none;
+        margin: 0.1rem 1.75rem 0.7rem 2.6rem;
+        padding: 0.25rem 0;
+        border-radius: 0 3px 3px 0;
+    }
+    .nav-dropdown.expanded .dropdown-menu { display: block; }
+    .dropdown-menu::before { display: none; }
+
+    /* SUB-ITEMS — secondary: smaller, lighter, muted, no per-row borders */
+    .dropdown-menu a {
+        font-family: var(--sans);
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--muted-tone);
+        display: flex; align-items: center;
+        min-height: 44px;
+        padding: 0.4rem 1.1rem;
+        border: none;
+        white-space: normal;
+        letter-spacing: 0;
+    }
+    .dropdown-menu a:hover { color: var(--seal); background: transparent; }
+    .dropdown-menu .dropdown-divider { display: none; }
+    .dropdown-menu .dropdown-group-label {
+        display: block;
+        font-family: var(--mono);
+        font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase;
+        font-weight: 600; color: var(--seal);
+        padding: 0.7rem 1.1rem 0.25rem;
+    }
+
+    /* Client Portal keeps its olive accent as a primary row */
+    .nav-links > a.nav-portal { color: #6E7314 !important; }
+
+    /* Primary CTA — inset filled button at the foot of the menu */
+    .nav-links > a.nav-cta {
+        background: var(--green);
+        color: #fff !important;
+        border: none;
+        border-top: none;
+        justify-content: center;
+        margin: 1.4rem 1.75rem 0;
+        width: auto;
+        min-height: 50px;
+        border-radius: 3px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+    }
+    .nav-links > a.nav-cta:hover { background: var(--seal); }
 }
 
 @media (max-width: 600px) {

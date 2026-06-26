@@ -104,7 +104,7 @@
     var toggle = nav.querySelector('.menu-toggle');
     var links = nav.querySelector('.nav-links');
 
-    function isMobileNav() { return window.matchMedia('(max-width: 1024px)').matches; }
+    function isMobileNav() { return window.matchMedia('(max-width: 900px)').matches; }
 
     function closeMenu() {
         links.classList.remove('open');
