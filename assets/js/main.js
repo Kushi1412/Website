@@ -104,10 +104,25 @@
     var toggle = nav.querySelector('.menu-toggle');
     var links = nav.querySelector('.nav-links');
 
+    // Scrim that dims the page behind the mobile dropdown menu (tap it to close)
+    var navScrim = document.createElement('div');
+    navScrim.className = 'nav-scrim';
+    document.body.appendChild(navScrim);
+
+    // Publish the bar height so the dropdown + scrim sit exactly beneath the bar
+    function setNavHeight() {
+        document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    }
+    setNavHeight();
+    window.addEventListener('resize', setNavHeight);
+    window.addEventListener('load', setNavHeight);
+
     function isMobileNav() { return window.matchMedia('(max-width: 900px)').matches; }
 
     function closeMenu() {
         links.classList.remove('open');
+        navScrim.classList.remove('open');
+        document.body.classList.remove('nav-open');
         toggle.setAttribute('aria-expanded', 'false');
         nav.querySelectorAll('.nav-dropdown.expanded').forEach(function (drop) {
             drop.classList.remove('expanded');
@@ -119,6 +134,8 @@
     toggle.addEventListener('click', function () {
         var open = links.classList.toggle('open');
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        navScrim.classList.toggle('open', open);
+        document.body.classList.toggle('nav-open', open);
         if (!open) { closeMenu(); }
     });
 
