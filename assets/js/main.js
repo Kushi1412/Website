@@ -80,7 +80,7 @@
         '<div class="footer-col"><h5>Clients</h5>' +
         '<a href="/portal">Client Portal</a>' +
         '<a href="mailto:hello@finateo.com">hello@finateo.com</a>' +
-        '<a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>' +
+        '<a href="https://www.linkedin.com/company/finateo/" target="_blank" rel="noopener">LinkedIn</a>' +
         '</div>' +
         '</div>' +
         '<div class="footer-bottom">' +
