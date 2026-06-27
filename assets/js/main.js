@@ -111,7 +111,8 @@
 
     // Publish the bar height so the dropdown + scrim sit exactly beneath the bar
     function setNavHeight() {
-        document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+        // sub-pixel precise so the dropdown can sit truly flush under the bar
+        document.documentElement.style.setProperty('--nav-h', nav.getBoundingClientRect().height + 'px');
     }
     setNavHeight();
     window.addEventListener('resize', setNavHeight);

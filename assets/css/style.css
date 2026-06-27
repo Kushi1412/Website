@@ -1214,14 +1214,17 @@ table.portal-table tr:hover td { background: #FFFEF9; }
     nav.site-nav { padding: 1.05rem 1.5rem; }
     .menu-toggle { display: flex; }
 
-    /* menu drops down from beneath the frosted bar (which stays visible) */
+    /* menu drops down from beneath the frosted bar (which stays visible);
+       lightly frosted so it reads as glass while keeping strong text contrast */
     .nav-links {
         display: none;
         position: fixed;
         top: calc(var(--nav-h, 60px) - 1px);
         left: 0; right: 0;
         max-height: calc(100vh - var(--nav-h, 60px));
-        background: var(--paper);
+        background: rgba(244, 241, 232, 0.9);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
         flex-direction: column;
         align-items: stretch;
         justify-content: flex-start;
@@ -1235,16 +1238,20 @@ table.portal-table tr:hover td { background: #FFFEF9; }
     }
     .nav-links.open { display: flex !important; }
 
-    /* scrim dims the page behind the open dropdown; tap to close */
+    /* scrim dims the page behind the open dropdown (appearance unchanged);
+       pointer-events:none lets you swipe to scroll the page behind it,
+       while a tap still falls through and closes the menu */
     .nav-scrim {
         position: fixed;
         top: var(--nav-h, 60px);
         left: 0; right: 0; bottom: 0;
         background: rgba(20, 22, 18, 0.42);
         z-index: 990;
+        pointer-events: none;
     }
     .nav-scrim.open { display: block; }
-    body.nav-open { overflow: hidden; }
+    /* hide the bar's hairline bottom border while open so no line peeks above the panel */
+    body.nav-open nav.site-nav { border-bottom-color: transparent; }
 
     /* TOP-LEVEL rows — primary: green, larger, heavier, generous */
     .nav-links > a,
