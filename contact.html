@@ -30,7 +30,7 @@
 
                     <h3 class="list-heading">LinkedIn</h3>
                     <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.8;">We publish weekly and answer messages daily.<br>
-                    <a href="https://www.linkedin.com" target="_blank" rel="noopener" style="color: var(--navy); font-weight: 600;">Connect with Finateo &rarr;</a></p>
+                    <a href="https://www.linkedin.com/company/finateo/" target="_blank" rel="noopener" style="color: var(--navy); font-weight: 600;">Connect with Finateo &rarr;</a></p>
 
                     <h3 class="list-heading">Locations</h3>
                     <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.8;">Copenhagen, Denmark — advisory<br>Tetovo, North Macedonia — shared services center</p>
@@ -72,9 +72,11 @@
                         <label for="cmessage">Message</label>
                         <textarea id="cmessage" name="message" required placeholder="A few lines on your situation is plenty — we'll ask the right questions from there."></textarea>
                     </div>
+                    <input type="checkbox" name="botcheck" id="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
                     <div class="full">
                         <button type="submit" class="btn-primary" style="border: 1px solid var(--navy);">Send Message</button>
-                        <p style="font-size: 0.7rem; color: var(--muted); margin-top: 1rem; line-height: 1.7;">Submitting opens a pre-filled email in your mail client — your message goes directly to us, and nothing is stored on this website.</p>
+                        <p id="formStatus" role="status" aria-live="polite" style="font-size: 0.85rem; color: var(--navy); margin-top: 1rem; line-height: 1.7;"></p>
+                        <p style="font-size: 0.7rem; color: var(--muted); margin-top: 1rem; line-height: 1.7;">Your message goes straight to our inbox — we'll reply within one business day. Nothing is stored on this website.</p>
                     </div>
                 </form>
             </div>
@@ -106,24 +108,58 @@
 
     <script src="assets/js/main.js"></script>
     <script>
-        // Contact form → pre-filled mailto (no backend on GitHub Pages; nothing is stored)
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            var name = document.getElementById('cname').value.trim();
-            var company = document.getElementById('ccompany').value.trim();
-            var email = document.getElementById('cemail').value.trim();
-            var topic = document.getElementById('ctopic').value;
-            var message = document.getElementById('cmessage').value.trim();
-            var subject = encodeURIComponent('[Finateo] ' + topic + ' — ' + (company || name));
-            var body = encodeURIComponent(
-                'Name: ' + name + '\n' +
-                'Company: ' + (company || '-') + '\n' +
-                'Email: ' + email + '\n' +
-                'Topic: ' + topic + '\n\n' +
-                message
-            );
-            window.location.href = 'mailto:hello@finateo.com?subject=' + subject + '&body=' + body;
-        });
+        // Contact form → Web3Forms (sends straight to hello@finateo.com; nothing stored on this site)
+        (function () {
+            var form = document.getElementById('contactForm');
+            var statusEl = document.getElementById('formStatus');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var btn = form.querySelector('button[type="submit"]');
+                var name = document.getElementById('cname').value.trim();
+                var company = document.getElementById('ccompany').value.trim();
+                var email = document.getElementById('cemail').value.trim();
+                var topic = document.getElementById('ctopic').value;
+                var message = document.getElementById('cmessage').value.trim();
+                var payload = {
+                    access_key: 'be5907a9-a588-417c-a42f-4cae54b07f6c',
+                    subject: '[Finateo] ' + topic + ' — ' + (company || name),
+                    from_name: 'Finateo Website',
+                    replyto: email,
+                    botcheck: document.getElementById('botcheck').checked,
+                    name: name,
+                    company: company || '-',
+                    email: email,
+                    topic: topic,
+                    message: message
+                };
+                btn.disabled = true;
+                btn.textContent = 'Sending…';
+                statusEl.style.color = 'var(--navy)';
+                statusEl.textContent = '';
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    if (data.success) {
+                        form.innerHTML = '<p style="font-family: \'Spectral\', serif; font-size: 1.5rem; color: var(--navy); line-height: 1.5;">Thank you — your message is on its way.</p><p style="font-size: 0.95rem; color: var(--muted); margin-top: 1rem; line-height: 1.8;">We read every note ourselves and reply within one business day.</p>';
+                    } else {
+                        statusEl.style.color = 'var(--gold)';
+                        statusEl.textContent = 'Something went wrong — please email hello@finateo.com directly.';
+                        btn.disabled = false;
+                        btn.textContent = 'Send Message';
+                    }
+                })
+                .catch(function () {
+                    statusEl.style.color = 'var(--gold)';
+                    statusEl.textContent = 'Network error — please email hello@finateo.com directly.';
+                    btn.disabled = false;
+                    btn.textContent = 'Send Message';
+                });
+            });
+        })();
     </script>
 </body>
 </html>
