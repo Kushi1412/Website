@@ -114,16 +114,17 @@ nav.site-nav.scrolled { box-shadow: 0 2px 24px rgba(25,23,19,0.08); }
 
 .logo {
     font-family: var(--serif);
-    font-size: 1.5rem;
     font-weight: 600;
-    letter-spacing: -0.01em;
     color: var(--green);
     text-decoration: none;
-    display: flex;
-    align-items: baseline;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    line-height: 1;
 }
 
-.logo .logo-dot { color: #B34A1F; }
+.logo .logo-word { font-size: 1.5rem; letter-spacing: -0.022em; }
+.logo .logo-rule { height: 3px; margin-top: 4px; background: #B34A1F; }
 
 .nav-links { display: flex; gap: 2.1rem; align-items: center; }
 
@@ -935,7 +936,8 @@ footer.site-footer {
     border-bottom: 1px solid var(--band-border);
 }
 
-.footer-brand .logo { color: var(--green); font-size: 1.3rem; margin-bottom: 1.2rem; display: inline-flex; }
+.footer-brand .logo { color: var(--green); margin-bottom: 1.2rem; }
+.footer-brand .logo .logo-word { font-size: 1.3rem; }
 
 .footer-brand p { font-size: 0.8rem; line-height: 1.8; max-width: 300px; color: var(--muted-tone); }
 

@@ -14,7 +14,7 @@
 
     /* ── NAVIGATION ── */
     var navHTML =
-        '<a href="/" class="logo">Finateo<span class="logo-dot">.</span></a>' +
+        '<a href="/" class="logo" aria-label="Finateo — Finance Advisory"><span class="logo-word">Finateo</span><span class="logo-rule"></span></a>' +
         '<button class="menu-toggle" aria-label="Menu" aria-expanded="false">' +
         '<span></span><span></span><span></span></button>' +
         '<div class="nav-links">' +
@@ -61,7 +61,7 @@
     var footerHTML =
         '<div class="footer-grid">' +
         '<div class="footer-brand">' +
-        '<a href="/" class="logo">Finateo<span class="logo-dot">.</span></a>' +
+        '<a href="/" class="logo" aria-label="Finateo — Finance Advisory"><span class="logo-word">Finateo</span><span class="logo-rule"></span></a>' +
         '<p>Deal &amp; growth finance advisory for companies navigating deals, growth and change. We design the finance function — and we can run it, through our shared services center in Tetovo and a broader professional network across several countries.</p>' +
         '</div>' +
         '<div class="footer-col"><h5>Services</h5>' +
