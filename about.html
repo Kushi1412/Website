@@ -11,6 +11,43 @@
     <meta name="description" content="Finateo is built on 10+ years of international finance experience — finance transformation, M&amp;A finance and entity governance inside complex multinational organisations.">
     <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* ── Page-specific: TEAM ── */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3.5rem 3rem;
+            margin-top: 3rem;
+        }
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            border-radius: 6px;
+            border: 1px solid var(--rule);
+        }
+        .team-card h3 {
+            font-family: var(--serif);
+            font-optical-sizing: auto;
+            font-size: 1.7rem;
+            font-weight: 500;
+            letter-spacing: -0.015em;
+            color: var(--navy);
+            margin-top: 1.4rem;
+        }
+        .team-role {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .team-card .prose { margin-top: 1.1rem; }
+        .team-card .pill-row { margin-top: 1.3rem; }
+    </style>
 </head>
 <body data-page="about">
 
@@ -23,15 +60,15 @@
 
     <!-- ── TEAM ── -->
     <section class="section white reveal" id="team">
-        <div class="two-col">
-            <div class="sticky-label">
-                <div class="section-tag">The Team</div>
-                <h2 class="section-title">Kushtrim Sadiki</h2>
-                <p class="lead" style="margin-top: 1.2rem; font-size: 0.85rem;">Chief Consultant &middot; Lecturer</p>
-            </div>
-            <div class="prose">
-                <p>Kushtrim brings more than ten years in international finance, all of it inside the kind of organisations our clients are becoming. Today he is <strong>Finance Integration Lead</strong> in the group finance function of an international group that has recently brought mergers and acquisitions onto its agenda — building the group's Finance M&amp;A capability from the ground up, and leading the development of its entity governance framework, defining how the group's entities and branches are operated and governed across the full cross-functional landscape: legal, tax, HR, IT, etc., and the business itself.</p>
-                <p>Earlier, as <strong>Finance Integration Lead at Novo Nordisk</strong>, he led the finance workstream through major acquisitions hand-in-hand with the integration management office (IMO) — learning, under real deadlines, what makes an integration land rather than stall. He helped define the company's Finance M&amp;A capability at a time when brownfield acquisitions in Product Supply were unexplored ground for the organisation, and — once the deal closed — led the post-acquisition finance transformation that followed: a substantial programme in its own right, rebuilding the acquired operation's finance function, processes and reporting to run to group standards well beyond Day-1 integration.</p>
+        <div class="section-tag">The Team</div>
+        <div class="team-grid">
+            <div class="team-card">
+                <img class="team-photo" src="assets/img/team/kushtrim-sadiki.png" alt="Kushtrim Sadiki" width="200" height="200">
+                <h3>Kushtrim Sadiki</h3>
+                <div class="team-role">Chief Consultant &middot; Lecturer</div>
+                <div class="prose">
+                    <p>Kushtrim brings more than ten years in international finance. Today he is <strong>Finance Integration Lead</strong> in the group finance function of an international group, building its Finance M&amp;A capability from the ground up and leading its entity governance framework across legal, tax, HR, IT, etc. Earlier, at <strong>Novo Nordisk</strong>, he led finance integration through major acquisitions hand-in-hand with the integration management office (IMO) — and, once the deals closed, led the substantial post-acquisition finance transformation that followed.</p>
+                </div>
                 <div class="pill-row">
                     <span class="pill">M&amp;A Finance</span>
                     <span class="pill">Finance M&amp;A Capability</span>
@@ -39,16 +76,13 @@
                     <span class="pill">Finance Transformation</span>
                 </div>
             </div>
-        </div>
-
-        <div class="two-col" style="margin-top: 5rem; padding-top: 5rem; border-top: 1px solid var(--rule);">
-            <div class="sticky-label">
-                <h2 class="section-title">Sajaan Tahir</h2>
-                <p class="lead" style="margin-top: 1.2rem; font-size: 0.85rem;">Chief Consultant &middot; Lecturer</p>
-            </div>
-            <div class="prose">
-                <p>Sajaan is <strong>Chief GenAI Advisor at Danske Bank</strong>, where he guides the adoption of generative AI in one of the most regulated financial environments in Europe. At Finateo he leads our <a href="/lectures" style="color: var(--seal);">executive lectures and briefings</a> on generative AI in finance — translating what actually works in enterprise AI into language boards and finance leadership can act on.</p>
-                <p>His focus: separating the durable from the hyped. Where generative AI genuinely changes finance work, where it doesn't yet, and how to govern the difference.</p>
+            <div class="team-card">
+                <img class="team-photo" src="assets/img/team/sajaan-tahir.png" alt="Sajaan Tahir" width="200" height="200">
+                <h3>Sajaan Tahir</h3>
+                <div class="team-role">Chief Consultant &middot; Lecturer</div>
+                <div class="prose">
+                    <p>Sajaan is <strong>Chief GenAI Advisor at Danske Bank</strong>, where he guides the adoption of generative AI in one of the most regulated financial environments in Europe — the kind of setting where AI has to satisfy regulators, auditors and risk committees, not just a demo audience. At Finateo he leads our <a href="/lectures" style="color: var(--seal);">executive lectures and briefings</a> on generative AI in finance, with one consistent focus: separating the durable from the hyped, and helping leadership govern the difference.</p>
+                </div>
                 <div class="pill-row">
                     <span class="pill">Generative AI in Finance</span>
                     <span class="pill">AI Governance</span>
