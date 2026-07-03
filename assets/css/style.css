@@ -81,6 +81,12 @@ body::before {
 
 ::selection { background: var(--seal); color: #fff; }
 
+/* keyboard focus — one visible treatment everywhere */
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--seal);
+    outline-offset: 2px;
+}
+
 /* ── NAV ── */
 nav.site-nav {
     position: fixed;
@@ -549,6 +555,13 @@ nav.site-nav.scrolled { box-shadow: 0 2px 24px rgba(25,23,19,0.08); }
     padding: 0.3rem 0.7rem;
     margin-bottom: 1.2rem;
 }
+
+/* ── DARK LEDGER CARDS (phase/step/entry-model grids on band sections) ── */
+.card.card-ink { background: var(--green); }
+.card.card-ink:hover { background: var(--green-deep); }
+.card.card-ink .card-num { color: var(--seal-bright); }
+.card.card-ink h3 { color: #F8F5EC; }
+.card.card-ink p { color: rgba(244, 241, 232, 0.75); }
 
 /* ── TWO-COLUMN CONTENT ── */
 .two-col {
