@@ -1396,16 +1396,108 @@ a.feed-card:hover { border-left-color: var(--seal); transform: translateY(-3px);
 .feed-card p { font-size: 0.9rem; line-height: 1.7; color: var(--muted-tone); }
 .feed-card .card-arrow { margin-top: auto; padding-top: 1.2rem; }
 .feed-card--case .card-arrow { color: #B34A1F; } /* case cue = fixed sealing-wax */
-.feed-more .case-label { margin-top: 1.1rem; }
+.feed-more { display: none; } /* card teaser only — full content opens in the modal */
+.feed-card--case { cursor: pointer; }
+.feed-card--case:hover { border-left-color: #B34A1F; transform: translateY(-3px); }
 .feed-expand {
     background: none; border: none; padding: 0; cursor: pointer;
+    font-family: var(--mono); font-size: 0.66rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
     color: #B34A1F; text-align: left; /* fixed sealing-wax, not the per-page accent */
 }
 .feed-expand:focus-visible { outline: 2px solid var(--seal); outline-offset: 2px; }
 
+/* ── Case-study modal ───────────────────────────────────────── */
+body.modal-open { overflow: hidden; }
+
+.case-modal {
+    position: fixed; inset: 0; z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2.5rem 2rem;
+}
+.case-modal[hidden] { display: none; }
+
+.case-modal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(14, 42, 32, 0.55); /* dimmed bottle-green ink */
+}
+
+.case-modal-box {
+    position: relative;
+    width: 100%; max-width: 760px; max-height: 85vh;
+    display: flex; flex-direction: column;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--seal); /* wax rule in the page accent */
+    border-radius: 14px;
+    box-shadow: 0 30px 80px -30px rgba(14, 42, 32, 0.55);
+    overflow: hidden;
+}
+
+/* quick entrance; closing is instant (no exit animation) */
+.case-modal .case-modal-box { opacity: 0; transform: translateY(16px); }
+.case-modal.open .case-modal-box {
+    opacity: 1; transform: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.case-modal .case-modal-backdrop { opacity: 0; }
+.case-modal.open .case-modal-backdrop { opacity: 1; transition: opacity 0.22s ease; }
+
+.case-modal-close {
+    position: absolute; top: 1.1rem; right: 1.1rem; z-index: 2;
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--rule); background: var(--card-tone);
+    color: var(--green); font-size: 1.35rem; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.case-modal-close:hover { background: var(--green); color: var(--paper); border-color: var(--green); }
+.case-modal-close:focus-visible { outline: 2px solid var(--seal); outline-offset: 2px; }
+
+.case-modal-body {
+    overflow-y: auto;
+    padding: 3rem 3.2rem 3.2rem;
+    scrollbar-width: thin;
+}
+.case-modal-body .card-num { margin: 1.4rem 0 0.9rem; }
+.case-modal-body h3 {
+    font-family: var(--serif);
+    font-size: 1.75rem; font-weight: 500; line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--green);
+    margin-bottom: 1.2rem;
+    padding-right: 2rem; /* clear of the close button */
+}
+.case-modal-body p { font-size: 0.95rem; line-height: 1.85; color: var(--muted-tone); margin-bottom: 1rem; }
+.case-modal-body .case-modal-intro { color: var(--ink); }
+.case-modal-body .case-label {
+    font-family: var(--mono);
+    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--seal); font-weight: 600;
+    margin: 1.8rem 0 0.6rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--rule); /* ruled-ledger divider between sections */
+}
+
+@media (max-width: 640px) {
+    /* near-fullscreen sheet on mobile */
+    .case-modal { padding: 0; align-items: flex-end; }
+    .case-modal-box {
+        max-width: none; max-height: 94vh;
+        border-radius: 14px 14px 0 0;
+        border-left: none; border-right: none; border-bottom: none;
+    }
+    .case-modal-body { padding: 2.2rem 1.5rem 2.5rem; }
+    .case-modal-body h3 { font-size: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .case-modal .case-modal-box, .case-modal .case-modal-backdrop { opacity: 1; transform: none; transition: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .insights-feed { scroll-behavior: auto; }
-    a.feed-card:hover { transform: none; }
+    a.feed-card:hover, .feed-card--case:hover { transform: none; }
 }
 @media (max-width: 768px) {
     .feed-arrow { display: none; }

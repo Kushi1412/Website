@@ -183,16 +183,85 @@
         var allCards = document.querySelectorAll('.feed-card');
         var updaters = [];
 
-        // Give every collapsed card one shared height across all feeds; an expanded card grows freely.
+        // Give every card one shared height across all feeds (full case content opens in the modal).
         function equalizeAll() {
             var i, max = 0;
             for (i = 0; i < allCards.length; i++) { allCards[i].style.height = 'auto'; }
-            for (i = 0; i < allCards.length; i++) {
-                if (!allCards[i].classList.contains('feed-card--open')) { max = Math.max(max, allCards[i].offsetHeight); }
+            for (i = 0; i < allCards.length; i++) { max = Math.max(max, allCards[i].offsetHeight); }
+            for (i = 0; i < allCards.length; i++) { allCards[i].style.height = max + 'px'; }
+        }
+
+        /* ── Case-study modal ─────────────────────────────────────
+           One shared dialog, injected here (same single-source rule as
+           nav/footer). Opening clones a card's content into it; closing
+           is instant and leaves the page ready for the next card. */
+        var caseModal = null, caseModalBox = null, caseModalBody = null,
+            caseCloseBtn = null, caseOpener = null;
+
+        function buildCaseModal() {
+            caseModal = document.createElement('div');
+            caseModal.className = 'case-modal';
+            caseModal.hidden = true;
+            caseModal.innerHTML =
+                '<div class="case-modal-backdrop"></div>' +
+                '<div class="case-modal-box" role="dialog" aria-modal="true" aria-labelledby="caseModalTitle">' +
+                '<button class="case-modal-close" type="button" aria-label="Close case study">&#215;</button>' +
+                '<div class="case-modal-body"></div>' +
+                '</div>';
+            document.body.appendChild(caseModal);
+            caseModalBox = caseModal.querySelector('.case-modal-box');
+            caseModalBody = caseModal.querySelector('.case-modal-body');
+            caseCloseBtn = caseModal.querySelector('.case-modal-close');
+
+            caseCloseBtn.addEventListener('click', closeCaseModal);
+            caseModal.querySelector('.case-modal-backdrop').addEventListener('click', closeCaseModal);
+            document.addEventListener('keydown', function (e) {
+                if (caseModal.hidden) { return; }
+                if (e.key === 'Escape') { closeCaseModal(); return; }
+                if (e.key !== 'Tab') { return; }
+                // focus trap: cycle within the dialog
+                var focusables = caseModalBox.querySelectorAll('button, a[href]');
+                var first = focusables[0], last = focusables[focusables.length - 1];
+                if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+                else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+            });
+        }
+
+        function openCaseModal(card, opener) {
+            if (!caseModal) { buildCaseModal(); }
+            caseOpener = opener || null;
+
+            var tag = card.querySelector('.feed-tag');
+            var num = card.querySelector('.card-num');
+            var title = card.querySelector('h3');
+            var intro = card.querySelector(':scope > p') || card.querySelector('p');
+            var more = card.querySelector('.feed-more');
+
+            var html = '';
+            if (tag) { html += '<span class="' + tag.className + '">' + tag.innerHTML + '</span>'; }
+            if (num) { html += '<div class="card-num">' + num.innerHTML + '</div>'; }
+            if (title) { html += '<h3 id="caseModalTitle">' + title.innerHTML + '</h3>'; }
+            if (intro) { html += '<p class="case-modal-intro">' + intro.innerHTML + '</p>'; }
+            if (more) { html += more.innerHTML; }
+            caseModalBody.innerHTML = html;
+
+            caseModal.hidden = false;
+            document.body.classList.add('modal-open');
+            caseModalBody.scrollTop = 0;
+            if (!reduceMotion) {
+                // force a frame so the entrance transition can play
+                void caseModalBox.offsetHeight;
             }
-            for (i = 0; i < allCards.length; i++) {
-                if (!allCards[i].classList.contains('feed-card--open')) { allCards[i].style.height = max + 'px'; }
-            }
+            caseModal.classList.add('open');
+            caseCloseBtn.focus();
+        }
+
+        function closeCaseModal() {
+            // instant close — no exit animation, ready for the next card
+            caseModal.classList.remove('open');
+            caseModal.hidden = true;
+            document.body.classList.remove('modal-open');
+            if (caseOpener) { caseOpener.focus(); caseOpener = null; }
         }
 
         function initFeed(feed) {
@@ -222,17 +291,11 @@
                 if (e.key === 'ArrowRight') { scrollFeed(1); e.preventDefault(); }
                 else if (e.key === 'ArrowLeft') { scrollFeed(-1); e.preventDefault(); }
             });
-            feed.querySelectorAll('.feed-expand').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    var card = btn.closest('.feed-card');
-                    var more = card ? card.querySelector('.feed-more') : null;
-                    var open = btn.getAttribute('aria-expanded') === 'true';
-                    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-                    if (more) { more.hidden = open; }
-                    if (card) { card.classList.toggle('feed-card--open', !open); }
-                    btn.textContent = open ? 'Read more →' : 'Show less →';
-                    equalizeAll();
-                    updateArrows();
+            // the whole case card is clickable; the button stays as the keyboard/AT trigger
+            feed.querySelectorAll('.feed-card--case').forEach(function (card) {
+                card.addEventListener('click', function (e) {
+                    var btn = card.querySelector('.feed-expand');
+                    openCaseModal(card, e.target.closest('.feed-expand') || btn);
                 });
             });
             updaters.push(updateArrows);
