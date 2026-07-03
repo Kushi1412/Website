@@ -24,10 +24,12 @@
         '<div class="dropdown-menu">' +
         '<a href="/services">All Services</a>' +
         '<div class="dropdown-divider"></div>' +
-        '<span class="dropdown-group-label">Advisory &amp; Delivery</span>' +
+        '<span class="dropdown-group-label">Advisory</span>' +
         '<a href="/finance-transformation">Finance Transformation Design</a>' +
         '<a href="/post-merger-integration">M&amp;A Finance</a>' +
         '<a href="/entity-governance">Entity Governance &amp; Structuring</a>' +
+        '<div class="dropdown-divider"></div>' +
+        '<span class="dropdown-group-label">Delivery</span>' +
         '<a href="/shared-services">Shared Services Center</a>' +
         '<div class="dropdown-divider"></div>' +
         '<span class="dropdown-group-label">Lectures &amp; Training</span>' +
