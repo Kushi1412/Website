@@ -45,6 +45,8 @@
             font-weight: 600;
             margin-top: 0.5rem;
         }
+        /* bio heights are equalized by the small script at the foot of the page,
+           so the competency pill rows start on the same line across cards */
         .team-card .prose { margin-top: 1.1rem; }
         .team-card .pill-row { margin-top: 1.3rem; }
     </style>
@@ -100,7 +102,7 @@
             <div class="prose">
                 <p>Finance transformation fails when it's scoped as a pure finance initiative. Every operating model change requires people outside finance to change how they work — and people change how they work when they own the change, not when they're consulted about it.</p>
                 <p>We work across <strong>finance, legal, tax, HR, IT, etc.</strong> because that's how reality works. Leading finance integration hand-in-hand with the IMO — and leading finance transformations at large Danish companies — taught us that cross-functional ownership determines whether a transformation lands or stalls, so we design ownership before we design processes.</p>
-                <p>And we stay flexible on role: strategic advisor at board level on some engagements, hands-on in the engine room on others. That range is rare — and it's exactly what the work needs.</p>
+                <p>And we stay flexible on role: strategic advisor at board level on some engagements, hands-on in the engine room on others. That range is exactly what this kind of work needs.</p>
             </div>
             <div class="prose">
                 <p><strong>What you can hold us to:</strong></p>
@@ -152,18 +154,39 @@
     <section class="section reveal" id="roadmap">
         <div class="section-tag">Where We're Heading</div>
         <h2 class="section-title">Built for depth, not volume</h2>
-        <p class="lead" style="margin-top: 1.5rem; max-width: 720px;">We're growing Finateo slowly and on purpose. Rather than serving many companies through light, arm's-length engagements, we're building a small number of close, long-term relationships — the kind where we can genuinely own a client's problems instead of skimming the surface of them. Depth over volume, by design.</p>
+        <p class="lead" style="margin-top: 1.5rem; max-width: 720px;">We're growing Finateo slowly and on purpose. Rather than serving many companies through light, arm's-length engagements, we're building a small number of close, long-term relationships — the kind where we can genuinely own a client's problems instead of skimming the surface. Depth over volume, by design.</p>
     </section>
 
     <!-- ── CTA ── -->
     <section class="cta-band reveal">
         <h2>Work with people who've <em>been accountable for the outcome</em></h2>
-        <p>Advice from practitioners who've owned the deadline, not observed it. That's the difference you'll feel in the first meeting.</p>
+        <p>Advice from practitioners who've owned the deadline themselves, not observed it from the sidelines.</p>
         <div class="cta-band-buttons on-dark">
             <a href="/contact" class="btn-primary">Meet us</a>
         </div>
     </section>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        // Team cards: equalize bio heights when side by side, so the
+        // competency pill rows start on the same line.
+        (function () {
+            var bios = document.querySelectorAll('.team-card .prose');
+            if (bios.length < 2) { return; }
+            function align() {
+                var max = 0;
+                bios.forEach(function (b) { b.style.minHeight = 'auto'; });
+                var cards = document.querySelectorAll('.team-card');
+                var sideBySide = Math.abs(cards[0].getBoundingClientRect().top - cards[1].getBoundingClientRect().top) < 2;
+                if (!sideBySide) { return; }
+                bios.forEach(function (b) { max = Math.max(max, b.offsetHeight); });
+                bios.forEach(function (b) { b.style.minHeight = max + 'px'; });
+            }
+            align();
+            window.addEventListener('resize', align);
+            window.addEventListener('load', align);
+            if (document.fonts && document.fonts.ready) { document.fonts.ready.then(align); }
+        })();
+    </script>
 </body>
 </html>

@@ -122,5 +122,25 @@
     </section>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        // Lecturer columns: equalize bio heights when side by side, so the
+        // competency pill rows start on the same line.
+        (function () {
+            var bios = document.querySelectorAll('#lecturers .two-col > .prose > p');
+            if (bios.length < 2) { return; }
+            function align() {
+                var max = 0;
+                bios.forEach(function (b) { b.style.minHeight = 'auto'; });
+                var sideBySide = Math.abs(bios[0].getBoundingClientRect().top - bios[1].getBoundingClientRect().top) < 2;
+                if (!sideBySide) { return; }
+                bios.forEach(function (b) { max = Math.max(max, b.offsetHeight); });
+                bios.forEach(function (b) { b.style.minHeight = max + 'px'; });
+            }
+            align();
+            window.addEventListener('resize', align);
+            window.addEventListener('load', align);
+            if (document.fonts && document.fonts.ready) { document.fonts.ready.then(align); }
+        })();
+    </script>
 </body>
 </html>
