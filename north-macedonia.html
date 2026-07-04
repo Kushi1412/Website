@@ -11,17 +11,114 @@
     <meta name="description" content="North Macedonia as a nearshore destination for finance operations: EU-aligned regulation, CET time zone, strong finance talent and 40–60% cost advantage. Finateo advises with insider knowledge.">
     <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* ── Page-specific: editorial split hero with Europe map plate ──
+           Map asset: assets/img/europe-map.svg (Mercator, lon -11..33.5 / lat 34..60).
+           Pin positions are % of the 640x565 viewBox — keep both in sync if the
+           map extent ever changes. */
+        .nm-hero-grid {
+            position: relative; z-index: 2;
+            display: grid; grid-template-columns: 1.08fr 0.92fr;
+            gap: 4rem; align-items: center;
+            max-width: 1240px; margin: 0 auto;
+        }
+        .nm-footnote {
+            font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em;
+            color: var(--muted-tone); margin-top: 1.4rem;
+        }
+        .nm-footnote::before { content: '* '; color: var(--seal); }
+        .nm-map-plate {
+            position: relative;
+            background: var(--paper-2);
+            border: 1px solid var(--rule);
+            border-radius: 14px;
+            padding: 1.6rem 1.6rem 1.2rem;
+            box-shadow: 0 24px 60px -30px rgba(14, 42, 32, 0.35);
+        }
+        .nm-map { position: relative; aspect-ratio: 640 / 565; }
+        .nm-map > img { width: 100%; height: 100%; display: block; }
+        .nm-arc { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+        .nm-arc path {
+            fill: none; stroke: var(--seal); stroke-width: 1.6;
+            stroke-dasharray: 5 6; opacity: 0.65;
+            animation: nm-dash 30s linear infinite;
+        }
+        @keyframes nm-dash { to { stroke-dashoffset: -660; } }
+        .nm-pin { position: absolute; transform: translate(-50%, -50%); }
+        .nm-pin .dot {
+            display: block; width: 7px; height: 7px; border-radius: 50%;
+            background: var(--green);
+        }
+        .nm-pin .tag {
+            position: absolute; top: 50%; left: 12px; transform: translateY(-50%);
+            font-family: var(--mono); font-size: 0.58rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-tone);
+            white-space: nowrap;
+        }
+        .nm-pin--left .tag { left: auto; right: 12px; }
+        .nm-pin--home .dot { width: 10px; height: 10px; background: var(--seal); }
+        .nm-pin--home .tag { color: var(--seal); }
+        .nm-pin--home::before, .nm-pin--home::after {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 10px; height: 10px; border-radius: 50%;
+            border: 1.5px solid var(--seal);
+            transform: translate(-50%, -50%);
+            animation: nm-pulse 2.6s ease-out infinite;
+        }
+        .nm-pin--home::after { animation-delay: 1.3s; }
+        @keyframes nm-pulse {
+            0% { width: 10px; height: 10px; opacity: 0.9; }
+            100% { width: 46px; height: 46px; opacity: 0; }
+        }
+        .nm-map-legend {
+            display: flex; gap: 1.6rem; margin-top: 1.15rem;
+            font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--muted-tone);
+        }
+        .nm-map-legend span { display: inline-flex; align-items: center; gap: 0.5rem; }
+        .nm-map-legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .nm-map-legend .l-home { background: var(--seal); }
+        .nm-map-legend .l-net { background: var(--green); }
+        @media (max-width: 1024px) {
+            .nm-hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .nm-map-plate { max-width: 560px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .nm-pin--home::before, .nm-pin--home::after, .nm-arc path { animation: none; }
+        }
+    </style>
 </head>
 <body data-page="north-macedonia">
 
     <section class="page-hero dark">
         <div class="page-hero-grid"></div>
-        <div class="breadcrumb anim-1"><a href="/">Home</a> &nbsp;/&nbsp; <span>North Macedonia</span></div>
-        <h1 class="anim-2">Europe's most <em>underrated</em> nearshore destination</h1>
-        <p class="lead anim-3">EU-aligned regulation, a deep pool of finance and accounting talent, CET time zone, and operating costs 40–60% below Western Europe. We advise companies evaluating North Macedonia as an outsourcing, nearshoring or project destination — grounded in our own operational presence in Tetovo and a broad professional network across the country, especially in finance.</p>
-        <div class="page-hero-cta anim-4 on-dark">
-            <a href="/contact" class="btn-primary">Evaluate the destination</a>
-            <a href="/shared-services" class="btn-outline">Our delivery center in Tetovo</a>
+        <div class="nm-hero-grid">
+            <div>
+                <div class="breadcrumb anim-1"><a href="/">Home</a> &nbsp;/&nbsp; <span>North Macedonia</span></div>
+                <h1 class="anim-2">Europe's most <em>underrated</em> nearshore destination</h1>
+                <p class="lead anim-3">EU-aligned regulation, a deep pool of finance and accounting talent, CET time zone, and operating costs 40–60% below Western Europe. We advise companies evaluating North Macedonia as an outsourcing, nearshoring or project destination — grounded in our own operational presence in Tetovo and a broad professional network across the country, especially in finance.</p>
+                <p class="nm-footnote anim-3">CET time zone — 2h flight from most European capitals.</p>
+                <div class="page-hero-cta anim-4 on-dark">
+                    <a href="/contact" class="btn-primary">Evaluate the destination</a>
+                    <a href="/shared-services" class="btn-outline">Our delivery center in Tetovo</a>
+                </div>
+            </div>
+            <div class="nm-map-plate anim-4">
+                <div class="nm-map" role="img" aria-label="Map of Europe highlighting Finateo's locations in Copenhagen and Tetovo, with network points in Berlin, Vilnius, Skopje and Istanbul">
+                    <img src="assets/img/europe-map.svg" alt="" width="640" height="565">
+                    <svg class="nm-arc" viewBox="0 0 640 565" aria-hidden="true"><path d="M339 117 Q 328 285 459.8 418.2"/></svg>
+                    <div class="nm-pin nm-pin--home" style="left: 52.97%; top: 20.72%;"><span class="dot"></span><span class="tag">Copenhagen</span></div>
+                    <div class="nm-pin nm-pin--home nm-pin--left" style="left: 71.84%; top: 74.06%;"><span class="dot"></span><span class="tag">Tetovo</span></div>
+                    <div class="nm-pin" style="left: 72.86%; top: 74.11%;"><span class="dot"></span><span class="tag">Skopje</span></div>
+                    <div class="nm-pin" style="left: 54.84%; top: 34.43%;"><span class="dot"></span><span class="tag">Berlin</span></div>
+                    <div class="nm-pin nm-pin--left" style="left: 81.53%; top: 25.13%;"><span class="dot"></span><span class="tag">Vilnius</span></div>
+                    <div class="nm-pin nm-pin--left" style="left: 89.84%; top: 77.47%;"><span class="dot"></span><span class="tag">Istanbul</span></div>
+                </div>
+                <div class="nm-map-legend">
+                    <span><i class="l-home"></i>Our locations</span>
+                    <span><i class="l-net"></i>Professional network</span>
+                </div>
+            </div>
         </div>
     </section>
 

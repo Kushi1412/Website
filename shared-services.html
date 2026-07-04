@@ -8,9 +8,25 @@
     <link rel="apple-touch-icon" href="/assets/img/brand/finateo-icon-180.png">
     <link rel="canonical" href="https://finateo.com/shared-services">
     <title>Shared Services Center — Finateo</title>
-    <meta name="description" content="Finateo's shared services center in Tetovo, North Macedonia runs project controlling, accounting, AP &amp; AR — and grows with you into FP&amp;A and investment analysis. Designed by the advisory, run with full transparency.">
+    <meta name="description" content="Finateo's shared services center in Tetovo, North Macedonia runs project controlling, accounting and transaction processing — and grows with you into FP&amp;A and investment analysis. Designed by the advisory, run with full transparency.">
     <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* ── Page-specific: tier-coded service grid ──
+           Three visual tiers: 01–03 core (green), 04–05 decision support (terracotta),
+           06 flexible/open-ended (muted, dashed). */
+        .svc-grid .card { border-top: 3px solid transparent; }
+        .card--core { border-top-color: var(--green); }
+        .card--core .card-num { color: var(--green); }
+        .card--growth { border-top-color: var(--seal-bright); }
+        .card--flex { border-top: 3px dashed #C9C2AE; background: var(--paper-2); }
+        .card--flex .card-num { color: var(--muted-tone); }
+        .card--flex .card-badge { color: var(--muted-tone); border-color: #C9C2AE; }
+        .tier-tag { display: inline-flex; align-items: center; gap: 0.6rem; }
+        .tier-tag::before { content: ''; width: 10px; height: 10px; flex: none; }
+        .tier-tag--core::before { background: var(--green); }
+        .tier-tag--growth::before { background: var(--seal-bright); }
+    </style>
 </head>
 <body data-page="services-ssc">
 
@@ -18,7 +34,7 @@
         <div class="page-hero-grid"></div>
         <div class="breadcrumb anim-1"><a href="/">Home</a> &nbsp;/&nbsp; <a href="/services">Services</a> &nbsp;/&nbsp; <span>Shared Services Center</span></div>
         <h1 class="anim-2">We don't just design your finance function. <em>We can run it, too.</em></h1>
-        <p class="lead anim-3">Finateo's shared services center in Tetovo, North Macedonia can run ongoing finance operations for our clients — from project controlling, accounting and AP &amp; AR through to financial planning &amp; analysis and investment analysis. Nearshore economics, advisory-grade design and full transparency through your client portal — always offered, never required.</p>
+        <p class="lead anim-3">Finateo's shared services center in Tetovo, North Macedonia can run ongoing finance operations for our clients — from project controlling, accounting and transaction processing through to financial planning &amp; analysis and investment analysis. Nearshore economics, advisory-grade design and full transparency in the view you choose — always offered, never required.</p>
         <div class="page-hero-cta anim-4 on-dark">
             <a href="/contact" class="btn-primary">Discuss a delivery setup</a>
             <a href="/portal" class="btn-outline">See the client portal</a>
@@ -50,41 +66,42 @@
             <div class="section-count">06</div>
         </div>
 
-        <div class="section-tag" style="margin-top: 2.5rem;">Transactional Core — Run Your Operations</div>
-        <div class="grid-2" style="margin-top: 1.5rem;">
-            <div class="card">
+        <div class="section-tag tier-tag tier-tag--core" style="margin-top: 2.5rem;">Transactional Core — Run Your Operations</div>
+        <div class="grid-3 svc-grid" style="margin-top: 1.5rem;">
+            <div class="card card--core">
                 <div class="card-num">01 —</div>
                 <h3>Project Controlling</h3>
                 <p>Budget tracking, forecasting, project P&amp;L, variance analysis and steering-ready reporting for project-driven businesses — engineering, construction, professional services and PE portfolio initiatives.</p>
             </div>
-            <div class="card">
+            <div class="card card--core">
                 <div class="card-num">02 —</div>
                 <h3>Accounting</h3>
                 <p>Bookkeeping, month-end close, statutory and group reporting, fixed assets and intercompany — delivered to your group calendar, in your ERP, audit-ready by design.</p>
             </div>
-            <div class="card" style="grid-column: 1 / -1;">
+            <div class="card card--core">
                 <div class="card-num">03 —</div>
-                <h3>Accounts Payable &amp; Receivable</h3>
-                <p>Invoice capture, approval workflows, payment-run preparation and supplier queries on one side; customer invoicing, cash application, ageing monitoring and structured collections on the other. Automation does the volume, people handle the exceptions — and working capital stays protected at both ends.</p>
+                <h3>Transaction Processing</h3>
+                <p>Payables and receivables, end to end: invoice capture, approval workflows, payment runs and supplier queries; customer invoicing, cash application, ageing monitoring and collections. Automation does the volume, people handle the exceptions.</p>
             </div>
         </div>
 
-        <div class="section-tag" style="margin-top: 3.5rem;">Decision Support — Grow With Us</div>
-        <div class="grid-2" style="margin-top: 1.5rem;">
-            <div class="card">
+        <div class="section-tag tier-tag tier-tag--growth" style="margin-top: 3.5rem;">Decision Support — Grow With Us</div>
+        <div class="grid-3 svc-grid" style="margin-top: 1.5rem;">
+            <div class="card card--growth">
                 <div class="card-num">04 —</div>
                 <h3>Financial Planning &amp; Analysis</h3>
-                <p>Budgeting cycles, rolling forecasts, management reporting packs, variance commentary and board-ready analysis — an analysis desk for your CFO, built on the same data our core team already runs. Most clients add this once the transactional core has earned their trust.</p>
+                <p>Budgeting cycles, rolling forecasts, management reporting packs, variance commentary and board-ready analysis — an analysis desk for your CFO, built on the same data our core team already runs.</p>
             </div>
-            <div class="card">
+            <div class="card card--growth">
                 <div class="card-num">05 —</div>
                 <h3>Investment Analysis &amp; Decision Support</h3>
-                <p>Business cases, capital-expenditure appraisal, scenario modelling and post-investment reviews — senior analysts working alongside your leadership and deal teams, so investment decisions rest on numbers someone has actually stress-tested.</p>
+                <p>Business cases, capital-expenditure appraisal, scenario modelling and post-investment reviews — senior analysts working alongside your leadership and deal teams, so investment decisions rest on stress-tested numbers.</p>
             </div>
-            <div class="card" style="grid-column: 1 / -1;">
+            <div class="card card--flex">
+                <span class="card-badge">Flexible scope</span>
                 <div class="card-num">06 —</div>
                 <h3>Other Finance Operations</h3>
-                <p>Reconciliations, master data management, compliance calendar support and ad-hoc analysis — the connective tissue around the core processes, scoped to what your setup needs.</p>
+                <p>Reconciliations, master data management, compliance calendar support and ad-hoc analysis — the connective tissue around the core processes, scoped open-endedly to what your setup needs.</p>
             </div>
         </div>
     </section>
@@ -125,13 +142,13 @@
                 <h2 class="section-title">Transparency is the product</h2>
             </div>
             <div class="prose">
-                <p>Trust in an outsourcing relationship is built on visibility — knowing what's happening, and when. That's the principle we built around. Every client engagement runs through the <strong>Finateo client portal</strong>, where you see your current commitments, milestone status and a live log of actions taken by your counterpart team in Tetovo — who did what, when, on which process.</p>
+                <p>Trust in an outsourcing relationship is built on visibility — knowing what's happening, and when. That's the principle we built around. You decide how you want that visibility delivered — structured reporting, live dashboards, or the <strong>Finateo client portal</strong> — showing your current commitments, milestone status and a log of actions taken by your counterpart team in Tetovo: who did what, when, on which process.</p>
 
                 <h3 class="list-heading">How we keep your data safe</h3>
                 <ul class="deliverables">
                     <li><strong>Named counterparts</strong> — a stable, dedicated team you know by name, not an anonymous queue</li>
                     <li><strong>Your systems, your choice</strong> — we work inside your own ERP and document environment, or in a separate secure environment, whichever you prefer; your data stays under your control</li>
-                    <li><strong>Scoped, time-limited access</strong> — you grant access only to the systems we operate for you, with role-based permissions and multi-factor authentication (MFA), and you can revoke it at any time</li>
+                    <li><strong>Scoped, time-limited access</strong> — you grant access only to the systems we operate for you, with role-based permissions and multi-factor authentication (MFA)</li>
                     <li><strong>GDPR-aligned operations</strong> — North Macedonia's data protection law mirrors the EU framework; processing agreements are part of every contract</li>
                     <li><strong>Segregation of duties</strong> — preparation and approval are never the same person, in our processes or yours</li>
                     <li><strong>Audit trail by default</strong> — every action logged and reportable, which your auditors will appreciate as much as you do</li>
