@@ -26,12 +26,13 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 960px;
+            width: 100%;
+            max-width: 1160px;
             text-align: center;
             background: var(--paper-2);
             border: 1px solid var(--rule);
             border-radius: 14px;
-            padding: 4.5rem 4.5rem 4rem;
+            padding: 4.5rem 5rem 4rem;
         }
         .hero-label {
             font-family: var(--mono);
@@ -62,7 +63,7 @@
             line-height: 1.02;
             letter-spacing: -0.03em;
             color: var(--navy);
-            max-width: 680px;
+            max-width: 820px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -87,21 +88,6 @@
             margin: 1.5rem auto 0;
         }
         .hero-cta-row { display: flex; justify-content: center; gap: 1.2rem; margin-top: 3rem; flex-wrap: wrap; }
-        .scroll-indicator {
-            position: absolute;
-            bottom: 3rem; left: 0; right: 0;
-            display: flex; align-items: center; justify-content: center; gap: 1rem;
-            font-family: var(--mono);
-            font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
-            color: var(--muted);
-            opacity: 0; animation: slideIn 0.9s ease forwards 1.2s;
-        }
-        .scroll-line { width: 40px; height: 1px; background: var(--border); position: relative; overflow: hidden; }
-        .scroll-line::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: var(--gold); animation: scrollPulse 2.2s ease-in-out infinite;
-        }
-        @keyframes scrollPulse { 0% { left: -100%; } 100% { left: 100%; } }
 
         /* ── Page-specific: MODEL (Advise / Build / Run) ── */
         .model-flow {
@@ -150,7 +136,6 @@
         @media (max-width: 1024px) {
             .hero { padding: 7rem 2rem 5rem; min-height: auto; }
             .hero-content { padding: 3.2rem 2.2rem 2.8rem; }
-            .scroll-indicator { display: none; }
             .model-flow { grid-template-columns: 1fr; }
             .model-connector { transform: rotate(90deg); padding: 0.6rem 0; }
         }
@@ -168,7 +153,7 @@
             <div class="hero-label anim-1">Deal &amp; Growth Finance Advisory</div>
             <h1 class="anim-2">Helping companies build a well-operating and <em>transparent</em> finance function</h1>
             <p class="hero-sub anim-3">Where finance works as one with the functions around it — and the wider business</p>
-            <p class="hero-intro anim-3">We help companies navigate deals, growth and change — and when the design is done, we don't walk away.</p>
+            <p class="hero-intro anim-3">We help companies navigate deals, growth and change — and once the design is done, we can stay on and run it for you, efficiently and at a competitive cost.</p>
             <div class="hero-cta-row anim-4">
                 <a class="btn-primary" href="/services">Explore Our Services</a>
                 <a class="btn-outline" href="/contact">Start a Conversation</a>
@@ -179,11 +164,6 @@
              To restore one: add a `<div class="hero-visual">…</div>` here as a
              second child, and switch `.hero` back to a two-column grid
              (e.g. display:grid; grid-template-columns:1.05fr 0.95fr; gap:3rem). -->
-
-        <div class="scroll-indicator">
-            <div class="scroll-line"></div>
-            Scroll to explore
-        </div>
     </section>
 
     <!-- ── AUTHORITY STRIP ── -->
@@ -238,7 +218,7 @@
                 <span class="card-badge">Delivery</span>
                 <div class="card-num">04 —</div>
                 <h3>Shared Services Center — Tetovo, North Macedonia</h3>
-                <p>Beyond advice: our nearshore center can run the finance operations we design — from project controlling, accounting and AP &amp; AR through to FP&amp;A and investment analysis. If and when you choose. Never a lock-in.</p>
+                <p>Beyond advice: our nearshore center can run the finance operations we design — from project controlling, accounting and AP &amp; AR through to FP&amp;A and investment analysis. If and when you choose, never as a lock-in.</p>
                 <span class="card-arrow">Explore the center &rarr;</span>
             </a>
         </div>
@@ -248,7 +228,7 @@
     <section class="section invert reveal" id="model">
         <div class="section-tag">How We Work</div>
         <h2 class="section-title">Advise. Build. <em>Run.</em></h2>
-        <p class="lead" style="margin-top: 1.5rem;">Most advisors hand over a slide deck and leave. We believe the firm that designs your finance function should be willing to stand behind how it runs — though whether we do stays entirely your choice.</p>
+        <p class="lead" style="margin-top: 1.5rem;">Most advisors hand over a slide deck and leave. We believe the firm that designs your finance function should be ready to stand behind how it runs — and whether we do is always your choice.</p>
         <div class="model-flow">
             <div class="model-step">
                 <div class="card-num">01 —</div>
@@ -371,6 +351,45 @@
             <div class="feed-shell">
                 <button class="feed-arrow feed-arrow--prev" type="button" data-dir="prev" aria-label="Previous case study" disabled>&larr;</button>
                 <div class="insights-feed" role="region" aria-label="Case studies" tabindex="0">
+                <article class="feed-card feed-card--case">
+                    <span class="feed-tag feed-tag--case">Case Study</span>
+                    <div class="card-num">Listed Multinational · Cross-Border M&amp;A</div>
+                    <h3>Integrating a factory acquisition into an existing market</h3>
+                    <p>The group acquired a production facility abroad, in a market where it already had a commercial presence. The integration target was that single division — one entity, one acquisition — and the prize was the facility's licenses and platform.</p>
+                    <div class="feed-more" hidden>
+                        <div class="case-label">What we did</div>
+                        <p>Led the finance integration of the acquired entity in close coordination with the IMO: Day-1 readiness, reporting alignment and entity governance integration — with the integration backlog kept strictly separate from the transformation that would repurpose the site.</p>
+                        <div class="case-label">Outcome</div>
+                        <p>The acquired entity reported to group standards on deadline; the transformation that converted the site to the group's own production ran afterwards as a scoped, costed programme rather than scope creep.</p>
+                    </div>
+                    <button class="card-arrow feed-expand" type="button" aria-haspopup="dialog">Read case study &rarr;</button>
+                </article>
+                <article class="feed-card feed-card--case">
+                    <span class="feed-tag feed-tag--case">Case Study</span>
+                    <div class="card-num">Manufacturing Group · M&amp;A</div>
+                    <h3>A greenfield-market acquisition that reached far deeper</h3>
+                    <p>In a separate deal, the group acquired a factory in a country where it had no existing market presence. With nothing local to build on, the integration scope ran much deeper and broader — and the transformation was central, not a follow-on.</p>
+                    <div class="feed-more" hidden>
+                        <div class="case-label">What we did</div>
+                        <p>Stood up the acquired entity's finance and governance from the ground up, then led the transformation that took the site from production-only to production and packing — expanding what the facility could do for the group.</p>
+                        <div class="case-label">Outcome</div>
+                        <p>A fully integrated entity reporting to group standards, and a transformed operation delivering more of the value chain in-house.</p>
+                    </div>
+                    <button class="card-arrow feed-expand" type="button" aria-haspopup="dialog">Read case study &rarr;</button>
+                </article>
+                <article class="feed-card feed-card--case">
+                    <span class="feed-tag feed-tag--case">Case Study</span>
+                    <div class="card-num">International Group · Governance</div>
+                    <h3>A governance framework built from the ground up</h3>
+                    <p>Branch and entity governance had never been formally designed — and without that foundation, no transformation initiative could get traction. Decisions that needed legal, HR and IT stalled because nothing owned them.</p>
+                    <div class="feed-more" hidden>
+                        <div class="case-label">What we did</div>
+                        <p>Defined a branch and entity governance framework from the ground up, built on cross-functional ownership with finance in focus — since that's where the impacts land heaviest. Every workstream co-owned by finance and the function it affected, with decision rights agreed before design work resumed.</p>
+                        <div class="case-label">Outcome</div>
+                        <p>A governance framework the organisation could actually run on; blocked decisions cleared within two cycles, and later initiatives had a foundation to build on instead of stalling.</p>
+                    </div>
+                    <button class="card-arrow feed-expand" type="button" aria-haspopup="dialog">Read case study &rarr;</button>
+                </article>
                 <article class="feed-card feed-card--case">
                     <span class="feed-tag feed-tag--case">Case Study</span>
                     <div class="card-num">Danish Manufacturing SME · Reporting Platform</div>
