@@ -14,13 +14,17 @@
     <style>
         /* ── Page-specific: HERO ── */
         .hero {
-            min-height: 100vh;
+            min-height: 91vh; /* slightly tighter gap between the nav bar and the plate */
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 0 4rem;
             padding-top: 80px;
             position: relative;
+        }
+        /* the hard line break carries the two-line headline on wide screens only */
+        @media (max-width: 700px) {
+            .hero h1 br { display: none; }
         }
         /* framed plate: a slightly darker paper panel that holds the message */
         .hero-content {
@@ -151,9 +155,9 @@
     <section class="hero" id="hero">
         <div class="hero-content">
             <div class="hero-label anim-1">Deal &amp; Growth Finance Advisory</div>
-            <h1 class="anim-2">Helping companies build a well-operating and <em>transparent</em> finance function</h1>
-            <p class="hero-sub anim-3">Where finance works as one with the functions around it — and the wider business</p>
-            <p class="hero-intro anim-3">We help companies navigate deals, growth and change — and once the design is done, we can stay on and run it for you, efficiently and at a competitive cost.</p>
+            <h1 class="anim-2">Finance that runs well —<br>and stands up to <em>scrutiny</em></h1>
+            <p class="hero-sub anim-3">Integrated deeply with the business. Efficient by design.</p>
+            <p class="hero-intro anim-3">We help companies navigate deals, growth and change — and once the design is done, ongoing operations can be agreed.</p>
             <div class="hero-cta-row anim-4">
                 <a class="btn-primary" href="/services">Explore Our Services</a>
                 <a class="btn-outline" href="/contact">Start a Conversation</a>
