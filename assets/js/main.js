@@ -64,7 +64,7 @@
         '<div class="footer-grid">' +
         '<div class="footer-brand">' +
         '<a href="/" class="logo" aria-label="Finateo — Finance Advisory"><span class="logo-word">Finateo</span><span class="logo-rule"></span></a>' +
-        '<p>Deal &amp; growth finance advisory. We design finance functions — and we can run them too, through our shared services center in Tetovo and a broader professional network across several countries.</p>' +
+        '<p>Deal &amp; growth finance advisory. We design finance functions — and, when you choose, run them from our shared services center in Tetovo, supported by a professional network across several countries.</p>' +
         '</div>' +
         '<div class="footer-col"><h5>Services</h5>' +
         '<a href="/finance-transformation">Finance Transformation Design</a>' +
